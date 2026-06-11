@@ -84,6 +84,7 @@
                                     </button>
                                 </div>
                             </div>
+                            <p class="team-section-subtitle" data-animate="fade-up">READ is supported by social workers, counsellors, trainers, grassroots volunteers, community leaders, resource persons, and development professionals committed to social transformation. Our team works closely with communities through empathy, professionalism, and long-term engagement.</p>
                             <div class="team-scroll-container">
                                 {{#foreach team_members}}
                                 <div class="team-card" data-animate="fade-up" style="animation-delay: calc({{@index}} * 60ms);">
@@ -144,6 +145,15 @@
     font-weight: 700;
     color: var(--clr-text, #f8fafc);
     margin: 0;
+}
+
+.team-section-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--clr-text-2, #b4c6d4);
+    line-height: 1.6;
+    margin: 16px 0 24px;
+    max-width: 900px;
 }
 
 .team-scroll-nav {
