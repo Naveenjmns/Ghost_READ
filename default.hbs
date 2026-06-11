@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" class="read-theme">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+
+    {{!-- Open Graph / Social --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{@site.title}}">
+    <meta property="og:title" content="{{meta_title}}">
+    {{#if @site.cover_image}}
+    <meta property="og:image" content="{{img_url @site.cover_image size="xl"}}">
+    {{/if}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{meta_title}}">
+
+    {{!-- Canonical --}}
+    <link rel="canonical" href="{{url absolute="true"}}">
+
+    {{!-- Google Fonts: Literary Pairing --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    {{!-- Theme CSS --}}
+    <link rel="stylesheet" href="{{asset "css/read.css"}}">
+
+    <script>
+        (function() {
+            const savedMood = localStorage.getItem('ghost-theme-mood');
+            if (savedMood && savedMood !== 'light-blue') {
+                document.documentElement.setAttribute('data-theme-mood', savedMood);
+            }
+        })();
+    </script>
+
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+
+    {{!-- Page Progress Bar --}}
+    <div class="progress-bar" id="progress-bar"></div>
+
+    {{!-- Preloader --}}
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">
+                <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "read-logo.png"}}{{/if}}" alt="READ Logo" class="preloader-logo-img" width="90" height="90">
+            </div>
+            <div class="preloader-tagline">Rights Education and Development Centre</div>
+        </div>
+    </div>
+
+    {{!-- Site Header --}}
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            {{!-- Decorative top accent line --}}
+            <div class="header-accent-line"></div>
+
+            <div class="header-content">
+                {{!-- Logo --}}
+                <a href="{{@site.url}}" class="site-logo" aria-label="{{@site.title}} Home">
+                    <div class="site-logo-glow"></div>
+                    <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
+                    <span class="site-logo-wordmark">RE<span class="logo-letter-accent">A</span>D</span>
+                </a>
+
+                {{!-- Center Navigation --}}
+                <nav class="site-nav" id="site-nav">
+                    {{navigation}}
+                </nav>
+
+                {{!-- Right Actions --}}
+                <div class="header-actions">
+                    <div class="theme-mood-switcher" id="theme-mood-switcher">
+                        <button class="theme-mood-btn mood-light-blue active" data-preset="light-blue" title="Light Blue Mood" aria-label="Light Blue Mood"></button>
+                        <button class="theme-mood-btn mood-dark-blue" data-preset="dark-blue" title="Dark Blue Mood" aria-label="Dark Blue Mood"></button>
+                        <button class="theme-mood-btn mood-maroon" data-preset="maroon" title="Maroon Mood" aria-label="Maroon Mood"></button>
+                    </div>
+                    <a href="/donate-us/" class="header-donate-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        <span>Donate</span>
+                    </a>
+                    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Mobile Menu --}}
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <div class="mobile-menu-inner">
+                {{navigation}}
+                <a href="/donate-us/" class="btn-primary-read btn-full">Donate to READ</a>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Main Content --}}
+    <main class="site-main">
+        {{{body}}}
+    </main>
+
+    {{!-- Footer --}}
+    <footer class="site-footer">
+        <div class="footer-ornament">
+            <span>✦</span>
+            <span>✦</span>
+            <span>✦</span>
+        </div>
+
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="{{@site.url}}" class="footer-logo">
+                    <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="footer-logo-img" width="52" height="52">
+                    <span class="footer-logo-name">READ</span>
+                </a>
+                <p class="footer-tagline">{{@site.description}}</p>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Explore</h4>
+                    {{navigation}}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-rule"></div>
+            <div class="footer-bottom-inner">
+                <p class="footer-copy">&copy; {{date format="YYYY"}} {{@site.title}}. All rights reserved.</p>
+                <div class="footer-social">
+                    {{#if @site.twitter}}
+                    <a href="https://twitter.com/{{@site.twitter}}" class="social-link" aria-label="Twitter" target="_blank" rel="noopener">
+                        <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    {{/if}}
+                    {{#if @site.facebook}}
+                    <a href="https://facebook.com/{{@site.facebook}}" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                        <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    {{/if}}
+                    <a href="{{@site.url}}rss/" class="social-link" aria-label="RSS Feed" target="_blank" rel="noopener">
+                        <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-legal">
+                    <a href="/privacy/">Privacy</a>
+                    <span>·</span>
+                    <a href="/terms/">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {{!-- Theme JS --}}
+    <script src="{{asset "js/read.js"}}"></script>
+
+    {{ghost_foot}}
+</body>
+</html>

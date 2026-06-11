@@ -1,0 +1,66 @@
+{{!< default}}
+
+<div class="author-page">
+    <header class="author-header" data-animate="fade-up">
+        <div class="author-header-inner">
+            {{#author}}
+            <div class="author-profile">
+                <img
+                    src="{{#if profile_image}}{{img_url profile_image size="m"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=200{{/if}}"
+                    alt="{{name}}"
+                    class="author-profile-img"
+                >
+                <div class="author-profile-info">
+                    <h1 class="author-name">{{name}}</h1>
+                    {{#if bio}}
+                    <p class="author-bio">{{bio}}</p>
+                    {{/if}}
+                    <div class="author-meta-row">
+                        {{#if location}}
+                        <span class="author-location">{{location}}</span>
+                        {{/if}}
+                        <span class="author-posts-count">{{count.posts}} Posts</span>
+                        {{#if website}}
+                        <a href="{{website}}" class="author-website" target="_blank" rel="noopener">Website</a>
+                        {{/if}}
+                        {{#if twitter}}
+                        <a href="https://twitter.com/{{twitter}}" class="author-social" target="_blank" rel="noopener">𝕏 {{twitter}}</a>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/author}}
+        </div>
+    </header>
+
+    <div class="author-posts-wrap">
+        <div class="posts-grid">
+            {{#foreach posts}}
+            <article class="post-card" data-animate="fade-up" data-delay-index="{{@index}}" data-delay-step="80">
+                {{#if feature_image}}
+                <a href="{{url}}" class="post-card-img-wrap" aria-label="{{title}}">
+                    <div class="post-card-img" style="background-image: url({{img_url feature_image size="m"}})">
+                        <div class="post-card-img-overlay"></div>
+                    </div>
+                </a>
+                {{/if}}
+                <div class="post-card-body">
+                    {{#primary_tag}}<a href="{{url}}" class="post-card-tag-pill">{{name}}</a>{{/primary_tag}}
+                    <h3 class="post-card-title"><a href="{{url}}">{{title}}</a></h3>
+                    <p class="post-card-excerpt post-card-excerpt-short">{{excerpt words="18"}}</p>
+                    <div class="post-card-footer">
+                        <div class="meta-details">
+                            <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                            <span class="meta-dot">·</span>
+                            <span>{{reading_time}}</span>
+                        </div>
+                        <a href="{{url}}" class="post-card-read-link">Read <span>→</span></a>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+
+        {{pagination}}
+    </div>
+</div>

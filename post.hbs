@@ -1,0 +1,174 @@
+{{!< default}}
+
+{{#post}}
+
+<article class="post-full {{post_class}}" id="post-{{id}}">
+
+    {{!-- Post Header --}}
+    <header class="post-header">
+        <div class="post-header-inner">
+            {{!-- Tags --}}
+            {{#primary_tag}}
+            <div class="post-tag-row" data-animate="fade-up">
+                <a href="{{url}}" class="post-tag-link">{{name}}</a>
+            </div>
+            {{/primary_tag}}
+
+            {{!-- Title --}}
+            <h1 class="post-title" data-animate="fade-up" data-delay="100">{{title}}</h1>
+
+            {{!-- Excerpt / Subtitle --}}
+            {{#if custom_excerpt}}
+            <p class="post-subtitle" data-animate="fade-up" data-delay="150">{{custom_excerpt}}</p>
+            {{/if}}
+
+            {{!-- Meta Row --}}
+            <div class="post-meta-row" data-animate="fade-up" data-delay="200">
+                {{#primary_author}}
+                <div class="post-author-info">
+                    <img
+                        src="{{#if profile_image}}{{img_url profile_image size="xs"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=48{{/if}}"
+                        alt="{{name}}"
+                        class="post-author-avatar"
+                    >
+                    <div class="post-author-details">
+                        <a href="{{url}}" class="post-author-name">{{name}}</a>
+                        <div class="post-meta-sub">
+                            <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMMM D, YYYY"}}</time>
+                            <span class="post-meta-dot">·</span>
+                            <span>{{../reading_time}}</span>
+                        </div>
+                    </div>
+                </div>
+                {{/primary_author}}
+
+                <div class="post-share-row">
+                    <span class="share-label">Share</span>
+                    <a href="https://twitter.com/intent/tweet?text={{encode title}}&url={{url absolute="true"}}" class="share-btn" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <button class="share-btn" id="copy-link-btn" aria-label="Copy link" title="Copy link">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Feature Image --}}
+    {{#if feature_image}}
+    <figure class="post-feature-image" data-animate="fade-up">
+        <img src="{{img_url feature_image size="xl"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" loading="eager">
+        {{#if feature_image_caption}}
+        <figcaption class="post-img-caption">{{feature_image_caption}}</figcaption>
+        {{/if}}
+    </figure>
+    {{/if}}
+
+    {{!-- Post Content --}}
+    <div class="post-content-wrap">
+        <div class="post-content gh-content" data-animate="fade-up">
+            {{content}}
+        </div>
+
+        {{!-- Tags Footer --}}
+        {{#if tags}}
+        <div class="post-tags-footer">
+            <span class="tags-label">Filed under:</span>
+            {{#foreach tags}}
+            <a href="{{url}}" class="post-tag-footer-pill">{{name}}</a>
+            {{/foreach}}
+        </div>
+        {{/if}}
+
+        {{!-- Author Bio --}}
+        {{#primary_author}}
+        <div class="post-author-bio">
+            <img
+                src="{{#if profile_image}}{{img_url profile_image size="s"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=80{{/if}}"
+                alt="{{name}}"
+                class="author-bio-img"
+            >
+            <div class="author-bio-content">
+                <h3 class="author-bio-name">
+                    <a href="{{url}}">{{name}}</a>
+                </h3>
+                {{#if bio}}
+                <p class="author-bio-text">{{bio}}</p>
+                {{/if}}
+                <a href="{{url}}" class="author-bio-link">More by {{name}} →</a>
+            </div>
+        </div>
+        {{/primary_author}}
+
+        {{!-- Post Navigation --}}
+        <nav class="post-navigation">
+            <div class="post-nav-rule"></div>
+            <div class="post-nav-grid">
+                {{#prev_post}}
+                <a href="{{url}}" class="post-nav-item post-nav-prev">
+                    <span class="post-nav-dir">← Previous</span>
+                    <span class="post-nav-title">{{title}}</span>
+                </a>
+                {{/prev_post}}
+                {{#next_post}}
+                <a href="{{url}}" class="post-nav-item post-nav-next">
+                    <span class="post-nav-dir">Next →</span>
+                    <span class="post-nav-title">{{title}}</span>
+                </a>
+                {{/next_post}}
+            </div>
+        </nav>
+
+        {{!-- Comments --}}
+        {{#if comments_enabled}}
+        <section class="post-comments">
+            {{comments}}
+        </section>
+        {{/if}}
+    </div>
+</article>
+
+{{!-- Related Posts --}}
+{{#if primary_tag}}
+{{#get "posts" filter="tags:[{{primary_tag.slug}}]+id:-{{id}}" limit="3" include="tags,authors"}}
+{{#if posts}}
+<section class="related-posts-section">
+    <div class="related-inner">
+        <div class="section-header">
+            <div class="section-header-line"></div>
+            <h2 class="section-title">You Might Also <em>Enjoy</em></h2>
+            <div class="section-header-line"></div>
+        </div>
+        <div class="related-grid">
+            {{#foreach posts}}
+            <article class="post-card" data-animate="fade-up" data-delay-index="{{@index}}" data-delay-step="100">
+                {{#if feature_image}}
+                <a href="{{url}}" class="post-card-img-wrap">
+                    <div class="post-card-img" style="background-image: url({{img_url feature_image size="s"}})">
+                        <div class="post-card-img-overlay"></div>
+                    </div>
+                </a>
+                {{/if}}
+                <div class="post-card-body">
+                    {{#primary_tag}}<a href="{{url}}" class="post-card-tag-pill">{{name}}</a>{{/primary_tag}}
+                    <h3 class="post-card-title"><a href="{{url}}">{{title}}</a></h3>
+                    <div class="post-card-footer">
+                        <div class="meta-details">
+                            <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D"}}</time>
+                            <span class="meta-dot">·</span>
+                            <span>{{reading_time}}</span>
+                        </div>
+                        <a href="{{url}}" class="post-card-read-link">Read <span>→</span></a>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+{{/if}}
+{{/get}}
+{{/if}}
+
+{{/post}}

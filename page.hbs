@@ -1,0 +1,41 @@
+{{!< default}}
+
+{{#post}}
+
+<article class="post-full {{post_class}}" id="post-{{id}}">
+    <div class="template-marker" data-template="page.hbs" style="display:none;"></div>
+
+    {{#if @page.show_title_and_feature_image}}
+    {{!-- Post Header --}}
+    <header class="post-header">
+        <div class="post-header-inner">
+            {{!-- Title --}}
+            <h1 class="post-title" data-animate="fade-up" data-delay="100">{{title}}</h1>
+
+            {{!-- Excerpt / Subtitle --}}
+            {{#if custom_excerpt}}
+            <p class="post-subtitle" data-animate="fade-up" data-delay="150">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+    </header>
+
+    {{!-- Feature Image --}}
+    {{#if feature_image}}
+    <figure class="post-feature-image" data-animate="fade-up">
+        <img src="{{img_url feature_image size="xl"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" loading="eager">
+        {{#if feature_image_caption}}
+        <figcaption class="post-img-caption">{{feature_image_caption}}</figcaption>
+        {{/if}}
+    </figure>
+    {{/if}}
+    {{/if}}
+
+    {{!-- Post Content --}}
+    <div class="post-content-wrap">
+        <div class="post-content gh-content" data-animate="fade-up">
+            {{content}}
+        </div>
+    </div>
+</article>
+
+{{/post}}

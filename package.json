@@ -1,0 +1,33 @@
+{
+  "name": "read",
+  "description": "READ — A Premium Literary & Personal Blog Ghost Theme",
+  "version": "1.0.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "READ Centre",
+    "email": "info@readcentre.org"
+  },
+  "keywords": [
+    "ghost-theme",
+    "blog",
+    "reading",
+    "literature",
+    "personal",
+    "editorial"
+  ],
+  "config": {
+    "posts_per_page": 9,
+    "image_sizes": {
+      "xxs": { "width": 30 },
+      "xs": { "width": 100 },
+      "s": { "width": 300 },
+      "m": { "width": 600 },
+      "l": { "width": 1000 },
+      "xl": { "width": 2000 }
+    },
+    "card_assets": true
+  }
+}

@@ -1,0 +1,26 @@
+{{!< default}}
+
+<div class="error-page">
+    <div class="error-inner" data-animate="fade-up">
+        <div class="error-number">{{statusCode}}</div>
+        <div class="error-book"></div>
+        <h1 class="error-title">
+            {{#match statusCode 404}}
+            This page turned the last leaf.
+            {{else}}
+            Something went wrong.
+            {{/match}}
+        </h1>
+        <p class="error-desc">
+            {{#match statusCode 404}}
+            The story you're looking for doesn't seem to exist — or it was moved to another shelf.
+            {{else}}
+            {{message}}
+            {{/match}}
+        </p>
+        <div class="error-actions">
+            <a href="{{@site.url}}" class="btn-primary-read">Return Home</a>
+            <a href="{{@site.url}}tag/books/" class="btn-ghost-read">Browse Reviews</a>
+        </div>
+    </div>
+</div>
