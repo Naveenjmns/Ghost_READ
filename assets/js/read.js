@@ -301,4 +301,50 @@
         setMood(savedMood);
     }
 
+    /* ── Stats Count-Up Animation ─────────────────────── */
+    const counters = $$('.count-up');
+    if (counters.length > 0 && 'IntersectionObserver' in window) {
+        const countUp = (el) => {
+            const target = parseInt(el.dataset.target, 10) || 0;
+            const duration = 2000; // 2 seconds
+            const startTime = performance.now();
+
+            const updateCount = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function (easeOutQuad)
+                const easeProgress = progress * (2 - progress);
+                
+                const currentValue = Math.floor(easeProgress * target);
+                el.textContent = currentValue.toLocaleString('en-US');
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    el.textContent = target.toLocaleString('en-US');
+                }
+            };
+
+            requestAnimationFrame(updateCount);
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    countUp(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        counters.forEach(counter => statsObserver.observe(counter));
+    } else {
+        // Fallback
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.target, 10) || 0;
+            counter.textContent = target.toLocaleString('en-US');
+        });
+    }
+
 })();
