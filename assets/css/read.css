@@ -3704,6 +3704,150 @@ button {
     }
 }
 
+/* Direct Contact Action Cards */
+.contact-action-card {
+    background: var(--clr-card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    transition: all var(--transition-mid);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-action-card:hover {
+    border-color: var(--clr-gold-alpha-20);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md), var(--shadow-gold);
+}
+
+.contact-action-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--clr-gold-alpha-10);
+    border: 1px solid var(--clr-gold-alpha-20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--clr-gold);
+    transition: all var(--transition-fast);
+}
+
+.contact-action-card:hover .contact-action-icon-wrap {
+    background: var(--clr-gold);
+    color: var(--clr-text-inv);
+    transform: scale(1.05);
+}
+
+.contact-action-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-action-title {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clr-gold);
+    margin-bottom: 0;
+}
+
+.contact-action-value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-text);
+    word-break: break-all;
+    transition: color var(--transition-fast);
+}
+
+.contact-action-card:hover .contact-action-value {
+    color: var(--clr-gold-light);
+}
+
+.contact-action-note {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--clr-text-3);
+}
+
+.contact-action-arrow {
+    color: var(--clr-text-3);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all var(--transition-fast);
+}
+
+.contact-action-card:hover .contact-action-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--clr-gold);
+}
+
+/* Social Actions */
+.contact-social-action-card {
+    display: block;
+}
+
+.contact-social-pills {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+}
+
+.social-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 10px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-2);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.social-pill:hover {
+    transform: scale(1.02);
+    color: #fff;
+}
+
+.facebook-pill:hover {
+    background: #1877F2 !important;
+    border-color: #1877F2 !important;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
+}
+
+.linkedin-pill:hover {
+    background: #0A66C2 !important;
+    border-color: #0A66C2 !important;
+    box-shadow: 0 0 15px rgba(10, 102, 194, 0.4);
+}
+
+.instagram-pill:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+    border-color: transparent !important;
+    box-shadow: 0 0 15px rgba(220, 39, 67, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .contact-container {
