@@ -67,117 +67,48 @@
             <div class="section-header-line"></div>
         </div>
 
-        <div class="programs-list">
-            
-            {{!-- Card 1: Tribal Development --}}
-            <div class="program-horizontal-card" data-animate="fade-up">
-                <div class="program-image-wrap">
-                    <img src="{{asset "tribal-development.jpg"}}" alt="Tribal Community Holistic Development" class="program-img" width="550" height="350">
-                </div>
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">🌳</span>
-                        <span class="program-region-tag">Sathyamangalam Tiger Reserve</span>
-                    </div>
-                    <h3 class="program-title">Tribal Community Holistic Development</h3>
-                    <p class="program-desc">
-                        Empowering tribal forest communities in the Sathyamangalam Tiger Reserve through educational centers, libraries, solar energy, agricultural sprinkler irrigation, and millet value-addition.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
-                </div>
-            </div>
+        {{!-- Dynamic: posts tagged with internal tag #program --}}
+        {{#get "posts" filter="tag:hash-program" limit="all" order="published_at asc" include="tags"}}
+            {{#if posts}}
+                <div class="programs-list">
+                    {{#foreach posts}}
+                        {{!-- Odd = image left, Even = image right --}}
+                        <article class="program-horizontal-card{{#if @even}} program-horizontal-card--flip{{/if}}" data-animate="fade-up">
 
-            {{!-- Card 2: Sanitary Workers --}}
-            <div class="program-horizontal-card" data-animate="fade-up" data-delay="100">
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">🧹</span>
-                        <span class="program-region-tag">Tamil Nadu Districts</span>
-                    </div>
-                    <h3 class="program-title">Sanitary Workers Welfare</h3>
-                    <p class="program-desc">
-                        Addressing health hazards and discrimination for sanitary worker communities through child support centers, educational coaching, medical camps, and legal aid.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
-                </div>
-                <div class="program-image-wrap">
-                    <img src="/content/images/Individual Photos/981e5617-f7c6-4f5c-b188-5375ccf9d618.jpg" alt="Sanitary Workers Welfare" class="program-img" width="550" height="350">
-                </div>
-            </div>
+                            <div class="program-image-wrap">
+                                {{#if feature_image}}
+                                    <img
+                                        src="{{img_url feature_image size="m"}}"
+                                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                        class="program-img"
+                                        width="550"
+                                        height="350"
+                                        loading="lazy"
+                                    >
+                                {{else}}
+                                    <div class="program-img-placeholder" aria-hidden="true"></div>
+                                {{/if}}
+                            </div>
 
-            {{!-- Card 3: Safe Migration --}}
-            <div class="program-horizontal-card" data-animate="fade-up" data-delay="200">
-                <div class="program-image-wrap">
-                    <img src="/content/images/Individual Photos/9ffe2c50-35ce-46f3-be00-c1d206b5c967.jpg" alt="Safe Migration Support" class="program-img" width="550" height="350">
-                </div>
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">🚌</span>
-                        <span class="program-region-tag">Tirupur, Erode, Dindigul, Namakkal</span>
-                    </div>
-                    <h3 class="program-title">Safe Migration Support</h3>
-                    <p class="program-desc">
-                        Supporting interstate migrant families in Tamil Nadu with language-friendly education centers, local school enrollment, healthcare clinics, and social benefits card access.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
-                </div>
-            </div>
+                            <div class="program-content">
+                                <div class="program-header-row">
+                                    {{#if primary_tag}}
+                                        <span class="program-region-tag">{{primary_tag.name}}</span>
+                                    {{/if}}
+                                </div>
+                                <h3 class="program-title">{{title}}</h3>
+                                <p class="program-desc">{{excerpt}}</p>
+                                <a href="{{url}}" class="program-learn-btn">Explore Program</a>
+                            </div>
 
-            {{!-- Card 4: POSH Act Implementation --}}
-            <div class="program-horizontal-card" data-animate="fade-up" data-delay="300">
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">🛡️</span>
-                        <span class="program-region-tag">Coimbatore, Tirupur, Erode</span>
-                    </div>
-                    <h3 class="program-title">Strengthening POSH Act Implementation</h3>
-                    <p class="program-desc">
-                        Partnering with industries to foster safe, dignified workplaces for women through POSH Internal Complaints Committee (IC) formation, capacity building, and life skills training.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
+                        </article>
+                    {{/foreach}}
                 </div>
-                <div class="program-image-wrap">
-                    <img src="/content/images/IC Meeting/WhatsApp Image 2026-05-09 at 12.39.07 PM.jpeg" alt="Strengthening POSH Act Implementation" class="program-img" width="550" height="350">
-                </div>
-            </div>
-
-            {{!-- Card 5: Entrepreneur Support --}}
-            <div class="program-horizontal-card" data-animate="fade-up" data-delay="400">
-                <div class="program-image-wrap">
-                    <img src="/content/images/National days celebration/20251011_165840.jpg" alt="Entrepreneur Support" class="program-img" width="550" height="350">
-                </div>
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">💼</span>
-                        <span class="program-region-tag">Tamil Nadu, Odisha, Maharashtra</span>
-                    </div>
-                    <h3 class="program-title">Entrepreneur Support</h3>
-                    <p class="program-desc">
-                        Promoting economic self-reliance among Dalit and tribal communities through entrepreneurship development training, mentoring, grants, and market linkages for first-generation business owners.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
-                </div>
-            </div>
-
-            {{!-- Card 6: CSR --}}
-            <div class="program-horizontal-card" data-animate="fade-up" data-delay="500">
-                <div class="program-content">
-                    <div class="program-header-row">
-                        <span class="program-icon-badge">🏫</span>
-                        <span class="program-region-tag">Multi-Region Schools</span>
-                    </div>
-                    <h3 class="program-title">Corporate Social Responsibility (CSR)</h3>
-                    <p class="program-desc">
-                        Upgrading infrastructure at government and community schools to create child-friendly classrooms, modern computer labs, science facilities, and safe sanitation blocks.
-                    </p>
-                    <a href="/about-us/" class="program-learn-btn">Explore Program</a>
-                </div>
-                <div class="program-image-wrap">
-                    <img src="/content/images/Individual Photos/e6bc3019-a383-4593-9082-1a4246bd5441.jpg" alt="Corporate Social Responsibility" class="program-img" width="550" height="350">
-                </div>
-            </div>
-
-        </div>
+            {{else}}
+                {{!-- No programs published yet --}}
+                <p class="programs-empty-note">Programs coming soon. Add posts with the <code>#program</code> tag in Ghost Admin.</p>
+            {{/if}}
+        {{/get}}
     </div>
 </section>
 

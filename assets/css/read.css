@@ -6555,18 +6555,27 @@ button {
     transform: translateY(-2px);
 }
 
-/* Alternate flex direction for cards */
-.program-horizontal-card:nth-child(even) {
+/* Alternate flex direction for cards — driven by Ghost {{@even}} via --flip class */
+.program-horizontal-card--flip {
     flex-direction: row-reverse;
 }
 
 /* Subtle background gradients for alternating depth */
-.program-horizontal-card:nth-child(odd) {
+.program-horizontal-card:not(.program-horizontal-card--flip) {
     background: linear-gradient(135deg, rgba(56, 189, 248, 0.01) 0%, rgba(15, 23, 30, 0.45) 100%);
 }
 
-.program-horizontal-card:nth-child(even) {
+.program-horizontal-card--flip {
     background: linear-gradient(135deg, rgba(15, 23, 30, 0.45) 0%, rgba(56, 189, 248, 0.01) 100%);
+}
+
+/* Placeholder when no feature image is set */
+.program-img-placeholder {
+    width: 100%;
+    min-height: 220px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.04), rgba(15, 23, 30, 0.3));
+    border: 1px dashed rgba(56, 189, 248, 0.08);
 }
 
 .program-image-wrap {
