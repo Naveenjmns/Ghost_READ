@@ -8,8 +8,8 @@
         <div class="stories-hero-bg">
             <div class="stories-hero-orb stories-hero-orb-1"></div>
             <div class="stories-hero-orb stories-hero-orb-2"></div>
-            
-            {{!-- Background Slideshow --}}
+
+            {{!-- Background Slideshow (featured story images) --}}
             {{#get "posts" filter="tag:story+featured:true" limit="5"}}
                 {{#if posts}}
                     <div class="hero-slideshow">
@@ -22,8 +22,6 @@
                         <div class="hero-slide active" style="background-image: url('/content/images/Individual Photos/5b7dac37-a1d4-4094-aac9-66ec754881d1.jpg');"></div>
                         <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/1ed9d4bf-1fdf-4e54-9b23-996e50f29801.jpg');"></div>
                         <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/b46d1471-eaeb-4a5b-94b7-bd5d49ff979b.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/9ffe2c50-35ce-46f3-be00-c1d206b5c967.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/e6bc3019-a383-4593-9082-1a4246bd5441.jpg');"></div>
                     </div>
                 {{/if}}
             {{/get}}
@@ -45,324 +43,129 @@
                 {{content}}
             </div>
             {{/if}}
-            <div class="stories-hero-stats" data-animate="fade-up" data-delay="300">
-                <div class="stories-hero-stat">
-                    <span class="stories-hero-stat-num">6</span>
-                    <span class="stories-hero-stat-label">Stories of Change</span>
-                </div>
-                <div class="stories-hero-stat-divider"></div>
-                <div class="stories-hero-stat">
-                    <span class="stories-hero-stat-num">5</span>
-                    <span class="stories-hero-stat-label">Programs Covered</span>
-                </div>
-                <div class="stories-hero-stat-divider"></div>
-                <div class="stories-hero-stat">
-                    <span class="stories-hero-stat-num">100+</span>
-                    <span class="stories-hero-stat-label">Direct Beneficiaries</span>
-                </div>
-            </div>
         </div>
     </section>
 
-    {{!-- ── Category Filter ──────────────────── --}}
+    {{!-- ── Dynamic Category Filter ────────────── --}}
     <section class="stories-filter-bar">
         <div class="stories-container">
             <div class="stories-filters" id="stories-filters">
-                <button class="stories-filter-btn stories-filter-btn--active" data-filter="all">All Stories</button>
-                <button class="stories-filter-btn" data-filter="education">Education</button>
-                <button class="stories-filter-btn" data-filter="tribal">Tribal Development</button>
-                <button class="stories-filter-btn" data-filter="women">Women Empowerment</button>
-                <button class="stories-filter-btn" data-filter="health">Health & Welfare</button>
-                <button class="stories-filter-btn" data-filter="posh">POSH & Rights</button>
+                <button class="stories-filter-btn stories-filter-btn--active" data-filter="all">
+                    All Stories
+                </button>
+                {{#get "tags" filter="slug:[education,tribal,women,health,posh,migration,livelihood]" limit="20" order="name asc"}}
+                    {{#foreach tags}}
+                    <button class="stories-filter-btn" data-filter="{{slug}}">
+                        {{name}}
+                    </button>
+                    {{/foreach}}
+                {{/get}}
             </div>
         </div>
     </section>
 
-    {{!-- ── Story Cards Grid ─────────────────── --}}
+    {{!-- ── Story Cards Grid (fully dynamic) ─────── --}}
     <section class="stories-grid-section">
         <div class="stories-container">
-            {{#get "posts" filter="tag:story" limit="all" include="tags" order="published_at desc"}}
+            {{#get "posts" filter="tag:story" limit="50" include="tags,authors" order="featured desc, published_at desc"}}
                 {{#if posts}}
                     <div class="stories-grid" id="stories-grid">
                         {{#foreach posts}}
-                        <article class="story-card{{#if featured}} story-card--featured{{/if}}" data-category="{{#primary_tag}}{{slug}}{{/primary_tag}}" data-animate="fade-up" data-delay-index="{{@index}}" data-delay-step="80">
+                        <article class="story-card{{#if featured}} story-card--featured{{/if}}"
+                                 data-tags="{{#foreach tags}}{{slug}},{{/foreach}}"
+                                 data-animate="fade-up"
+                                 data-delay-index="{{@index}}">
+
                             {{#if featured}}
                             <div class="story-card-badge">Featured</div>
                             {{/if}}
-                            {{#if feature_image}}
-                            <div class="story-card-image-wrap">
-                                <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="story-card-img">
-                            </div>
-                            {{/if}}
-                            <div class="story-card-category">
-                                <span class="story-cat-icon">
-                                    {{#has tag="education"}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>{{/has}}
-                                    {{#has tag="tribal"}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 2 22 22 22"></polygon></svg>{{/has}}
-                                    {{#has tag="women"}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>{{/has}}
-                                    {{#has tag="health"}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>{{/has}}
-                                    {{#has tag="posh"}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>{{/has}}
-                                </span>
-                                <span class="story-cat-label">{{#primary_tag}}{{name}}{{/primary_tag}}</span>
-                            </div>
-                            <h3 class="story-card-title">{{title}}</h3>
-                            <p class="story-card-excerpt">{{excerpt}}</p>
-                            
-                            <div class="story-card-impact">
-                                {{#if twitter_title}}
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">{{twitter_title}}</span>
-                                    <span class="story-impact-label">{{twitter_description}}</span>
-                                </div>
-                                {{/if}}
-                                {{#if og_title}}
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">{{og_title}}</span>
-                                    <span class="story-impact-label">{{og_description}}</span>
-                                </div>
-                                {{/if}}
-                            </div>
-                            
-                            <button class="story-read-more" data-story="story-{{id}}">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
 
-                            <div class="story-full-content" id="story-{{id}}">
-                                <div class="story-full-body">
-                                    {{content}}
+                            {{!-- Cover Image --}}
+                            {{#if feature_image}}
+                            <a href="{{url}}" class="story-card-image-wrap">
+                                <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="story-card-img" loading="lazy">
+                                <div class="story-card-img-overlay"></div>
+                            </a>
+                            {{/if}}
+
+                            <div class="story-card-body">
+                                {{!-- Category label from primary tag --}}
+                                <div class="story-card-category">
+                                    <span class="story-cat-icon">
+                                        {{#primary_tag}}
+                                            {{#has slug="education"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>{{/has}}
+                                            {{#has slug="tribal"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="12 2 2 22 22 22"/></svg>{{/has}}
+                                            {{#has slug="women"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>{{/has}}
+                                            {{#has slug="health"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>{{/has}}
+                                            {{#has slug="posh"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>{{/has}}
+                                            {{#has slug="migration"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>{{/has}}
+                                            {{#has slug="livelihood"}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>{{/has}}
+                                        {{/primary_tag}}
+                                    </span>
+                                    <span class="story-cat-label">{{#primary_tag}}{{name}}{{/primary_tag}}</span>
                                 </div>
+
+                                {{!-- Title & Excerpt --}}
+                                <h3 class="story-card-title">
+                                    <a href="{{url}}">{{title}}</a>
+                                </h3>
+                                <p class="story-card-excerpt">{{excerpt words="30"}}</p>
+
+                                {{!-- Impact Numbers (stored in Twitter OG meta fields) --}}
+                                {{#if twitter_title}}
+                                <div class="story-card-impact">
+                                    <div class="story-impact-item">
+                                        <span class="story-impact-num">{{twitter_title}}</span>
+                                        <span class="story-impact-label">{{twitter_description}}</span>
+                                    </div>
+                                    {{#if og_title}}
+                                    <div class="story-impact-item">
+                                        <span class="story-impact-num">{{og_title}}</span>
+                                        <span class="story-impact-label">{{og_description}}</span>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                {{/if}}
+
+                                {{!-- Tag pills --}}
+                                <div class="story-tag-pills">
+                                    {{#foreach tags}}
+                                    <span class="story-tag-pill">{{name}}</span>
+                                    {{/foreach}}
+                                </div>
+
+                                {{!-- CTA: links to the actual post --}}
+                                <a href="{{url}}" class="story-read-more">
+                                    Read Full Story
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </div>
                         </article>
                         {{/foreach}}
                     </div>
+
                 {{else}}
-                    <div class="stories-grid" id="stories-grid">
-
-                        {{!-- Story 1: School Transport --}}
-                        <article class="story-card story-card--featured" data-category="education" data-animate="fade-up">
-                            <div class="story-card-badge">Featured</div>
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/Individual Photos/5b7dac37-a1d4-4094-aac9-66ec754881d1.jpg" alt="Bridging the Distance: School Transport for Tribal Kids" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></span>
-                                <span class="story-cat-label">Education</span>
-                            </div>
-                            <h3 class="story-card-title">Bridging the Distance: School Transport for Tribal Kids</h3>
-                            <p class="story-card-excerpt">In the remote tribal villages of Ittarai, Thadasalatti, and Mavanatham, going to school was once a daily struggle for many children. Students walked long distances through forest paths and hilly terrain, often missing classes due to unsafe travel conditions.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">43</span>
-                                    <span class="story-impact-label">Children Benefited</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">3</span>
-                                    <span class="story-impact-label">Villages Covered</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-1">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-1">
-                                <div class="story-full-body">
-                                    <p>In the remote tribal villages of Ittarai, Thadasalatti, and Mavanatham, going to school was once a daily struggle for many children. Students walked long distances through forest paths and hilly terrain, often missing classes due to unsafe travel conditions and lack of transportation. During rainy seasons, attendance dropped further, increasing the risk of school dropout, especially among girls.</p>
-                                    <p>To address this challenge, the "Bridging the Distance: School Transport for Tribal Kids" initiative was introduced, providing safe and reliable transportation support for tribal students. The program benefited 43 children across the three villages, helping them travel to school regularly and safely.</p>
-                                    <p>With consistent transport access, school attendance and punctuality improved significantly. Teachers observed better classroom participation, while parents felt relieved knowing their children could travel safely every day. The initiative also strengthened parents' confidence in continuing their children's education.</p>
-                                    <p>Today, children who once struggled to reach school are attending classes regularly, participating actively, and building hope for a brighter future through education.</p>
-                                </div>
-                            </div>
-                        </article>
-
-                        {{!-- Story 2: Solar Farming --}}
-                        <article class="story-card" data-category="tribal" data-animate="fade-up" data-delay="80">
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/Individual Photos/1ed9d4bf-1fdf-4e54-9b23-996e50f29801.jpg" alt="Community Farming through Solar-Powered Irrigation" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 2 22 22 22"></polygon></svg></span>
-                                <span class="story-cat-label">Tribal Development</span>
-                            </div>
-                            <h3 class="story-card-title">Community Farming through Solar-Powered Irrigation</h3>
-                            <p class="story-card-excerpt">In the remote tribal villages of Hasanur and Thalamalai Panchayats in Erode District, farming was once completely dependent on rainfall due to the lack of irrigation facilities and irregular electricity supply.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">6</span>
-                                    <span class="story-impact-label">Farmers United</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">2</span>
-                                    <span class="story-impact-label">Panchayats</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-2">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-2">
-                                <div class="story-full-body">
-                                    <p>In the remote tribal villages of Hasanur and Thalamalai Panchayats in Erode District, farming was once completely dependent on rainfall due to the lack of irrigation facilities and irregular electricity supply. Tribal farmers struggled with low crop yields, seasonal cultivation, and unstable incomes, affecting the livelihood security of their families.</p>
-                                    <p>To address this challenge, the Rights Education and Development Centre (READ), under the FFVDP Project, introduced a community farming initiative supported by a solar-powered borewell irrigation system. Six tribal farmers came together to practice collective farming and cultivate beans, a high-demand crop suitable for the local environment.</p>
-                                    <p>The solar-powered irrigation system ensured a reliable water supply, enabling uninterrupted cultivation even in remote areas with frequent power outages. Along with irrigation support, farmers received training on sustainable agriculture, organic farming methods, soil conservation, and efficient water management.</p>
-                                    <p>The initiative significantly improved agricultural productivity and household income, while also strengthening unity and cooperation among community members. Today, the project stands as a successful example of how renewable energy and community-led farming can create sustainable livelihoods and improve the well-being of tribal families.</p>
-                                </div>
-                            </div>
-                        </article>
-
-                        {{!-- Story 3: POSH / Migrant Children Education --}}
-                        <article class="story-card" data-category="posh" data-animate="fade-up" data-delay="160">
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/Individual Photos/ff368d3e-876b-4ae0-ace3-4e00e5fbcae6.jpg" alt="Enrolling Migrant Children Back into School" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
-                                <span class="story-cat-label">POSH & Rights</span>
-                            </div>
-                            <h3 class="story-card-title">Enrolling Migrant Children Back into School</h3>
-                            <p class="story-card-excerpt">In Palangarai Settlement, Avinashi block of Tiruppur District, two migrant children from Bihar — Anushika Kumari (8) and Harpita Kumari (7) — were out of school and engaged in household chores while their parents worked long hours.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">6</span>
-                                    <span class="story-impact-label">Children Enrolled</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">1</span>
-                                    <span class="story-impact-label">Settlement</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-3">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-3">
-                                <div class="story-full-body">
-                                    <p>In Palangarai Settlement, Avinashi block of Tiruppur District, two migrant children from Bihar — Anushika Kumari (8) and Harpita Kumari (7) — were out of school and engaged in household chores while their parents worked long hours in a nearby factory. Their parents had little interest in education, believing it was unnecessary as the children only spoke Hindi.</p>
-                                    <p>During a community survey, READ identified these children and initiated discussions with the parents. Initially hesitant due to language barriers, the parents were counselled on the importance of education, safety, and future opportunities. With support from local school teachers, awareness was created about the benefits of learning English, mathematics, and life skills.</p>
-                                    <p>Gradually, the parents agreed to enroll their children. READ facilitated the documentation process and successfully enrolled the children in Grades 1 and 2. The children and their parents expressed great happiness, and the school appreciated READ's efforts.</p>
-                                    <p>This initiative also inspired the enrollment of four more children from the same settlement, with regular parent meetings now strengthening community engagement.</p>
-                                </div>
-                            </div>
-                        </article>
-
-                        {{!-- Story 4: Maternal Health --}}
-                        <article class="story-card" data-category="health" data-animate="fade-up" data-delay="0">
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/Individual Photos/7e9c7127-1480-4532-a6b3-20915358d272.jpg" alt="Improving Maternal Health through Nutrition Support" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></span>
-                                <span class="story-cat-label">Health & Welfare</span>
-                            </div>
-                            <h3 class="story-card-title">Improving Maternal Health through Nutrition Support</h3>
-                            <p class="story-card-excerpt">Under the Public Health and Family Welfare initiative, READ supported Fatima Majki (23), a migrant pregnant woman residing in Kalampalayam Meridian Hostel settlement in Tiruppur District, suffering from anemia due to inadequate nutrition.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">29</span>
-                                    <span class="story-impact-label">Women Supported</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">100%</span>
-                                    <span class="story-impact-label">Safer Pregnancies</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-4">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-4">
-                                <div class="story-full-body">
-                                    <p>Under the Public Health and Family Welfare initiative, READ supported Fatima Majki (23), a migrant pregnant woman residing in Kalampalayam Meridian Hostel settlement in Tiruppur District. She was in her ninth month of pregnancy and suffering from anemia due to inadequate nutrition. Her husband, Ashok Mal (24), works as a migrant laborer, and the family had limited access to proper healthcare and nutritious food.</p>
-                                    <p>During a survey and labor welfare meeting, READ identified her condition and provided free health mix powder to improve her nutritional intake. Awareness was also created about maternal health and the importance of a balanced diet during pregnancy.</p>
-                                    <p>Her expected delivery date is 29 April 2026, and the nutritional support is helping improve her strength and hemoglobin levels. Fatima and her husband expressed gratitude, stating that the support came at a crucial time.</p>
-                                    <p>Similar assistance was extended to 28 other migrant pregnant women, ensuring safer and healthier pregnancies.</p>
-                                </div>
-                            </div>
-                        </article>
-
-                        {{!-- Story 5: Women Livelihood --}}
-                        <article class="story-card story-card--featured" data-category="women" data-animate="fade-up" data-delay="80">
-                            <div class="story-card-badge">Featured</div>
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/IC Meeting/WhatsApp Image 2026-05-09 at 12.39.08 PM.jpeg" alt="Empowering Women through Livelihood Initiatives" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
-                                <span class="story-cat-label">Women Empowerment</span>
-                            </div>
-                            <h3 class="story-card-title">Empowering Women through Livelihood Initiatives</h3>
-                            <p class="story-card-excerpt">In Erode District, a major hub for textile and garment industries, READ has been actively supporting women workers to improve their economic status through Self-Help Groups and capacity-building programs.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">₹1.7L</span>
-                                    <span class="story-impact-label">Grant Given</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">₹18K</span>
-                                    <span class="story-impact-label">Monthly Income</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-5">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-5">
-                                <div class="story-full-body">
-                                    <p>In Erode District, a major hub for textile and garment industries, READ has been actively supporting women workers to improve their economic status. In the Gobi region, villages with a high number of women engaged in textile work were identified for intervention.</p>
-                                    <p>READ facilitated the formation of Women Self-Help Groups (SHGs) and conducted regular training and capacity-building programs. To promote sustainable livelihoods, financial support was provided for initiating small businesses.</p>
-                                    <p>In Alukuli village, five SHG women received a grant of INR 1.7 lakhs to start a home-based garments unit. Through this initiative, they are now earning up to INR 18,000 per month individually. This has significantly improved their financial independence and confidence.</p>
-                                    <p>The initiative demonstrates how targeted support can transform the lives of women workers and strengthen community development.</p>
-                                </div>
-                            </div>
-                        </article>
-
-                        {{!-- Story 6: Strengthening SHGs --}}
-                        <article class="story-card" data-category="women" data-animate="fade-up" data-delay="160">
-                            <div class="story-card-image-wrap">
-                                <img src="/content/images/IC Meeting/41664ed5-18fe-4f5e-ae99-d79350116562.jpg" alt="Strengthening Women's Livelihoods through SHGs" class="story-card-img">
-                            </div>
-                            <div class="story-card-category">
-                                <span class="story-cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
-                                <span class="story-cat-label">Women Empowerment</span>
-                            </div>
-                            <h3 class="story-card-title">Strengthening Women's Livelihoods through SHGs</h3>
-                            <p class="story-card-excerpt">In Erode District, READ formed Women Self-Help Groups and provided regular training, financial literacy sessions, and seed support to encourage entrepreneurship — from petty shops to garments units.</p>
-                            <div class="story-card-impact">
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">5</span>
-                                    <span class="story-impact-label">SHG Women</span>
-                                </div>
-                                <div class="story-impact-item">
-                                    <span class="story-impact-num">₹18K</span>
-                                    <span class="story-impact-label">Per Month</span>
-                                </div>
-                            </div>
-                            <button class="story-read-more" data-story="story-6">
-                                Read Full Story
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </button>
-
-                            <div class="story-full-content" id="story-6">
-                                <div class="story-full-body">
-                                    <p>In Erode District, a key centre for textile and garment industries, READ has been working to uplift women workers' economic conditions. In the Gobi region, villages with a high concentration of women employed in textile units were identified for focused interventions.</p>
-                                    <p>READ formed Women Self-Help Groups (SHGs) and provided regular training, financial literacy sessions, and group meetings. To encourage entrepreneurship, small grants were given to support self-employment activities such as petty shops, vegetable vending, and cloth businesses.</p>
-                                    <p>In Alukuli village, five SHG women collectively received INR 1.7 lakhs as seed support to start a home-based garments unit. With continuous guidance and support, they successfully established their enterprise.</p>
-                                    <p>Today, each woman earns up to INR 18,000 per month, contributing significantly to their household income. This initiative has enhanced their confidence, financial independence, and decision-making power. It stands as a strong example of how community-based support can transform women's livelihoods sustainably.</p>
-                                </div>
-                            </div>
-                        </article>
-
+                    {{!-- Empty state --}}
+                    <div class="stories-empty" data-animate="fade-up">
+                        <div class="stories-empty-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Stories Coming Soon</h3>
+                        <p>Our team is documenting impact from the field. Check back soon for stories of change from Tamil Nadu's communities.</p>
+                        <a href="/" class="story-read-more">Back to Home <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 {{/if}}
+
             {{/get}}
+
+            {{!-- No-results state (shown by JS when filter has 0 matches) --}}
+            <div class="stories-no-results" id="stories-no-results" style="display:none;" aria-live="polite">
+                <p>No stories found for this category yet.</p>
+            </div>
         </div>
     </section>
 
-    {{!-- ── Programs Summary ─────────────────── --}}
+    {{!-- ── Programs Banner (dynamic from tags) ──── --}}
     <section class="stories-programs-banner">
         <div class="stories-container">
             <div class="stories-section-head" data-animate="fade-up">
@@ -370,88 +173,27 @@
                 <h2 class="stories-section-title">Driving Change through <em>Action</em></h2>
             </div>
             <div class="stories-programs-grid">
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="0">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">Education & Child Rights</span>
-                </div>
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="60">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">Tribal Community Development</span>
-                </div>
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="120">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">Safe Migration Support</span>
-                </div>
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="180">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">Women Empowerment & SHGs</span>
-                </div>
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="240">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">Public Health & Welfare</span>
-                </div>
-                <div class="stories-program-pill" data-animate="fade-up" data-delay="300">
-                    <span class="stories-pill-icon"></span>
-                    <span class="stories-pill-text">POSH Act & Workplace Safety</span>
-                </div>
+                {{#get "tags" filter="slug:[education,tribal,women,health,posh,migration,livelihood]" limit="20" order="name asc"}}
+                    {{#foreach tags}}
+                    <div class="stories-program-pill" data-animate="fade-up" data-delay-index="{{@index}}">
+                        <span class="stories-pill-icon"></span>
+                        <span class="stories-pill-text">{{name}}</span>
+                        {{#if count.posts}}<span class="stories-pill-count">{{count.posts}}</span>{{/if}}
+                    </div>
+                    {{/foreach}}
+                {{/get}}
             </div>
         </div>
     </section>
-
-
 
 </div>
 
 <script>
 (function() {
-    // Category filter
-    var filterBtns = document.querySelectorAll('.stories-filter-btn');
-    var cards = document.querySelectorAll('.story-card');
 
-    if (filterBtns.length) {
-        filterBtns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(function(b) { b.classList.remove('stories-filter-btn--active'); });
-                btn.classList.add('stories-filter-btn--active');
-                var filter = btn.dataset.filter;
-                cards.forEach(function(card) {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = '';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(function() { card.style.display = 'none'; }, 300);
-                    }
-                });
-            });
-        });
-    }
-
-    // Expandable stories
-    var readMoreBtns = document.querySelectorAll('.story-read-more');
-    readMoreBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var storyId = btn.dataset.story;
-            var content = document.getElementById(storyId);
-            if (!content) return;
-            var isOpen = content.classList.contains('story-full-content--open');
-            if (isOpen) {
-                content.classList.remove('story-full-content--open');
-                content.style.maxHeight = '0';
-                btn.innerHTML = 'Read Full Story <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-            } else {
-                content.classList.add('story-full-content--open');
-                content.style.maxHeight = content.scrollHeight + 'px';
-                btn.innerHTML = 'Collapse <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 19l7-7-7-7"/></svg>';
-            }
-        });
-    });
-
-    // Background Slideshow
+    // ── Background Slideshow ──────────────────────────
     var slides = document.querySelectorAll('.hero-slide');
-    if (slides.length) {
+    if (slides.length > 1) {
         var currentSlide = 0;
         setInterval(function() {
             slides[currentSlide].classList.remove('active');
@@ -459,6 +201,47 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
     }
+
+    // ── Category Filter ───────────────────────────────
+    var filterBtns = document.querySelectorAll('.stories-filter-btn');
+    var cards      = document.querySelectorAll('.story-card');
+    var noResults  = document.getElementById('stories-no-results');
+
+    if (!filterBtns.length) return;
+
+    filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+
+            // Update active button
+            filterBtns.forEach(function(b) { b.classList.remove('stories-filter-btn--active'); });
+            btn.classList.add('stories-filter-btn--active');
+
+            var filter = btn.dataset.filter;
+            var visibleCount = 0;
+
+            cards.forEach(function(card) {
+                var tagList = (card.dataset.tags || '').split(',').map(function(t){ return t.trim(); });
+                var matches = (filter === 'all') || tagList.includes(filter);
+
+                if (matches) {
+                    card.style.display = '';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    visibleCount++;
+                } else {
+                    card.style.opacity  = '0';
+                    card.style.transform = 'translateY(16px)';
+                    setTimeout(function(c){ return function(){ c.style.display = 'none'; }; }(card), 280);
+                }
+            });
+
+            // Show / hide no-results message
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+        });
+    });
+
 })();
 </script>
 

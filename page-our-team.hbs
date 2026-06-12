@@ -34,8 +34,8 @@
             </div>
             {{/if}}
 
-            {{#get "posts" filter="tag:board" limit="all" order="published_at asc" include="tags" as |board_members|}}
-                {{#get "posts" filter="tag:team" limit="all" order="published_at asc" include="tags" as |team_members|}}
+            {{#get "posts" filter="tag:board" limit="50" order="published_at asc" include="tags" as |board_members|}}
+                {{#get "posts" filter="tag:team" limit="50" order="published_at asc" include="tags" as |team_members|}}
                     
                     {{#if board_members}}
                         <div class="team-section-grid-wrap">
@@ -53,7 +53,7 @@
                             <p class="team-section-subtitle" data-animate="fade-up">Our governing board provides strategic guidance, administrative oversight, and a shared commitment to steering READ's mission toward lasting social impact.</p>
                             <div class="team-scroll-container">
                                 {{#foreach board_members}}
-                                <div class="team-card" data-animate="fade-up" style="animation-delay: calc({{@index}} * 60ms);">
+                                <div class="team-card" data-animate="fade-up" data-delay-index="{{@index}}">
                                     <div class="team-avatar-wrap">
                                         {{#if feature_image}}
                                             <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="team-avatar-img">
@@ -90,7 +90,7 @@
                             <p class="team-section-subtitle" data-animate="fade-up">READ is supported by social workers, counsellors, trainers, grassroots volunteers, community leaders, resource persons, and development professionals committed to social transformation. Our team works closely with communities through empathy, professionalism, and long-term engagement.</p>
                             <div class="team-scroll-container">
                                 {{#foreach team_members}}
-                                <div class="team-card" data-animate="fade-up" style="animation-delay: calc({{@index}} * 60ms);">
+                                <div class="team-card" data-animate="fade-up" data-delay-index="{{@index}}">
                                     <div class="team-avatar-wrap">
                                         {{#if feature_image}}
                                             <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="team-avatar-img">

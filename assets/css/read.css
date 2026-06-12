@@ -81,6 +81,10 @@
     --clr-card-bg: rgba(21, 32, 43, 0.45);
     --clr-gold-alpha-10: rgba(56, 189, 248, 0.1);
     --clr-gold-alpha-20: rgba(56, 189, 248, 0.2);
+
+    /* ── Ghost 6 required font variables ────────────────── */
+    --gh-font-heading: var(--font-display, "Playfair Display", serif);
+    --gh-font-body: var(--font-body, "Inter", sans-serif);
 }
 
 /* ── Reset & Base ────────────────────────────────────────────── */
@@ -6768,6 +6772,129 @@ button {
     transform: scale(1.05);
 }
 
+/* image overlay gradient on the link wrap */
+.story-card-image-wrap {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.story-card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 60%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.story-card:hover .story-card-img-overlay {
+    opacity: 1;
+}
+
+/* card body wrapper */
+.story-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-lg);
+}
+
+/* title link */
+.story-card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.story-card-title a:hover {
+    color: var(--clr-gold);
+}
+
+/* tag pills row */
+.story-tag-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.story-tag-pill {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: var(--clr-text-2);
+    text-transform: capitalize;
+}
+
+/* empty state */
+.stories-empty {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl);
+    color: var(--clr-text-2);
+}
+
+.stories-empty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--clr-card-bg);
+    border: 1px solid var(--clr-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-lg);
+    color: var(--clr-gold);
+    opacity: 0.7;
+}
+
+.stories-empty h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin-bottom: var(--space-sm);
+}
+
+.stories-empty p {
+    max-width: 420px;
+    margin: 0 auto var(--space-lg);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* no-results JS message */
+.stories-no-results {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--clr-text-2);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+/* program pill post count badge */
+.stories-pill-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--clr-gold);
+    color: #000;
+    font-size: 0.68rem;
+    font-weight: 800;
+    margin-left: 0.4rem;
+    line-height: 1;
+}
+
 .program-card-image-wrap {
     position: relative;
     margin: calc(var(--space-xl) * -1) calc(var(--space-xl) * -1) var(--space-md) calc(var(--space-xl) * -1);
@@ -7565,5 +7692,187 @@ button {
     .rh-glance-img,
     .rh-prog-img {
         transition: none;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Contact Partners (cp-*) — redesigned full-width section
+   ══════════════════════════════════════════════════════════════ */
+
+.contact-partners {
+    padding: var(--space-3xl) 0 calc(var(--space-3xl) + 1rem);
+    background: var(--clr-bg);
+    border-top: 1px solid var(--clr-border);
+    border-bottom: 1px solid var(--clr-border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle decorative orb behind the section */
+.contact-partners::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -120px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ─ Inner wrapper ─ */
+.cp-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+}
+
+/* ─ Section header ─ */
+.cp-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.cp-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clr-gold);
+    margin-bottom: var(--space-sm);
+}
+
+.cp-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--clr-gold);
+    box-shadow: 0 0 8px var(--clr-gold);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.cp-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--clr-text);
+    margin: 0 0 var(--space-sm);
+    line-height: 1.2;
+}
+
+.cp-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-gold-light, #f5d485));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cp-subtitle {
+    font-size: 0.95rem;
+    color: var(--clr-text-2);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ─ Category rows ─ */
+.cp-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xl);
+    padding: var(--space-lg) 0;
+}
+
+.cp-row-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 175px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clr-gold);
+    padding-top: 0.45rem;
+    flex-shrink: 0;
+}
+
+.cp-row-label svg {
+    flex-shrink: 0;
+    opacity: 0.8;
+}
+
+/* ─ Tags area ─ */
+.cp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    flex: 1;
+}
+
+/* ─ Individual tag pill ─ */
+.cp-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.1rem;
+    background: var(--clr-card-bg);
+    border: 1px solid var(--clr-border);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--clr-text);
+    transition: background 0.25s ease, border-color 0.25s ease,
+                color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.cp-tag:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.5);
+    color: var(--clr-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+}
+
+.cp-tag--wide {
+    white-space: normal;
+}
+
+/* ─ Row divider ─ */
+.cp-divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--clr-border) 20%,
+        var(--clr-border) 80%,
+        transparent
+    );
+    margin: 0;
+}
+
+/* ─ Responsive ─ */
+@media (max-width: 700px) {
+    .cp-row {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .cp-row-label {
+        min-width: unset;
+        padding-top: 0;
+    }
+
+    .cp-tags {
+        justify-content: flex-start;
+    }
+
+    .cp-inner {
+        padding: 0 var(--space-md);
     }
 }
