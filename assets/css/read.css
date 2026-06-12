@@ -715,8 +715,8 @@ button {
     inset: 0;
     z-index: 1;
     background-image: 
-        radial-gradient(ellipse 70% 80% at 50% 50%, var(--clr-gold-alpha-20) 0%, rgba(var(--clr-bg-rgb), 0.7) 100%),
-        linear-gradient(180deg, rgba(var(--clr-bg-rgb), 0.3) 0%, rgba(var(--clr-bg-rgb), 0.95) 100%),
+        radial-gradient(ellipse 70% 80% at 50% 50%, var(--clr-gold-alpha-20) 0%, rgba(var(--clr-bg-rgb), 0.15) 100%),
+        linear-gradient(180deg, rgba(var(--clr-bg-rgb), 0.1) 0%, rgba(var(--clr-bg-rgb), 0.55) 100%),
         url('../img/index_BG.jpg');
     background-size: cover;
     background-position: center;
@@ -7164,7 +7164,7 @@ button {
     inset: 0;
     z-index: 1;
     overflow: hidden;
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 .hero-slide {
@@ -7185,8 +7185,8 @@ button {
     inset: 0;
     z-index: 2;
     background: linear-gradient(to bottom,
-        rgba(var(--clr-bg-rgb), 0.55) 0%,
-        rgba(var(--clr-bg-rgb), 0.85) 100%);
+        rgba(var(--clr-bg-rgb), 0.15) 0%,
+        rgba(var(--clr-bg-rgb), 0.55) 100%);
 }
 
 /* ============================================================
