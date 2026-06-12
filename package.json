@@ -63,9 +63,6 @@
       "donation_bank_details": {
         "type": "text"
       },
-      "donation_upi_id": {
-        "type": "text"
-      },
       "donation_qr_image": {
         "type": "image"
       }

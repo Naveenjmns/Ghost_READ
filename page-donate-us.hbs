@@ -235,45 +235,15 @@
                     {{/if}}
 
                     {{!-- UPI & QR Code Card --}}
-                    {{#if @custom.donation_upi_id}}
+                    {{#if @custom.donation_qr_image}}
                     <div class="donate-method-card upi-qr-card">
                         <div class="donate-method-badge">UPI &amp; QR Code</div>
                         <h3 class="donate-method-card-title">Scan to Donate</h3>
                         
                         <div class="qr-code-wrapper">
-                            {{#if @custom.donation_qr_image}}
-                                <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
-                            {{else}}
-                                <div class="qr-code-placeholder">
-                                    <div class="qr-code-border">
-                                        <div class="qr-code-inner-box">
-                                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--clr-gold); opacity: 0.5;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 17h.01M17 7h.01M7 7h.01M17 17h.01"/></svg>
-                                            <span class="qr-code-text">UPI QR Code</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {{/if}}
-                        </div>
-
-                        <div class="upi-id-box">
-                            <span class="upi-id-label">UPI ID:</span>
-                            <span class="upi-id-val">{{@custom.donation_upi_id}}</span>
-                            <button class="upi-copy-btn" onclick="navigator.clipboard.writeText('{{@custom.donation_upi_id}}'); alert('UPI ID copied!');" aria-label="Copy UPI ID">
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-6 4h6m-3-3v6"/></svg>
-                            </button>
+                            <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
                         </div>
                     </div>
-                    {{else}}
-                        {{#if @custom.donation_qr_image}}
-                        <div class="donate-method-card upi-qr-card">
-                            <div class="donate-method-badge">UPI &amp; QR Code</div>
-                            <h3 class="donate-method-card-title">Scan to Donate</h3>
-                            
-                            <div class="qr-code-wrapper">
-                                <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
-                            </div>
-                        </div>
-                        {{/if}}
                     {{/if}}
                 </div>
 
