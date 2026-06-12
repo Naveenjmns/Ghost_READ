@@ -223,16 +223,20 @@
                     {{/if}}
 
                     {{!-- UPI & QR Code Card --}}
-                    {{#if @custom.donation_qr_image}}
-                    <div class="donate-method-card upi-qr-card">
-                        <div class="donate-method-badge">UPI &amp; QR Code</div>
-                        <h3 class="donate-method-card-title">Scan to Donate</h3>
-                        
-                        <div class="qr-code-wrapper">
-                            <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
-                        </div>
-                    </div>
-                    {{/if}}
+                    {{#get "posts" filter="tag:hash-donation-qr" limit="1" as |qr_post|}}
+                        {{#if qr_post}}
+                            {{#foreach qr_post}}
+                            <div class="donate-method-card upi-qr-card">
+                                <div class="donate-method-badge">UPI &amp; QR Code</div>
+                                <h3 class="donate-method-card-title">Scan to Donate</h3>
+                                
+                                <div class="qr-code-wrapper">
+                                    <img src="{{img_url feature_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
+                                </div>
+                            </div>
+                            {{/foreach}}
+                        {{/if}}
+                    {{/get}}
                 </div>
 
                 <div class="donate-tax-info">

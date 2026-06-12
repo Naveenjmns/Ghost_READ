@@ -14,7 +14,15 @@
             <div class="hero-masthead" data-animate="fade-up">
                 <div class="jubilee-badge-wrap">
                     <div class="jubilee-badge">
-                        <img src="{{#if @custom.silver_jubilee_image}}{{@custom.silver_jubilee_image}}{{else}}{{asset "img/silver_jubilee.png"}}{{/if}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                        {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
+                            {{#if jubilee_post}}
+                                {{#foreach jubilee_post}}
+                                    <img src="{{img_url feature_image}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                                {{/foreach}}
+                            {{else}}
+                                <img src="{{asset "img/silver_jubilee.png"}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                            {{/if}}
+                        {{/get}}
                         <span class="jubilee-text">Silver Jubilee</span>
                         <span class="jubilee-divider">·</span>
                         <span class="jubilee-years">25 Years of Service (2001 – 2026)</span>

@@ -304,7 +304,15 @@
         <div class="about-container">
             <div class="about-closing-inner" data-animate="fade-up">
                 <div class="about-closing-logo">
-                    <img src="{{#if @custom.custom_logo_image}}{{@custom.custom_logo_image}}{{else if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" width="80" height="80">
+                    {{#get "posts" filter="tag:hash-custom-logo" limit="1" as |logo_post|}}
+                        {{#if logo_post}}
+                            {{#foreach logo_post}}
+                                <img src="{{img_url feature_image}}" alt="READ Logo" width="80" height="80">
+                            {{/foreach}}
+                        {{else}}
+                            <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" width="80" height="80">
+                        {{/if}}
+                    {{/get}}
                 </div>
                 <blockquote class="about-closing-quote">
                     Education brings dignity.<br>

@@ -45,20 +45,11 @@
       "homepage_hero_image": {
         "type": "image"
       },
-      "silver_jubilee_image": {
-        "type": "image"
-      },
-      "custom_logo_image": {
-        "type": "image"
-      },
       "stories_programs_image": {
         "type": "image"
       },
       "donation_bank_details": {
         "type": "text"
-      },
-      "donation_qr_image": {
-        "type": "image"
       }
     }
   }
