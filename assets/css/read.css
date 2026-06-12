@@ -3483,17 +3483,6 @@ button {
     pointer-events: none;
 }
 
-.contact-hero-inner {
-    position: relative;
-    max-width: var(--max-w-narrow);
-    margin: 0 auto;
-    padding: 0 var(--space-xl);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-lg);
-}
-
 .contact-hero-badge {
     display: inline-flex;
     align-items: center;
@@ -3519,24 +3508,48 @@ button {
     animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulse-dot {
+.contact-hero-inner {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+}
 
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Kicker row */
+.contact-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 540px;
+    margin: var(--space-xs) 0;
+}
 
-    50% {
-        opacity: 0.4;
-        transform: scale(1.4);
-    }
+.contact-hero-kicker-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+}
+
+.contact-hero-kicker-text {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-text-3);
+    white-space: nowrap;
 }
 
 .contact-hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.1;
     color: var(--clr-text);
     margin: 0;
@@ -3544,15 +3557,74 @@ button {
 
 .contact-hero-title em {
     font-style: italic;
-    color: var(--clr-gold);
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+/* Quote-strip description */
 .contact-hero-desc {
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     color: var(--clr-text-2);
-    line-height: 1.7;
-    max-width: 500px;
+    line-height: 1.8;
+    max-width: 560px;
     font-style: italic;
+    font-weight: 400;
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, var(--clr-gold), var(--clr-amber)) 1;
+    padding-left: var(--space-lg);
+    text-align: left;
+    margin: var(--space-xs) 0;
+}
+
+.contact-hero-desc strong {
+    color: var(--clr-text);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.contact-hero-desc em {
+    color: var(--clr-gold);
+    -webkit-text-fill-color: unset;
+    background: none;
+}
+
+/* Audience-type pills */
+.contact-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+}
+
+.contact-hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--clr-text-2);
+    background: var(--clr-bg-2);
+    border: 1px solid var(--clr-border);
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.contact-hero-pill svg {
+    color: var(--clr-gold);
+    flex-shrink: 0;
+}
+
+.contact-hero-pill:hover {
+    background: var(--clr-gold-alpha-10);
+    border-color: var(--clr-gold-alpha-20);
+    color: var(--clr-gold);
+    transform: translateY(-1px);
 }
 
 /* Main Layout */
