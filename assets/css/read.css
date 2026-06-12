@@ -4021,13 +4021,14 @@ button {
 .about-hero-inner {
     position: relative;
     z-index: 3;
-    max-width: 760px;
+    max-width: 820px;
     margin: 0 auto;
     padding: 0 var(--space-xl);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-md);
+    text-align: center;
 }
 
 .about-hero-badge {
@@ -4054,6 +4055,32 @@ button {
     animation: pulse-dot 2s infinite;
 }
 
+/* Kicker row — organisation full name between decorative lines */
+.about-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 640px;
+    margin: var(--space-xs) 0;
+}
+
+.about-hero-kicker-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+}
+
+.about-hero-kicker-text {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-text-3);
+    white-space: nowrap;
+}
+
 .about-hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.8rem, 7vw, 5rem);
@@ -4065,26 +4092,74 @@ button {
 
 .about-hero-title em {
     font-style: italic;
-    color: var(--clr-gold);
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.about-hero-subtitle {
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--clr-text-2);
-    margin: 0;
-}
-
+/* Description as a welcoming quote-style strip */
 .about-hero-desc {
-    font-size: 1.1rem;
+    font-size: 1.12rem;
     color: var(--clr-text-2);
-    line-height: 1.7;
-    max-width: 520px;
+    line-height: 1.8;
+    max-width: 580px;
     font-style: italic;
+    font-weight: 400;
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, var(--clr-gold), var(--clr-amber)) 1;
+    padding-left: var(--space-lg);
+    text-align: left;
+    margin: var(--space-sm) 0;
+}
+
+.about-hero-desc strong {
+    color: var(--clr-text);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.about-hero-desc em {
+    color: var(--clr-gold);
+    -webkit-text-fill-color: unset;
+    background: none;
+}
+
+/* Focus-area pills row */
+.about-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin: var(--space-xs) 0;
+}
+
+.about-hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--clr-text-2);
+    background: var(--clr-bg-2);
+    border: 1px solid var(--clr-border);
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.about-hero-pill svg {
+    color: var(--clr-gold);
+    flex-shrink: 0;
+}
+
+.about-hero-pill:hover {
+    background: var(--clr-gold-alpha-10);
+    border-color: var(--clr-gold-alpha-20);
+    color: var(--clr-gold);
+    transform: translateY(-1px);
 }
 
 /* Stats row */
