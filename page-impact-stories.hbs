@@ -9,22 +9,15 @@
             <div class="stories-hero-orb stories-hero-orb-1"></div>
             <div class="stories-hero-orb stories-hero-orb-2"></div>
 
-            {{!-- Background Slideshow (featured story images) --}}
-            {{#get "posts" filter="tag:story+featured:true" limit="5"}}
-                {{#if posts}}
-                    <div class="hero-slideshow">
-                        {{#foreach posts}}
-                            <div class="hero-slide{{#if @first}} active{{/if}}" style="background-image: url('{{img_url feature_image size="xl"}}');"></div>
-                        {{/foreach}}
-                    </div>
-                {{else}}
-                    <div class="hero-slideshow">
-                        <div class="hero-slide active" style="background-image: url('/content/images/Individual Photos/5b7dac37-a1d4-4094-aac9-66ec754881d1.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/1ed9d4bf-1fdf-4e54-9b23-996e50f29801.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/Individual Photos/b46d1471-eaeb-4a5b-94b7-bd5d49ff979b.jpg');"></div>
-                    </div>
-                {{/if}}
-            {{/get}}
+            {{!-- Background Slideshow (6 custom uploaded images) --}}
+            <div class="hero-slideshow">
+                <div class="hero-slide active" style="background-image: url('{{asset "img/stories1.jpeg"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/stories2.jpeg"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/stories3.png"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/stories4.jpeg"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/stories5.jpeg"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/stories6.jpeg"}}');"></div>
+            </div>
             <div class="hero-slideshow-overlay"></div>
         </div>
         <div class="stories-hero-inner">
@@ -129,7 +122,7 @@
 
                                 {{!-- Tag pills --}}
                                 <div class="story-tag-pills">
-                                    {{#foreach tags}}
+                                    {{#foreach tags visibility="public"}}
                                     <span class="story-tag-pill">{{name}}</span>
                                     {{/foreach}}
                                 </div>

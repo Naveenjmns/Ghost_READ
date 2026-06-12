@@ -10,25 +10,15 @@
             <div class="about-hero-orb about-hero-orb-2"></div>
             <div class="about-hero-grid"></div>
             
-            {{!-- Background Slideshow --}}
-            {{#get "posts" filter="tag:hash-about-gallery" limit="6"}}
-                {{#if posts}}
-                    <div class="hero-slideshow">
-                        {{#foreach posts}}
-                            <div class="hero-slide{{#if @first}} active{{/if}}" style="background-image: url('{{img_url feature_image size="xl"}}');"></div>
-                        {{/foreach}}
-                    </div>
-                {{else}}
-                    <div class="hero-slideshow">
-                        <div class="hero-slide active" style="background-image: url('/content/images/Individual Photos/024788ed-0d39-4cc7-b514-4147553f745a.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/National days celebration/20251011_170733.jpg');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/tribal/IMG_2987.JPG');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/Marathon/DSCF0128.JPG');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/medical camp - migrants/DSCF0075.JPG');"></div>
-                        <div class="hero-slide" style="background-image: url('/content/images/medical camp - migrants/DSCF0074.JPG');"></div>
-                    </div>
-                {{/if}}
-            {{/get}}
+            {{!-- Background Slideshow (6 custom uploaded images) --}}
+            <div class="hero-slideshow">
+                <div class="hero-slide active" style="background-image: url('{{asset "img/about1.png"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/about2.png"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/about3.jpg.jpeg"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/about4.png"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/about5.png"}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{asset "img/about6.png"}}');"></div>
+            </div>
             <div class="hero-slideshow-overlay"></div>
         </div>
         <div class="about-hero-inner">
@@ -115,13 +105,14 @@
                 <div class="about-container">
                     <div class="about-section-head" data-animate="fade-up">
                         <div class="about-section-label">Our Journey</div>
-                        <h2 class="about-section-title">Two Decades of <em>Impact</em></h2>
+                        <h2 class="about-section-title">Celebrating 25 Years of <em>Impact</em></h2>
                     </div>
                     <div class="about-timeline-track">
                         <div class="about-timeline-line"></div>
                         {{#foreach posts}}
                             <div class="about-timeline-item{{#if @odd}} about-timeline-item--right{{/if}}" data-animate="fade-up">
                                 <div class="about-timeline-dot{{#if @last}} about-timeline-dot--active{{/if}}"></div>
+                                <div class="about-timeline-year{{#if @last}} about-timeline-year--active{{/if}}">{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{date published_at format="YYYY"}}{{/if}}</div>
                                 <div class="about-timeline-content">
                                     <h4>{{title}}</h4>
                                     <div>{{content}}</div>
@@ -228,7 +219,7 @@
                 <p class="about-closing-sub">With this vision, READ remains committed to building empowered, inclusive, and self-reliant communities across Tamil Nadu.</p>
                 <div class="about-closing-actions">
                     <a href="/donate-us/" class="about-cta-btn about-cta-btn--primary">Support Our Work</a>
-                    <a href="/conatct-us/" class="about-cta-btn about-cta-btn--outline">Contact Us</a>
+                    <a href="/contact-us/" class="about-cta-btn about-cta-btn--outline">Contact Us</a>
                 </div>
             </div>
         </div>

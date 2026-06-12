@@ -82,6 +82,79 @@
                 </div>
 
             </div>
+
+            {{!-- Donation Methods --}}
+            <div class="donate-methods" data-animate="fade-up" data-delay="150">
+                <div class="donate-methods-header">
+                    <h2 class="donate-methods-title">Choose Your <em>Donation Method</em></h2>
+                    <p class="donate-methods-subtitle">All donations to READ are tax-exempt under Section 80G of the Income Tax Act.</p>
+                </div>
+
+                <div class="donate-methods-grid">
+                    {{!-- Bank Transfer Card --}}
+                    <div class="donate-method-card bank-transfer-card">
+                        <div class="donate-method-badge">Direct Transfer</div>
+                        <h3 class="donate-method-card-title">Bank Account Details</h3>
+                        
+                        <div class="bank-details-list">
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Name</span>
+                                <span class="bank-detail-val">Rights Education and Development Centre (READ)</span>
+                            </div>
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Number</span>
+                                <span class="bank-detail-val">3047220002307 <span class="copy-hint" onclick="navigator.clipboard.writeText('3047220002307'); alert('Account number copied!');">(Copy)</span></span>
+                            </div>
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Bank Name</span>
+                                <span class="bank-detail-val">State Bank of India</span>
+                            </div>
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Branch</span>
+                                <span class="bank-detail-val">Sathyamangalam</span>
+                            </div>
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">IFSC Code</span>
+                                <span class="bank-detail-val">SBIN0001234 <span class="copy-hint" onclick="navigator.clipboard.writeText('SBIN0001234'); alert('IFSC code copied!');">(Copy)</span></span>
+                            </div>
+                            <div class="bank-detail-item">
+                                <span class="bank-detail-label">Account Type</span>
+                                <span class="bank-detail-val">Savings Account</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- UPI & QR Code Card --}}
+                    <div class="donate-method-card upi-qr-card">
+                        <div class="donate-method-badge">UPI &amp; QR Code</div>
+                        <h3 class="donate-method-card-title">Scan to Donate</h3>
+                        
+                        <div class="qr-code-wrapper">
+                            <div class="qr-code-placeholder">
+                                <div class="qr-code-border">
+                                    <div class="qr-code-inner-box">
+                                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--clr-gold); opacity: 0.5;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 17h.01M17 7h.01M7 7h.01M17 17h.01"/></svg>
+                                        <span class="qr-code-text">UPI QR Code</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="upi-id-box">
+                            <span class="upi-id-label">UPI ID:</span>
+                            <span class="upi-id-val">readsuryamsw@okaxis</span>
+                            <button class="upi-copy-btn" onclick="navigator.clipboard.writeText('readsuryamsw@okaxis'); alert('UPI ID copied!');" aria-label="Copy UPI ID">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-6 4h6m-3-3v6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-tax-info">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p>After making a donation, please share the transaction receipt along with your PAN details to <strong>readsuryamsw@gmail.com</strong> so we can issue your tax exemption certificate (Form 10BE).</p>
+                </div>
+            </div>
         </div>
     </section>
 

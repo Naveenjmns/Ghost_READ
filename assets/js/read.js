@@ -172,7 +172,7 @@
             try {
                 await navigator.clipboard.writeText(window.location.href);
                 const originalHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>`;
+                copyBtn.innerHTML = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> <span>Copied!</span>`;
                 copyBtn.style.color = 'var(--clr-gold)';
                 setTimeout(() => {
                     copyBtn.innerHTML = originalHTML;
