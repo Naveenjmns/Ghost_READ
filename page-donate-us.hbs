@@ -10,11 +10,50 @@
         </div>
         <div class="donate-support-container">
             <div class="donate-support-header" data-animate="fade-up">
-                <div class="donate-support-label">Make a Difference</div>
-                <h1 class="donate-support-title">{{#if title}}{{title}}{{else}}Where Your <em>Support Goes</em>{{/if}}</h1>
+
+                <div class="donate-hero-badge">
+                    <span class="donate-hero-dot">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </span>
+                    <span>Make a Difference · Tamil Nadu</span>
+                </div>
+
+                <div class="donate-hero-kicker">
+                    <span class="donate-hero-kicker-line"></span>
+                    <span class="donate-hero-kicker-text">Your support changes lives</span>
+                    <span class="donate-hero-kicker-line"></span>
+                </div>
+
+                <h1 class="donate-support-title">
+                    {{#if title}}{{title}}{{else}}Where Your <em>Support</em> Goes{{/if}}
+                </h1>
+
                 <p class="donate-support-subtitle">
-                    {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every contribution you make is channelled directly into programs that uplift the most vulnerable communities across Tamil Nadu.{{/if}}
+                    {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every contribution you make is channelled <strong>directly</strong> into programs that uplift the <em>most vulnerable communities</em> across Tamil Nadu.{{/if}}
                 </p>
+
+                <div class="donate-hero-impact-row">
+                    <div class="donate-impact-stat">
+                        <span class="donate-impact-num">100%</span>
+                        <span class="donate-impact-label">Directly to Programs</span>
+                    </div>
+                    <span class="donate-impact-sep">·</span>
+                    <div class="donate-impact-stat">
+                        <span class="donate-impact-num">80G</span>
+                        <span class="donate-impact-label">Tax Exempted</span>
+                    </div>
+                    <span class="donate-impact-sep">·</span>
+                    <div class="donate-impact-stat">
+                        <span class="donate-impact-num">50k+</span>
+                        <span class="donate-impact-label">Lives Impacted</span>
+                    </div>
+                    <span class="donate-impact-sep">·</span>
+                    <div class="donate-impact-stat">
+                        <span class="donate-impact-num">25 yrs</span>
+                        <span class="donate-impact-label">Of Service</span>
+                    </div>
+                </div>
+
             </div>
 
             {{#if content}}
@@ -229,26 +268,149 @@
     margin-bottom: 20px;
 }
 
+/* Pulsing heart badge */
+.donate-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clr-gold);
+    background: var(--clr-gold-alpha-10);
+    border: 1px solid var(--clr-gold-alpha-20);
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.donate-hero-dot {
+    display: inline-flex;
+    align-items: center;
+    color: var(--clr-gold);
+    animation: pulse-dot 2s infinite;
+}
+
+/* Kicker row */
+.donate-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 540px;
+    margin: 0 auto 8px;
+}
+
+.donate-hero-kicker-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+}
+
+.donate-hero-kicker-text {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-text-3);
+    white-space: nowrap;
+}
+
 .donate-support-title {
     font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 800;
     color: var(--clr-text);
     line-height: 1.15;
-    margin: 0 0 16px;
+    margin: 0 0 20px;
     letter-spacing: -0.02em;
 }
 
 .donate-support-title em {
     font-style: normal;
-    color: var(--clr-gold);
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+/* Quote-strip description */
 .donate-support-subtitle {
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     color: var(--clr-text-2);
-    max-width: 580px;
-    margin: 0 auto;
-    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.8;
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, var(--clr-gold), var(--clr-amber)) 1;
+    padding-left: 20px;
+    text-align: left;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.donate-support-subtitle strong {
+    color: var(--clr-text);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.donate-support-subtitle em {
+    color: var(--clr-gold);
+    -webkit-text-fill-color: unset;
+    background: none;
+}
+
+/* Impact mini-stats row */
+.donate-hero-impact-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    padding: 20px 28px;
+    background: var(--clr-bg-2);
+    border: 1px solid var(--clr-border);
+    border-radius: 16px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.donate-impact-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.donate-impact-num {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.donate-impact-label {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clr-text-3);
+}
+
+.donate-impact-sep {
+    font-size: 1.4rem;
+    color: var(--clr-border);
+    line-height: 1;
+    align-self: center;
 }
 
 .donate-support-grid {
