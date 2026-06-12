@@ -30,16 +30,7 @@
     },
     "card_assets": true,
     "custom": {
-      "about_stat_years": {
-        "type": "text"
-      },
-      "about_stat_lives": {
-        "type": "text"
-      },
-      "about_stat_programs": {
-        "type": "text"
-      },
-      "about_stat_region": {
+      "about_stats": {
         "type": "text"
       },
       "homepage_hero_image": {

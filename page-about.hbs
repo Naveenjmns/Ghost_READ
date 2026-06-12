@@ -61,32 +61,62 @@
                 </span>
             </div>
 
-            <div class="about-hero-stats" data-animate="fade-up" data-delay="400">
+            <div class="about-hero-stats" id="about-hero-stats" data-animate="fade-up" data-delay="400">
                 <div class="about-stat">
-                    <span class="about-stat-num" data-stat-value="{{#if @custom.about_stat_years}}{{@custom.about_stat_years}}{{else}}20+{{/if}}">
-                        {{#if @custom.about_stat_years}}{{@custom.about_stat_years}}{{else}}20+{{/if}}
-                    </span>
+                    <span class="about-stat-num" id="about-stat-years" data-stat-value="20+">20+</span>
                     <span class="about-stat-label">Years of Service</span>
                 </div>
                 <div class="about-stat">
-                    <span class="about-stat-num" data-stat-value="{{#if @custom.about_stat_lives}}{{@custom.about_stat_lives}}{{else}}50000+{{/if}}">
-                        {{#if @custom.about_stat_lives}}{{@custom.about_stat_lives}}{{else}}50000+{{/if}}
-                    </span>
+                    <span class="about-stat-num" id="about-stat-lives" data-stat-value="50000+">50000+</span>
                     <span class="about-stat-label">Lives Impacted</span>
                 </div>
                 <div class="about-stat">
-                    <span class="about-stat-num" data-stat-value="{{#if @custom.about_stat_programs}}{{@custom.about_stat_programs}}{{else}}12+{{/if}}">
-                        {{#if @custom.about_stat_programs}}{{@custom.about_stat_programs}}{{else}}12+{{/if}}
-                    </span>
+                    <span class="about-stat-num" id="about-stat-programs" data-stat-value="12+">12+</span>
                     <span class="about-stat-label">Programs</span>
                 </div>
                 <div class="about-stat">
-                    <span class="about-stat-num">
-                        {{#if @custom.about_stat_region}}{{@custom.about_stat_region}}{{else}}Tamil Nadu{{/if}}
-                    </span>
+                    <span class="about-stat-num" id="about-stat-region">Tamil Nadu</span>
                     <span class="about-stat-label">Region Served</span>
                 </div>
             </div>
+
+            {{#if @custom.about_stats}}
+            <script>
+            (function() {
+                const rawStats = "{{@custom.about_stats}}".trim();
+                if (!rawStats) return;
+
+                // Format: Years, Lives, Programs, Region
+                const parts = rawStats.split(',').map(p => p.trim());
+                
+                const years = parts[0] || '20+';
+                const lives = parts[1] || '50000+';
+                const programs = parts[2] || '12+';
+                const region = parts[3] || 'Tamil Nadu';
+
+                const yearsEl = document.getElementById('about-stat-years');
+                const livesEl = document.getElementById('about-stat-lives');
+                const programsEl = document.getElementById('about-stat-programs');
+                const regionEl = document.getElementById('about-stat-region');
+
+                if (yearsEl) {
+                    yearsEl.textContent = years;
+                    yearsEl.setAttribute('data-stat-value', years);
+                }
+                if (livesEl) {
+                    livesEl.textContent = lives;
+                    livesEl.setAttribute('data-stat-value', lives);
+                }
+                if (programsEl) {
+                    programsEl.textContent = programs;
+                    programsEl.setAttribute('data-stat-value', programs);
+                }
+                if (regionEl) {
+                    regionEl.textContent = region;
+                }
+            })();
+            </script>
+            {{/if}}
         </div>
     </section>
 
