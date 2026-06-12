@@ -54,12 +54,6 @@
       "stories_programs_image": {
         "type": "image"
       },
-      "donation_page_heading": {
-        "type": "text"
-      },
-      "donation_description": {
-        "type": "text"
-      },
       "donation_bank_details": {
         "type": "text"
       },
