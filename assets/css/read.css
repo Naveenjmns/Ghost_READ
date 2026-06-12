@@ -6294,9 +6294,14 @@ button {
 .stories-hero-inner {
     position: relative;
     z-index: 1;
-    max-width: 720px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 0 var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
 }
 
 .stories-hero-badge {
@@ -6308,56 +6313,131 @@ button {
     border: 1px solid var(--clr-gold-alpha-20);
     border-radius: var(--radius-full);
     font-family: var(--font-ui);
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--clr-gold-light);
-    letter-spacing: 0.03em;
-    margin-bottom: var(--space-lg);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--clr-gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
 .stories-hero-sparkle {
-    font-size: 1rem;
+    font-size: 0.75rem;
+    color: var(--clr-gold);
     animation: stories-sparkle-pulse 2s ease-in-out infinite;
 }
 
 @keyframes stories-sparkle-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(1.15) rotate(20deg); }
+}
 
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Kicker row */
+.stories-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 520px;
+    margin: var(--space-xs) 0;
+}
 
-    50% {
-        opacity: 0.6;
-        transform: scale(1.15);
-    }
+.stories-hero-kicker-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+}
+
+.stories-hero-kicker-text {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clr-text-3);
+    white-space: nowrap;
 }
 
 .stories-hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 700;
-    line-height: 1.15;
+    font-weight: 800;
+    line-height: 1.1;
     color: var(--clr-text);
-    margin-bottom: var(--space-lg);
+    margin: 0;
 }
 
 .stories-hero-title em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--clr-gold), var(--clr-gold-light));
+    font-style: italic;
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+/* Quote-strip description */
 .stories-hero-desc {
     font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 1.08rem;
+    line-height: 1.85;
     color: var(--clr-text-2);
-    max-width: 580px;
-    margin: 0 auto var(--space-xl);
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    font-weight: 400;
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, var(--clr-gold), var(--clr-amber)) 1;
+    padding-left: var(--space-lg);
+    text-align: left;
+}
+
+.stories-hero-desc strong {
+    color: var(--clr-text);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.stories-hero-desc em {
+    color: var(--clr-gold);
+    -webkit-text-fill-color: unset;
+    background: none;
+    font-style: italic;
+}
+
+/* Location / theme pills */
+.stories-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+}
+
+.stories-hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--clr-text-2);
+    background: var(--clr-bg-2);
+    border: 1px solid var(--clr-border);
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.stories-hero-pill svg {
+    color: var(--clr-gold);
+    flex-shrink: 0;
+}
+
+.stories-hero-pill:hover {
+    background: var(--clr-gold-alpha-10);
+    border-color: var(--clr-gold-alpha-20);
+    color: var(--clr-gold);
+    transform: translateY(-1px);
 }
 
 /* ── Hero Stats ────────────────────────────────────────────── */

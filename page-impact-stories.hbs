@@ -22,15 +22,47 @@
         </div>
         <div class="stories-hero-inner">
             <div class="stories-hero-badge" data-animate="fade-up">
-                <span class="stories-hero-sparkle"></span>
-                <span>Real People · Real Change</span>
+                <span class="stories-hero-sparkle">✦</span>
+                <span>Real People · Real Change · Tamil Nadu</span>
             </div>
-            <h1 class="stories-hero-title" data-animate="fade-up" data-delay="100">
+
+            <div class="stories-hero-kicker" data-animate="fade-up" data-delay="60">
+                <span class="stories-hero-kicker-line"></span>
+                <span class="stories-hero-kicker-text">From the ground — unfiltered &amp; authentic</span>
+                <span class="stories-hero-kicker-line"></span>
+            </div>
+
+            <h1 class="stories-hero-title" data-animate="fade-up" data-delay="120">
                 {{#if title}}{{title}}{{else}}Impact <em>Stories</em>{{/if}}
             </h1>
+
             <p class="stories-hero-desc" data-animate="fade-up" data-delay="200">
-                {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every story here is a life transformed. From tribal villages to urban settlements, these are real experiences of communities empowered through READ's programs across Tamil Nadu.{{/if}}
+                {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every story here is a <strong>life transformed.</strong> From <em>tribal villages</em> to <em>urban settlements,</em> these are real experiences of communities empowered through READ's programs across <strong>Tamil Nadu.</strong>{{/if}}
             </p>
+
+            <div class="stories-hero-pills" data-animate="fade-up" data-delay="280">
+                <span class="stories-hero-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Tribal Villages
+                </span>
+                <span class="stories-hero-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    Urban Settlements
+                </span>
+                <span class="stories-hero-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Real Lives
+                </span>
+                <span class="stories-hero-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    READ Programs
+                </span>
+                <span class="stories-hero-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Tamil Nadu
+                </span>
+            </div>
+
             {{#if content}}
             <div class="stories-hero-content gh-content" style="max-width: 800px; margin: 40px auto 0; text-align: center; color: var(--clr-text-2); font-size: 1.05rem; line-height: 1.7;">
                 {{content}}
