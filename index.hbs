@@ -4,20 +4,18 @@
 <section class="home-hero" id="home-hero">
     {{!-- Top Image Banner (no longer behind text) --}}
     <div class="hero-image-banner">
-        {{#get "posts" filter="tag:hash-homepage-slider" limit="5" order="published_at desc" as |slider_posts|}}
-            {{#if slider_posts}}
-                <div class="hero-slideshow" style="opacity: 1;">
-                    {{#foreach slider_posts}}
-                        <div class="hero-slide{{#if @first}} active{{/if}}" style="background-image: url('{{img_url feature_image}}');"></div>
-                    {{/foreach}}
-                </div>
-            {{else}}
-                <div class="hero-slideshow" style="opacity: 1;">
-                    <div class="hero-slide active" style="background-image: url('{{asset "img/index_BG.jpg"}}');"></div>
-                </div>
-            {{/if}}
-        {{/get}}
+        <div class="hero-slideshow" id="homepage-hero-slideshow" style="opacity: 1;">
+            <div class="hero-slide active" style="background-image: url('{{asset "img/index_BG.jpg"}}');"></div>
+        </div>
     </div>
+
+    {{#get "posts" filter="tag:hash-homepage-slider" limit="1" as |slider_post|}}
+        {{#if slider_post}}
+            {{#foreach slider_post}}
+                <div id="homepage-slider-raw-content" style="display: none;">{{content}}</div>
+            {{/foreach}}
+        {{/if}}
+    {{/get}}
 
     {{!-- Bottom Text Content (solid background matching theme mood) --}}
     <div class="hero-text-content">
@@ -127,15 +125,37 @@
 
 <script>
 (function() {
-    // Background Slideshow for home hero banner
-    var slides = document.querySelectorAll('.home-hero .hero-slide');
-    if (slides.length > 1) {
-        var currentSlide = 0;
-        setInterval(function() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 4000);
+    // Parse single post tagged #homepage-slider and extract images
+    const rawContentEl = document.getElementById('homepage-slider-raw-content');
+    const sliderContainer = document.getElementById('homepage-hero-slideshow');
+    
+    if (rawContentEl && sliderContainer) {
+        const imgs = rawContentEl.querySelectorAll('img');
+        const imgUrls = Array.from(imgs).map(img => img.src || img.getAttribute('src')).filter(Boolean);
+        
+        if (imgUrls.length > 0) {
+            // Clear fallback
+            sliderContainer.innerHTML = '';
+            
+            // Generate slides
+            imgUrls.forEach((url, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'hero-slide' + (index === 0 ? ' active' : '');
+                slide.style.backgroundImage = `url('${url}')`;
+                sliderContainer.appendChild(slide);
+            });
+            
+            // Run slideshow
+            if (imgUrls.length > 1) {
+                let currentSlide = 0;
+                const slides = sliderContainer.querySelectorAll('.hero-slide');
+                setInterval(function() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 4000);
+            }
+        }
     }
 })();
 </script>
