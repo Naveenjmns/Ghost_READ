@@ -10,14 +10,14 @@
             <div class="about-hero-orb about-hero-orb-2"></div>
             <div class="about-hero-grid"></div>
             
-            {{!-- Background Slideshow (6 custom uploaded images) --}}
+            {{!-- Background Slideshow (custom uploaded images from settings) --}}
             <div class="hero-slideshow">
-                <div class="hero-slide active" style="background-image: url('{{asset "img/about1.png"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/about2.png"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/about3.jpg.jpeg"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/about4.png"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/about5.png"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/about6.png"}}');"></div>
+                <div class="hero-slide active" style="background-image: url('{{#if @custom.about_slide_1}}{{@custom.about_slide_1}}{{else}}{{asset "img/about1.png"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.about_slide_2}}{{@custom.about_slide_2}}{{else}}{{asset "img/about2.png"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.about_slide_3}}{{@custom.about_slide_3}}{{else}}{{asset "img/about3.jpg.jpeg"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.about_slide_4}}{{@custom.about_slide_4}}{{else}}{{asset "img/about4.png"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.about_slide_5}}{{@custom.about_slide_5}}{{else}}{{asset "img/about5.png"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.about_slide_6}}{{@custom.about_slide_6}}{{else}}{{asset "img/about6.png"}}{{/if}}');"></div>
             </div>
             <div class="hero-slideshow-overlay"></div>
         </div>
@@ -209,7 +209,7 @@
         <div class="about-container">
             <div class="about-closing-inner" data-animate="fade-up">
                 <div class="about-closing-logo">
-                    <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" width="80" height="80">
+                    <img src="{{#if @custom.custom_logo_image}}{{@custom.custom_logo_image}}{{else if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" width="80" height="80">
                 </div>
                 <blockquote class="about-closing-quote">
                     Education brings dignity.<br>

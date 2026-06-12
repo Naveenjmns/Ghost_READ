@@ -9,14 +9,14 @@
             <div class="stories-hero-orb stories-hero-orb-1"></div>
             <div class="stories-hero-orb stories-hero-orb-2"></div>
 
-            {{!-- Background Slideshow (6 custom uploaded images) --}}
+            {{!-- Background Slideshow (custom uploaded images from settings) --}}
             <div class="hero-slideshow">
-                <div class="hero-slide active" style="background-image: url('{{asset "img/stories1.jpeg"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/stories2.jpeg"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/stories3.png"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/stories4.jpeg"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/stories5.jpeg"}}');"></div>
-                <div class="hero-slide" style="background-image: url('{{asset "img/stories6.jpeg"}}');"></div>
+                <div class="hero-slide active" style="background-image: url('{{#if @custom.stories_slide_1}}{{@custom.stories_slide_1}}{{else}}{{asset "img/stories1.jpeg"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.stories_slide_2}}{{@custom.stories_slide_2}}{{else}}{{asset "img/stories2.jpeg"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.stories_slide_3}}{{@custom.stories_slide_3}}{{else}}{{asset "img/stories3.png"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.stories_slide_4}}{{@custom.stories_slide_4}}{{else}}{{asset "img/stories4.jpeg"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.stories_slide_5}}{{@custom.stories_slide_5}}{{else}}{{asset "img/stories5.jpeg"}}{{/if}}');"></div>
+                <div class="hero-slide" style="background-image: url('{{#if @custom.stories_slide_6}}{{@custom.stories_slide_6}}{{else}}{{asset "img/stories6.jpeg"}}{{/if}}');"></div>
             </div>
             <div class="hero-slideshow-overlay"></div>
         </div>
@@ -32,7 +32,7 @@
                 {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every story here is a life transformed. From tribal villages to urban settlements, these are real experiences of communities empowered through READ's programs across Tamil Nadu.{{/if}}
             </p>
             {{#if content}}
-            <div class="stories-hero-content gh-content" style="max-width: 800px; margin: 40px auto 0; text-align: center; color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7;">
+            <div class="stories-hero-content gh-content" style="max-width: 800px; margin: 40px auto 0; text-align: center; color: var(--clr-text-2); font-size: 1.05rem; line-height: 1.7;">
                 {{content}}
             </div>
             {{/if}}

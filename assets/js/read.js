@@ -281,7 +281,7 @@
                 }
             });
             
-            if (mood === 'light-blue') {
+            if (mood === 'sunset-violet') {
                 document.documentElement.removeAttribute('data-theme-mood');
             } else {
                 document.documentElement.setAttribute('data-theme-mood', mood);
@@ -297,7 +297,12 @@
             });
         });
         
-        const savedMood = localStorage.getItem('ghost-theme-mood') || 'light-blue';
+        let savedMood = localStorage.getItem('ghost-theme-mood') || 'sunset-violet';
+        if (savedMood === 'light-blue' || savedMood === 'emerald' || savedMood === 'aurora-teal') {
+            savedMood = 'sunset-violet';
+        } else if (savedMood === 'dark-blue') {
+            savedMood = 'cyber-sapphire';
+        }
         setMood(savedMood);
     }
 

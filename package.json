@@ -28,6 +28,53 @@
       "l": { "width": 1000 },
       "xl": { "width": 2000 }
     },
-    "card_assets": true
+    "card_assets": true,
+    "custom": {
+      "about_slide_1": {
+        "type": "image"
+      },
+      "about_slide_2": {
+        "type": "image"
+      },
+      "about_slide_3": {
+        "type": "image"
+      },
+      "about_slide_4": {
+        "type": "image"
+      },
+      "about_slide_5": {
+        "type": "image"
+      },
+      "about_slide_6": {
+        "type": "image"
+      },
+      "stories_slide_1": {
+        "type": "image"
+      },
+      "stories_slide_2": {
+        "type": "image"
+      },
+      "stories_slide_3": {
+        "type": "image"
+      },
+      "stories_slide_4": {
+        "type": "image"
+      },
+      "stories_slide_5": {
+        "type": "image"
+      },
+      "stories_slide_6": {
+        "type": "image"
+      },
+      "homepage_hero_image": {
+        "type": "image"
+      },
+      "silver_jubilee_image": {
+        "type": "image"
+      },
+      "custom_logo_image": {
+        "type": "image"
+      }
+    }
   }
 }
