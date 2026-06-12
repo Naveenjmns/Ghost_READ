@@ -33,9 +33,6 @@
       "about_stats": {
         "type": "text"
       },
-      "homepage_hero_image": {
-        "type": "image"
-      },
       "stories_programs_image": {
         "type": "image"
       },

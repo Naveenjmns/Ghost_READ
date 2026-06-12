@@ -4,7 +4,19 @@
 <section class="home-hero" id="home-hero">
     {{!-- Top Image Banner (no longer behind text) --}}
     <div class="hero-image-banner">
-        <img src="{{#if @custom.homepage_hero_image}}{{@custom.homepage_hero_image}}{{else}}{{asset "img/index_BG.jpg"}}{{/if}}" alt="READ NGO Homepage Banner" class="hero-banner-img">
+        {{#get "posts" filter="tag:hash-homepage-slider" limit="5" order="published_at desc" as |slider_posts|}}
+            {{#if slider_posts}}
+                <div class="hero-slideshow" style="opacity: 1;">
+                    {{#foreach slider_posts}}
+                        <div class="hero-slide{{#if @first}} active{{/if}}" style="background-image: url('{{img_url feature_image}}');"></div>
+                    {{/foreach}}
+                </div>
+            {{else}}
+                <div class="hero-slideshow" style="opacity: 1;">
+                    <div class="hero-slide active" style="background-image: url('{{asset "img/index_BG.jpg"}}');"></div>
+                </div>
+            {{/if}}
+        {{/get}}
     </div>
 
     {{!-- Bottom Text Content (solid background matching theme mood) --}}
@@ -112,5 +124,20 @@
         <cite class="quote-author">— READ Core Vision</cite>
     </div>
 </section>
+
+<script>
+(function() {
+    // Background Slideshow for home hero banner
+    var slides = document.querySelectorAll('.home-hero .hero-slide');
+    if (slides.length > 1) {
+        var currentSlide = 0;
+        setInterval(function() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
+    }
+})();
+</script>
 
 
