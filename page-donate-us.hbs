@@ -25,11 +25,19 @@
                 </div>
 
                 <h1 class="donate-support-title">
-                    {{#if title}}{{title}}{{else}}Where Your <em>Support</em> Goes{{/if}}
+                    {{#if @custom.donation_page_heading}}
+                        {{@custom.donation_page_heading}}
+                    {{else}}
+                        {{#if title}}{{title}}{{else}}Where Your <em>Support</em> Goes{{/if}}
+                    {{/if}}
                 </h1>
 
                 <p class="donate-support-subtitle">
-                    {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every contribution you make is channelled <strong>directly</strong> into programs that uplift the <em>most vulnerable communities</em> across Tamil Nadu.{{/if}}
+                    {{#if @custom.donation_description}}
+                        {{@custom.donation_description}}
+                    {{else}}
+                        {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Every contribution you make is channelled <strong>directly</strong> into programs that uplift the <em>most vulnerable communities</em> across Tamil Nadu.{{/if}}
+                    {{/if}}
                 </p>
 
                 <div class="donate-hero-impact-row">
@@ -131,62 +139,91 @@
 
                 <div class="donate-methods-grid">
                     {{!-- Bank Transfer Card --}}
+                    {{#if @custom.donation_bank_name}}
                     <div class="donate-method-card bank-transfer-card">
                         <div class="donate-method-badge">Direct Transfer</div>
                         <h3 class="donate-method-card-title">Bank Account Details</h3>
                         
                         <div class="bank-details-list">
+                            {{#if @custom.donation_account_name}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">Account Name</span>
-                                <span class="bank-detail-val">Rights Education and Development Centre (READ)</span>
+                                <span class="bank-detail-val">{{@custom.donation_account_name}}</span>
                             </div>
+                            {{/if}}
+                            {{#if @custom.donation_account_number}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">Account Number</span>
-                                <span class="bank-detail-val">3047220002307 <span class="copy-hint" onclick="navigator.clipboard.writeText('3047220002307'); alert('Account number copied!');">(Copy)</span></span>
+                                <span class="bank-detail-val">{{@custom.donation_account_number}} <span class="copy-hint" onclick="navigator.clipboard.writeText('{{@custom.donation_account_number}}'); alert('Account number copied!');">(Copy)</span></span>
                             </div>
+                            {{/if}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">Bank Name</span>
-                                <span class="bank-detail-val">State Bank of India</span>
+                                <span class="bank-detail-val">{{@custom.donation_bank_name}}</span>
                             </div>
+                            {{#if @custom.donation_branch}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">Branch</span>
-                                <span class="bank-detail-val">Sathyamangalam</span>
+                                <span class="bank-detail-val">{{@custom.donation_branch}}</span>
                             </div>
+                            {{/if}}
+                            {{#if @custom.donation_ifsc_code}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">IFSC Code</span>
-                                <span class="bank-detail-val">SBIN0001234 <span class="copy-hint" onclick="navigator.clipboard.writeText('SBIN0001234'); alert('IFSC code copied!');">(Copy)</span></span>
+                                <span class="bank-detail-val">{{@custom.donation_ifsc_code}} <span class="copy-hint" onclick="navigator.clipboard.writeText('{{@custom.donation_ifsc_code}}'); alert('IFSC code copied!');">(Copy)</span></span>
                             </div>
+                            {{/if}}
+                            {{#if @custom.donation_account_type}}
                             <div class="bank-detail-item">
                                 <span class="bank-detail-label">Account Type</span>
-                                <span class="bank-detail-val">Savings Account</span>
+                                <span class="bank-detail-val">{{@custom.donation_account_type}}</span>
                             </div>
+                            {{/if}}
                         </div>
                     </div>
+                    {{/if}}
 
                     {{!-- UPI & QR Code Card --}}
+                    {{#if @custom.donation_upi_id}}
                     <div class="donate-method-card upi-qr-card">
                         <div class="donate-method-badge">UPI &amp; QR Code</div>
                         <h3 class="donate-method-card-title">Scan to Donate</h3>
                         
                         <div class="qr-code-wrapper">
-                            <div class="qr-code-placeholder">
-                                <div class="qr-code-border">
-                                    <div class="qr-code-inner-box">
-                                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--clr-gold); opacity: 0.5;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 17h.01M17 7h.01M7 7h.01M17 17h.01"/></svg>
-                                        <span class="qr-code-text">UPI QR Code</span>
+                            {{#if @custom.donation_qr_image}}
+                                <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
+                            {{else}}
+                                <div class="qr-code-placeholder">
+                                    <div class="qr-code-border">
+                                        <div class="qr-code-inner-box">
+                                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--clr-gold); opacity: 0.5;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 17h.01M17 7h.01M7 7h.01M17 17h.01"/></svg>
+                                            <span class="qr-code-text">UPI QR Code</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {{/if}}
                         </div>
 
                         <div class="upi-id-box">
                             <span class="upi-id-label">UPI ID:</span>
-                            <span class="upi-id-val">readsuryamsw@okaxis</span>
-                            <button class="upi-copy-btn" onclick="navigator.clipboard.writeText('readsuryamsw@okaxis'); alert('UPI ID copied!');" aria-label="Copy UPI ID">
+                            <span class="upi-id-val">{{@custom.donation_upi_id}}</span>
+                            <button class="upi-copy-btn" onclick="navigator.clipboard.writeText('{{@custom.donation_upi_id}}'); alert('UPI ID copied!');" aria-label="Copy UPI ID">
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-6 4h6m-3-3v6"/></svg>
                             </button>
                         </div>
                     </div>
+                    {{else}}
+                        {{#if @custom.donation_qr_image}}
+                        <div class="donate-method-card upi-qr-card">
+                            <div class="donate-method-badge">UPI &amp; QR Code</div>
+                            <h3 class="donate-method-card-title">Scan to Donate</h3>
+                            
+                            <div class="qr-code-wrapper">
+                                <img src="{{img_url @custom.donation_qr_image}}" alt="UPI QR Code" class="qr-code-img" loading="lazy">
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/if}}
                 </div>
 
                 <div class="donate-tax-info">

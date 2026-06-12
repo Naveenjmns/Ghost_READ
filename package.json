@@ -30,41 +30,17 @@
     },
     "card_assets": true,
     "custom": {
-      "about_slide_1": {
-        "type": "image"
+      "about_stat_years": {
+        "type": "text"
       },
-      "about_slide_2": {
-        "type": "image"
+      "about_stat_lives": {
+        "type": "text"
       },
-      "about_slide_3": {
-        "type": "image"
+      "about_stat_programs": {
+        "type": "text"
       },
-      "about_slide_4": {
-        "type": "image"
-      },
-      "about_slide_5": {
-        "type": "image"
-      },
-      "about_slide_6": {
-        "type": "image"
-      },
-      "stories_slide_1": {
-        "type": "image"
-      },
-      "stories_slide_2": {
-        "type": "image"
-      },
-      "stories_slide_3": {
-        "type": "image"
-      },
-      "stories_slide_4": {
-        "type": "image"
-      },
-      "stories_slide_5": {
-        "type": "image"
-      },
-      "stories_slide_6": {
-        "type": "image"
+      "about_stat_region": {
+        "type": "text"
       },
       "homepage_hero_image": {
         "type": "image"
@@ -73,6 +49,39 @@
         "type": "image"
       },
       "custom_logo_image": {
+        "type": "image"
+      },
+      "stories_programs_image": {
+        "type": "image"
+      },
+      "donation_page_heading": {
+        "type": "text"
+      },
+      "donation_description": {
+        "type": "text"
+      },
+      "donation_account_name": {
+        "type": "text"
+      },
+      "donation_account_number": {
+        "type": "text"
+      },
+      "donation_bank_name": {
+        "type": "text"
+      },
+      "donation_branch": {
+        "type": "text"
+      },
+      "donation_ifsc_code": {
+        "type": "text"
+      },
+      "donation_account_type": {
+        "type": "text"
+      },
+      "donation_upi_id": {
+        "type": "text"
+      },
+      "donation_qr_image": {
         "type": "image"
       }
     }

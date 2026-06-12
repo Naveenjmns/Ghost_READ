@@ -1,0 +1,59 @@
+{{#get "posts" filter="tag:hash-partner-international,tag:partner-international,tag:hash-partner-national,tag:partner-national,tag:hash-partner-government,tag:partner-government,tag:hash-partner-institutional,tag:partner-institutional" limit="100" include="tags"}}
+    {{#if posts}}
+        <section class="partners-section" aria-label="Our Partners">
+            <div class="partners-container">
+                <div class="section-header" data-animate="fade-up">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-title">Our <em>Partners</em> & Collaborators</h2>
+                    <div class="section-header-line"></div>
+                </div>
+
+                <div class="partners-marquee-container" data-animate="fade-up">
+                    <div class="partners-marquee-track">
+                        {{!-- First loop of logo cards --}}
+                        {{#foreach posts}}
+                            {{#if feature_image}}
+                                <div class="partners-marquee-item">
+                                    {{#if canonical_url}}
+                                        <a href="{{canonical_url}}" target="_blank" rel="noopener noreferrer" class="partner-logo-link" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </a>
+                                    {{else if custom_excerpt}}
+                                        <a href="{{custom_excerpt}}" target="_blank" rel="noopener noreferrer" class="partner-logo-link" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </a>
+                                    {{else}}
+                                        <div class="partner-logo-static" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </div>
+                                    {{/if}}
+                                </div>
+                            {{/if}}
+                        {{/foreach}}
+
+                        {{!-- Second loop of logo cards to enable seamless infinite scrolling --}}
+                        {{#foreach posts}}
+                            {{#if feature_image}}
+                                <div class="partners-marquee-item" aria-hidden="true">
+                                    {{#if canonical_url}}
+                                        <a href="{{canonical_url}}" target="_blank" rel="noopener noreferrer" class="partner-logo-link" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </a>
+                                    {{else if custom_excerpt}}
+                                        <a href="{{custom_excerpt}}" target="_blank" rel="noopener noreferrer" class="partner-logo-link" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </a>
+                                    {{else}}
+                                        <div class="partner-logo-static" title="{{title}}">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}" class="partners-marquee-img" loading="lazy">
+                                        </div>
+                                    {{/if}}
+                                </div>
+                            {{/if}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {{/if}}
+{{/get}}

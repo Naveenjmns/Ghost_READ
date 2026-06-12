@@ -307,6 +307,17 @@
     }
 
     /* ── Stats Count-Up Animation ─────────────────────── */
+    // Automatically apply count-up behavior to numeric stats on the about page
+    const statNums = $$('.about-stat-num[data-stat-value]');
+    statNums.forEach(el => {
+        const val = el.getAttribute('data-stat-value').trim();
+        const numericVal = parseInt(val.replace(/[,+]/g, ''), 10);
+        if (!isNaN(numericVal) && /^[0-9,+-]+$/.test(val)) {
+            const hasPlus = val.includes('+');
+            el.innerHTML = `<span class="count-up" data-target="${numericVal}">0</span>${hasPlus ? '+' : ''}`;
+        }
+    });
+
     const counters = $$('.count-up');
     if (counters.length > 0 && 'IntersectionObserver' in window) {
         const countUp = (el) => {

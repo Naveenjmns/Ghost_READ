@@ -69,10 +69,9 @@
 
             <div class="header-content">
                 {{!-- Logo --}}
-                <a href="{{@site.url}}" class="site-logo" aria-label="{{@site.title}} Home">
+                <a href="{{@site.url}}" class="site-logo" aria-label="{{@site.title}} Home" id="site-logo-link">
                     <div class="site-logo-glow"></div>
                     <img src="{{#if @custom.custom_logo_image}}{{@custom.custom_logo_image}}{{else if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
-                    <span class="site-logo-wordmark">RE<span class="logo-letter-accent">A</span>D</span>
                     <div class="logo-badge-divider"></div>
                     <img src="{{#if @custom.silver_jubilee_image}}{{@custom.silver_jubilee_image}}{{else}}{{asset "img/silver_jubilee.png"}}{{/if}}" alt="Silver Jubilee" class="site-logo-jubilee" width="36" height="36">
                 </a>
@@ -113,6 +112,9 @@
         {{{body}}}
     </main>
 
+    {{!-- Partners Showcase --}}
+    {{> "partners-marquee"}}
+
     {{!-- Footer --}}
     <footer class="site-footer">
         <div class="footer-ornament">
@@ -125,7 +127,6 @@
             <div class="footer-brand">
                 <a href="{{@site.url}}" class="footer-logo">
                     <img src="{{#if @custom.custom_logo_image}}{{@custom.custom_logo_image}}{{else if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="footer-logo-img" width="52" height="52">
-                    <span class="footer-logo-name">READ</span>
                 </a>
                 <p class="footer-tagline">{{@site.description}}</p>
             </div>
