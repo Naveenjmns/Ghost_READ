@@ -393,61 +393,95 @@ button {
     gap: var(--space-lg);
 }
 
-/* ── Logo (Slanted Shelter-style Container) ── */
+/* ── Logo ── */
 .site-logo {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-decoration: none;
     flex-shrink: 0;
     position: relative;
-    background: #ffffff; /* Solid white background shape */
-    padding: 10px 38px 10px 24px;
-    margin-top: -16px; /* Extend to top of header */
-    margin-bottom: -24px; /* Hang below bottom of header */
-    height: 78px; /* Fixed height projecting down */
-    clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%); /* Slanted right edge */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    z-index: 10;
-    transition: padding var(--transition-mid);
 }
 
 .site-logo-glow {
-    display: none; /* Glow no longer needed on white background */
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background: radial-gradient(circle, var(--clr-gold-alpha-20) 0%, transparent 70%);
+    border-radius: 50%;
+    left: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-mid);
+}
+
+.site-logo:hover .site-logo-glow {
+    opacity: 1;
 }
 
 .site-logo-img {
-    height: 48px;
-    width: 48px;
+    height: 50px;
+    width: 50px;
     object-fit: contain;
-    background: transparent; /* Remove individual white background */
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none; /* Remove shadow since parent has it */
-    transition: transform var(--transition-fast);
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 4px;
+    transition: transform var(--transition-mid), box-shadow var(--transition-mid);
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08), 0 0 0 1px var(--clr-border);
 }
 
 .site-logo:hover .site-logo-img {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-1px);
+    box-shadow: 0 6px 18px var(--clr-gold-alpha-20), 0 0 0 1px var(--clr-gold-alpha-10);
+}
+
+.site-logo-wordmark {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--clr-gold-light) 0%, var(--clr-gold) 50%, var(--clr-rust) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: letter-spacing var(--transition-mid);
+    line-height: 1;
+}
+
+.logo-letter-accent {
+    background: linear-gradient(135deg, var(--clr-rust), var(--clr-gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.site-logo:hover .site-logo-wordmark {
+    letter-spacing: 0.4em;
 }
 
 .logo-badge-divider {
     width: 1px;
-    height: 24px;
-    background: rgba(15, 23, 42, 0.15); /* Soft gray divider on white */
-    margin: 0 6px;
+    height: 28px;
+    background: var(--clr-border);
+    margin: 0 4px;
 }
 
 .site-logo-jubilee {
-    height: 56px;
+    height: 60px;
     width: auto;
     object-fit: contain;
-    margin: 0 -8px 0 -4px;
-    transition: transform var(--transition-fast);
+    margin: 0 -12px;
+    filter: drop-shadow(0 0 4px var(--clr-gold-alpha-20));
+    transition: transform var(--transition-mid), filter var(--transition-mid);
 }
 
 .site-logo:hover .site-logo-jubilee {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 10px rgba(var(--clr-gold-rgb), 0.4));
 }
 
 /* ── Center Navigation ── */
