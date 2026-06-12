@@ -671,11 +671,9 @@ button {
     align-items: center;
     overflow: hidden;
     border-bottom: 1px solid var(--clr-border);
-    background-image: url('../img/index_BG.jpeg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 .hero-backdrop {
