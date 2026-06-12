@@ -139,48 +139,99 @@
 
                 <div class="donate-methods-grid">
                     {{!-- Bank Transfer Card --}}
-                    {{#if @custom.donation_bank_name}}
-                    <div class="donate-method-card bank-transfer-card">
+                    {{#if @custom.donation_bank_details}}
+                    <div class="donate-method-card bank-transfer-card" id="bank-transfer-card" style="display: none;">
                         <div class="donate-method-badge">Direct Transfer</div>
                         <h3 class="donate-method-card-title">Bank Account Details</h3>
                         
                         <div class="bank-details-list">
-                            {{#if @custom.donation_account_name}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-acc-name-row" style="display: none;">
                                 <span class="bank-detail-label">Account Name</span>
-                                <span class="bank-detail-val">{{@custom.donation_account_name}}</span>
+                                <span class="bank-detail-val" id="bank-detail-acc-name"></span>
                             </div>
-                            {{/if}}
-                            {{#if @custom.donation_account_number}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-acc-num-row" style="display: none;">
                                 <span class="bank-detail-label">Account Number</span>
-                                <span class="bank-detail-val">{{@custom.donation_account_number}} <span class="copy-hint" onclick="navigator.clipboard.writeText('{{@custom.donation_account_number}}'); alert('Account number copied!');">(Copy)</span></span>
+                                <span class="bank-detail-val"><span id="bank-detail-acc-num"></span> <span class="copy-hint" id="bank-copy-acc-num-btn" style="cursor:pointer;">(Copy)</span></span>
                             </div>
-                            {{/if}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-bank-name-row" style="display: none;">
                                 <span class="bank-detail-label">Bank Name</span>
-                                <span class="bank-detail-val">{{@custom.donation_bank_name}}</span>
+                                <span class="bank-detail-val" id="bank-detail-bank-name"></span>
                             </div>
-                            {{#if @custom.donation_branch}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-branch-row" style="display: none;">
                                 <span class="bank-detail-label">Branch</span>
-                                <span class="bank-detail-val">{{@custom.donation_branch}}</span>
+                                <span class="bank-detail-val" id="bank-detail-branch"></span>
                             </div>
-                            {{/if}}
-                            {{#if @custom.donation_ifsc_code}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-ifsc-row" style="display: none;">
                                 <span class="bank-detail-label">IFSC Code</span>
-                                <span class="bank-detail-val">{{@custom.donation_ifsc_code}} <span class="copy-hint" onclick="navigator.clipboard.writeText('{{@custom.donation_ifsc_code}}'); alert('IFSC code copied!');">(Copy)</span></span>
+                                <span class="bank-detail-val"><span id="bank-detail-ifsc"></span> <span class="copy-hint" id="bank-copy-ifsc-btn" style="cursor:pointer;">(Copy)</span></span>
                             </div>
-                            {{/if}}
-                            {{#if @custom.donation_account_type}}
-                            <div class="bank-detail-item">
+                            <div class="bank-detail-item" id="bank-detail-type-row" style="display: none;">
                                 <span class="bank-detail-label">Account Type</span>
-                                <span class="bank-detail-val">{{@custom.donation_account_type}}</span>
+                                <span class="bank-detail-val" id="bank-detail-type"></span>
                             </div>
-                            {{/if}}
                         </div>
                     </div>
+
+                    <script>
+                    (function() {
+                        const rawDetails = "{{@custom.donation_bank_details}}".trim();
+                        if (!rawDetails) return;
+
+                        const parts = rawDetails.split(',').map(p => p.trim());
+                        
+                        const accName = parts[0] || '';
+                        const accNum = parts[1] || '';
+                        const bankName = parts[2] || '';
+                        const branch = parts[3] || '';
+                        const ifsc = parts[4] || '';
+                        const type = parts[5] || '';
+
+                        let hasAnyDetail = false;
+
+                        if (accName) {
+                            document.getElementById('bank-detail-acc-name').textContent = accName;
+                            document.getElementById('bank-detail-acc-name-row').style.display = 'flex';
+                            hasAnyDetail = true;
+                        }
+                        if (accNum) {
+                            document.getElementById('bank-detail-acc-num').textContent = accNum;
+                            document.getElementById('bank-detail-acc-num-row').style.display = 'flex';
+                            document.getElementById('bank-copy-acc-num-btn').addEventListener('click', function() {
+                                navigator.clipboard.writeText(accNum);
+                                alert('Account number copied!');
+                            });
+                            hasAnyDetail = true;
+                        }
+                        if (bankName) {
+                            document.getElementById('bank-detail-bank-name').textContent = bankName;
+                            document.getElementById('bank-detail-bank-name-row').style.display = 'flex';
+                            hasAnyDetail = true;
+                        }
+                        if (branch) {
+                            document.getElementById('bank-detail-branch').textContent = branch;
+                            document.getElementById('bank-detail-branch-row').style.display = 'flex';
+                            hasAnyDetail = true;
+                        }
+                        if (ifsc) {
+                            document.getElementById('bank-detail-ifsc').textContent = ifsc;
+                            document.getElementById('bank-detail-ifsc-row').style.display = 'flex';
+                            document.getElementById('bank-copy-ifsc-btn').addEventListener('click', function() {
+                                navigator.clipboard.writeText(ifsc);
+                                alert('IFSC code copied!');
+                            });
+                            hasAnyDetail = true;
+                        }
+                        if (type) {
+                            document.getElementById('bank-detail-type').textContent = type;
+                            document.getElementById('bank-detail-type-row').style.display = 'flex';
+                            hasAnyDetail = true;
+                        }
+
+                        if (hasAnyDetail) {
+                            document.getElementById('bank-transfer-card').style.display = 'block';
+                        }
+                    })();
+                    </script>
                     {{/if}}
 
                     {{!-- UPI & QR Code Card --}}

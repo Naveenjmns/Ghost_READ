@@ -60,22 +60,7 @@
       "donation_description": {
         "type": "text"
       },
-      "donation_account_name": {
-        "type": "text"
-      },
-      "donation_account_number": {
-        "type": "text"
-      },
-      "donation_bank_name": {
-        "type": "text"
-      },
-      "donation_branch": {
-        "type": "text"
-      },
-      "donation_ifsc_code": {
-        "type": "text"
-      },
-      "donation_account_type": {
+      "donation_bank_details": {
         "type": "text"
       },
       "donation_upi_id": {
