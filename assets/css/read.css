@@ -9681,7 +9681,16 @@ button {
 }
 
 .about-hero-section .about-stat-label {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.about-hero-section .about-hero-stats {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.about-hero-section .about-stat:not(:last-child)::after {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 /* Mobile responsive fixes for the restructured layout */
