@@ -9705,3 +9705,33 @@ button {
         padding: 0 var(--space-md);
     }
 }
+
+/* Extra dynamic social pills colors */
+.twitter-pill:hover,
+.x-pill:hover {
+    background: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.twitter-pill:hover svg,
+.x-pill:hover svg {
+    color: #ffffff !important;
+}
+
+.youtube-pill:hover {
+    background: #ff0000 !important;
+    border-color: #ff0000 !important;
+}
+
+.youtube-pill:hover svg {
+    color: #ffffff !important;
+}
+
+.default-pill:hover {
+    background: var(--clr-gold) !important;
+    border-color: var(--clr-gold) !important;
+}
+
+.default-pill:hover svg {
+    color: #ffffff !important;
+}
