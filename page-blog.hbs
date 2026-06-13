@@ -26,7 +26,7 @@
     {{!-- Blog Feed Grid --}}
     <section class="blog-list-section">
         <div class="gallery-container">
-            {{#get "posts" filter="tag:-[hash-program,hash-gallery,hash-custom-logo,hash-silver-jubilee,hash-homepage-slider]" limit="100" include="tags,authors" as |blog_posts|}}
+            {{#get "posts" filter="tag:hash-blog,tag:blog" limit="100" include="tags,authors" as |blog_posts|}}
                 {{#if blog_posts}}
                     <div class="blog-posts-container">
                         <div class="posts-grid" id="blog-posts-grid">
@@ -80,7 +80,7 @@
                             <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h10.5M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5a2.25 2.25 0 002.25 2.25z"/></svg>
                         </div>
                         <h3>No blog posts found</h3>
-                        <p>Write standard posts in your Ghost Admin panel to populate this page feed.</p>
+                        <p>Write posts and tag them with <code>#blog</code> or <code>blog</code> in your Ghost Admin panel to populate this page feed.</p>
                     </div>
                 {{/if}}
             {{/get}}
