@@ -1,0 +1,159 @@
+{{!< default}}
+
+{{#post}}
+<div class="blog-index-page">
+    {{!-- Hero Header --}}
+    <section class="blog-hero">
+        <div class="gallery-container">
+            <div class="gallery-hero-badge" data-animate="fade-up">
+                <span class="gallery-hero-dot"></span>
+                <span>Updates & Insights · READ Centre</span>
+            </div>
+            
+            <h1 class="gallery-hero-title" data-animate="fade-up" data-delay="100">
+                {{#if title}}{{title}}{{else}}Our <em>Blog & News</em>{{/if}}
+            </h1>
+            
+            <p class="gallery-hero-desc" data-animate="fade-up" data-delay="150">
+                {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Read the latest announcements, field updates, stories, and articles from our tribal empowerment projects.{{/if}}
+            </p>
+        </div>
+    </section>
+
+    {{!-- Anchor point for pagination scroll --}}
+    <div id="blog-title-anchor" style="position: relative; top: -100px;"></div>
+
+    {{!-- Blog Feed Grid --}}
+    <section class="blog-list-section">
+        <div class="gallery-container">
+            {{#get "posts" filter="tag:-[hash-program,hash-gallery,hash-custom-logo,hash-silver-jubilee,hash-homepage-slider]" limit="100" include="tags,authors" as |blog_posts|}}
+                {{#if blog_posts}}
+                    <div class="blog-posts-container">
+                        <div class="posts-grid" id="blog-posts-grid">
+                            {{#foreach blog_posts}}
+                                <article class="post-card blog-post-item" data-index="{{@index}}" data-animate="fade-up" style="display: none;">
+                                    {{#if feature_image}}
+                                    <a href="{{url}}" class="post-card-img-wrap" aria-label="{{title}}">
+                                        <div class="post-card-img" style="background-image: url({{img_url feature_image size="m"}})">
+                                            <div class="post-card-img-overlay"></div>
+                                            {{#primary_tag}}
+                                            <span class="post-card-tag-badge">{{name}}</span>
+                                            {{/primary_tag}}
+                                        </div>
+                                    </a>
+                                    {{/if}}
+                                    <div class="post-card-body">
+                                        {{#unless feature_image}}
+                                        {{#primary_tag}}<a href="{{url}}" class="post-card-tag-pill">{{name}}</a>{{/primary_tag}}
+                                        {{/unless}}
+                                        <h3 class="post-card-title"><a href="{{url}}">{{title}}</a></h3>
+                                        <p class="post-card-excerpt post-card-excerpt-short">{{excerpt words="18"}}</p>
+                                        <div class="post-card-footer">
+                                            <div class="meta-details">
+                                                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                                                <span class="meta-dot">·</span>
+                                                <span>{{reading_time}}</span>
+                                            </div>
+                                            <a href="{{url}}" class="post-card-read-link">Read <span>→</span></a>
+                                        </div>
+                                    </div>
+                                </article>
+                            {{/foreach}}
+                        </div>
+
+                        {{!-- Client-side pagination --}}
+                        <div class="blog-pagination" id="blog-pagination" style="display: none;">
+                            <button class="btn-pagination prev" id="btn-prev" aria-label="Previous Page">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                <span>Previous</span>
+                            </button>
+                            <span class="page-number-indicator" id="page-num">Page 1 of 1</span>
+                            <button class="btn-pagination next" id="btn-next" aria-label="Next Page">
+                                <span>Next</span>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="gallery-empty-state">
+                        <div class="gallery-empty-icon">
+                            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h10.5M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5a2.25 2.25 0 002.25 2.25z"/></svg>
+                        </div>
+                        <h3>No blog posts found</h3>
+                        <p>Write standard posts in your Ghost Admin panel to populate this page feed.</p>
+                    </div>
+                {{/if}}
+            {{/get}}
+        </div>
+    </section>
+</div>
+{{/post}}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const posts = document.querySelectorAll('.blog-post-item');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const pageNum = document.getElementById('page-num');
+    const paginationWrap = document.getElementById('blog-pagination');
+    const scrollAnchor = document.getElementById('blog-title-anchor');
+
+    if (!posts || posts.length === 0) return;
+
+    const postsPerPage = 9;
+    let currentPage = 1;
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+
+    if (totalPages > 1) {
+        paginationWrap.style.display = 'flex';
+    }
+
+    function showPage(page) {
+        const start = (page - 1) * postsPerPage;
+        const end = start + postsPerPage;
+
+        posts.forEach((post, index) => {
+            if (index >= start && index < end) {
+                post.style.display = 'flex';
+                // Trigger quick visual entrance
+                post.style.opacity = '0';
+                post.style.transform = 'translateY(15px)';
+                setTimeout(() => {
+                    post.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                    post.style.opacity = '1';
+                    post.style.transform = 'translateY(0)';
+                }, (index - start) * 40);
+            } else {
+                post.style.display = 'none';
+            }
+        });
+
+        pageNum.textContent = `Page ${page} of ${totalPages}`;
+        btnPrev.disabled = (page === 1);
+        btnNext.disabled = (page === totalPages);
+    }
+
+    btnPrev.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+            if (scrollAnchor) {
+                scrollAnchor.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+
+    btnNext.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+            if (scrollAnchor) {
+                scrollAnchor.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+
+    // Load first page on start
+    showPage(1);
+});
+</script>

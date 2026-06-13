@@ -9480,3 +9480,98 @@ button {
         height: 70%;
     }
 }
+
+/* ============================================================
+   Blog Page & Pagination Layout
+   ============================================================ */
+
+.blog-hero {
+    padding: var(--space-3xl) 0 var(--space-xl);
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, rgba(var(--clr-gold-rgb), 0.06), transparent 70%);
+}
+
+.blog-list-section {
+    padding-bottom: var(--space-3xl);
+}
+
+.blog-posts-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.blog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+    padding: var(--space-md) 0;
+    width: 100%;
+}
+
+.btn-pagination {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--clr-bg-3);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    color: var(--clr-text-2);
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    user-select: none;
+}
+
+.btn-pagination svg {
+    transition: transform var(--transition-fast);
+}
+
+.btn-pagination.prev:hover:not(:disabled) svg {
+    transform: translateX(-3px);
+}
+
+.btn-pagination.next:hover:not(:disabled) svg {
+    transform: translateX(3px);
+}
+
+.btn-pagination:hover:not(:disabled) {
+    border-color: var(--clr-gold-light);
+    color: var(--clr-gold);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-pagination:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-pagination:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    border-color: var(--clr-border-light);
+    box-shadow: none;
+    color: var(--clr-text-3);
+}
+
+.page-number-indicator {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--clr-text-3);
+    letter-spacing: 0.02em;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Fix grid card alignment inside blog container */
+.blog-posts-container .posts-grid {
+    margin-top: var(--space-xl);
+}
