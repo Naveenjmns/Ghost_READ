@@ -112,6 +112,8 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -122,6 +124,7 @@ body {
     line-height: 1.7;
     min-height: 100vh;
     overflow-x: hidden;
+    width: 100%;
     transition: background-color var(--transition-mid), color var(--transition-mid);
 }
 
@@ -553,8 +556,8 @@ button {
     flex-shrink: 0;
 }
 
-/* Donate Button (replaces Subscribe) */
-.header-donate-btn {
+/* Subscribe Button */
+.header-subscribe-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -576,7 +579,7 @@ button {
     box-shadow: 0 2px 12px rgba(232, 160, 32, 0.2);
 }
 
-.header-donate-btn::before {
+.header-subscribe-btn::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -586,23 +589,23 @@ button {
     transition: opacity var(--transition-fast);
 }
 
-.header-donate-btn:hover {
+.header-subscribe-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 20px rgba(232, 160, 32, 0.35);
     background-position: 100% 0;
 }
 
-.header-donate-btn:hover::before {
+.header-subscribe-btn:hover::before {
     opacity: 1;
 }
 
-.header-donate-btn svg {
+.header-subscribe-btn svg {
     width: 14px;
     height: 14px;
     transition: transform 0.3s ease;
 }
 
-.header-donate-btn:hover svg {
+.header-subscribe-btn:hover svg {
     transform: scale(1.15);
     animation: heartbeat 0.6s ease-in-out;
 }
@@ -738,14 +741,72 @@ button {
 .hero-text-content {
     background: linear-gradient(135deg, #f43f5e, #fb923c);
     width: 100%;
-    padding: var(--space-2xl) 0 var(--space-3xl);
+    padding: var(--space-xl) 0 var(--space-xl);
     position: relative;
     z-index: 2;
 }
 
 /* Invert colors inside text content for contrast */
+.hero-text-content .vision-org-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 24px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: var(--space-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hero-text-content .brand-acronym {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: #ffe066;
+    text-shadow: 0 0 10px rgba(255, 224, 102, 0.4);
+}
+
+.hero-text-content .brand-divider {
+    width: 1.5px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.hero-text-content .brand-fullname {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+}
+
+@media (max-width: 640px) {
+    .hero-text-content .vision-org-brand {
+        flex-direction: column;
+        gap: var(--space-xs);
+        border-radius: var(--radius-lg);
+        padding: 12px 20px;
+    }
+    .hero-text-content .brand-divider {
+        width: 40px;
+        height: 1.5px;
+        margin: 4px 0;
+    }
+    .hero-text-content .brand-fullname {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+}
+
 .hero-text-content .vision-text {
     color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    line-height: 1.35;
 }
 
 .hero-text-content .vision-accent {
@@ -753,6 +814,10 @@ button {
     background: none;
     -webkit-text-fill-color: initial;
     background-clip: initial;
+    font-weight: 800;
+    text-shadow: 0 0 15px rgba(255, 224, 102, 0.4);
+    border-bottom: 2px solid rgba(255, 224, 102, 0.7);
+    padding-bottom: 2px;
 }
 
 .hero-text-content .vision-eyebrow {
@@ -853,12 +918,30 @@ button {
     }
 }
 
+@media (max-width: 580px) {
+    .jubilee-badge {
+        flex-wrap: wrap;
+        border-radius: var(--radius-md);
+        padding: 8px 16px;
+        gap: var(--space-xs);
+    }
+    .hero-text-content .jubilee-divider {
+        display: none;
+    }
+    .hero-text-content .jubilee-text,
+    .hero-text-content .jubilee-years {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
 .hero-container {
     position: relative;
     z-index: 3;
     max-width: 900px;
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-xl);
+    padding: 0 var(--space-xl);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -2959,13 +3042,22 @@ button {
         display: block;
     }
 
-    .header-donate-btn {
+    .header-subscribe-btn {
         display: none;
     }
 
     .site-logo-img {
         height: 40px;
         width: 40px;
+    }
+
+    .site-logo-jubilee {
+        height: 48px;
+        margin: 0 -8px;
+    }
+
+    .logo-badge-divider {
+        height: 22px;
     }
 
     .site-logo-wordmark {
@@ -2992,7 +3084,7 @@ button {
     }
 
     .hero-container {
-        padding: var(--space-2xl) var(--space-lg);
+        padding: 0 var(--space-lg);
     }
 
     .masthead-title {
@@ -3708,6 +3800,14 @@ button {
     line-height: 1.6;
 }
 
+.contact-info-text p {
+    margin: 0;
+}
+
+.contact-info-text p + p {
+    margin-top: var(--space-xs);
+}
+
 .contact-info-link {
     color: var(--clr-text);
     transition: color var(--transition-fast);
@@ -3829,7 +3929,7 @@ button {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
-    padding: var(--space-lg) var(--space-xl);
+    padding: var(--space-lg) var(--space-lg);
     display: flex;
     align-items: center;
     gap: var(--space-md);
@@ -3884,10 +3984,11 @@ button {
 
 .contact-action-value {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: clamp(0.88rem, 2.5vw, 1.0rem);
     font-weight: 700;
     color: var(--clr-text);
-    word-break: break-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
     transition: color var(--transition-fast);
 }
 
@@ -6551,7 +6652,11 @@ button {
 }
 
 .stories-filter-btn--active:hover {
+    background: linear-gradient(135deg, var(--clr-gold-light), var(--clr-gold-dim));
     color: var(--clr-text-inv);
+    border-color: var(--clr-gold-light);
+    box-shadow: 0 6px 20px rgba(var(--clr-gold-rgb), 0.4);
+    transform: translateY(-1px);
 }
 
 /* ── Story Cards Grid ──────────────────────────────────────── */
@@ -8182,7 +8287,7 @@ button {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
-    padding: var(--space-lg) var(--space-xl);
+    padding: var(--space-lg) var(--space-lg);
     display: flex;
     align-items: center;
     gap: var(--space-md);
@@ -8237,9 +8342,11 @@ button {
 }
 
 .contact-action-value {
-    font-size: 1.05rem;
+    font-size: clamp(0.88rem, 2.5vw, 1.0rem);
     font-weight: 600;
     color: var(--clr-text);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-action-note {
@@ -8288,6 +8395,17 @@ button {
     flex-shrink: 0;
     color: var(--clr-text-3);
     transition: color var(--transition-fast);
+}
+
+.social-icon-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.social-icon-placeholder svg {
+    display: block;
 }
 
 .social-pill:hover {

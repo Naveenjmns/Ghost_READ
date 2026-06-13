@@ -1,20 +1,17 @@
-{{!< default}}
-
-{{!-- HERO / VISION & MISSION --}}
-<section class="home-hero" id="home-hero">
+{{!< default}} {{!-- HERO / VISION & MISSION --}} <section class="home-hero" id="home-hero">
     {{!-- Top Image Banner (no longer behind text) --}}
     <div class="hero-image-banner">
         <div class="hero-slideshow" id="homepage-hero-slideshow" style="opacity: 1;">
-            <div class="hero-slide active" style="background-image: url('{{asset "img/index_BG.jpg"}}');"></div>
+            <div class="hero-slide active" style="background-image: url('{{asset " img/index_BG.jpg"}}');"></div>
         </div>
     </div>
 
     {{#get "posts" filter="tag:hash-homepage-slider" limit="1" as |slider_post|}}
-        {{#if slider_post}}
-            {{#foreach slider_post}}
-                <div id="homepage-slider-raw-content" style="display: none;">{{content}}</div>
-            {{/foreach}}
-        {{/if}}
+    {{#if slider_post}}
+    {{#foreach slider_post}}
+    <div id="homepage-slider-raw-content" style="display: none;">{{content}}</div>
+    {{/foreach}}
+    {{/if}}
     {{/get}}
 
     {{!-- Bottom Text Content (solid background matching theme mood) --}}
@@ -25,13 +22,14 @@
                 <div class="jubilee-badge-wrap">
                     <div class="jubilee-badge">
                         {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
-                            {{#if jubilee_post}}
-                                {{#foreach jubilee_post}}
-                                    <img src="{{img_url feature_image}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
-                                {{/foreach}}
-                            {{else}}
-                                <img src="{{asset "img/silver_jubilee.png"}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
-                            {{/if}}
+                        {{#if jubilee_post}}
+                        {{#foreach jubilee_post}}
+                        <img src="{{img_url feature_image}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                        {{/foreach}}
+                        {{else}}
+                        <img src="{{asset " img/silver_jubilee.png"}}" alt="Silver Jubilee Logo"
+                            class="jubilee-badge-logo">
+                        {{/if}}
                         {{/get}}
                         <span class="jubilee-text">Silver Jubilee</span>
                         <span class="jubilee-divider">·</span>
@@ -40,6 +38,11 @@
                 </div>
 
                 <div class="vision-block">
+                    <div class="vision-org-brand">
+                        <span class="brand-acronym">READ</span>
+                        <span class="brand-divider"></span>
+                        <span class="brand-fullname">Rights Education And Development Centre</span>
+                    </div>
                     <h1 class="vision-text">
                         Creating a society where every person has the right to a
                         <em class="vision-accent"> good standard of living</em>
@@ -54,110 +57,105 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
 
-{{!-- WHAT WE DO --}}
-<section class="programs-section" id="what-we-do">
-    <div class="programs-container">
-        
-        <div class="section-header" data-animate="fade-up">
-            <div class="section-header-line"></div>
-            <h2 class="section-title">What We <em>Do</em></h2>
-            <div class="section-header-line"></div>
-        </div>
+    {{!-- WHAT WE DO --}}
+    <section class="programs-section" id="what-we-do">
+        <div class="programs-container">
 
-        {{!-- Dynamic: posts tagged with internal tag #program --}}
-        {{#get "posts" filter="tag:hash-program" limit="20" order="published_at asc" include="tags"}}
+            <div class="section-header" data-animate="fade-up">
+                <div class="section-header-line"></div>
+                <h2 class="section-title">What We <em>Do</em></h2>
+                <div class="section-header-line"></div>
+            </div>
+
+            {{!-- Dynamic: posts tagged with internal tag #program --}}
+            {{#get "posts" filter="tag:hash-program" limit="20" order="published_at asc" include="tags"}}
             {{#if posts}}
-                <div class="programs-list">
-                    {{#foreach posts}}
-                        {{!-- Odd = image left, Even = image right --}}
-                        <article class="program-horizontal-card{{#if @even}} program-horizontal-card--flip{{/if}}" data-animate="fade-up">
+            <div class="programs-list">
+                {{#foreach posts}}
+                {{!-- Odd = image left, Even = image right --}}
+                <article class="program-horizontal-card{{#if @even}} program-horizontal-card--flip{{/if}}"
+                    data-animate="fade-up">
 
-                            <div class="program-image-wrap">
-                                {{#if feature_image}}
-                                    <img
-                                        src="{{img_url feature_image size="m"}}"
-                                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                                        class="program-img"
-                                        width="550"
-                                        height="350"
-                                        loading="lazy"
-                                    >
-                                {{else}}
-                                    <div class="program-img-placeholder" aria-hidden="true"></div>
-                                {{/if}}
-                            </div>
+                    <div class="program-image-wrap">
+                        {{#if feature_image}}
+                        <img src="{{img_url feature_image size=" m"}}"
+                            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                            class="program-img" width="550" height="350" loading="lazy">
+                        {{else}}
+                        <div class="program-img-placeholder" aria-hidden="true"></div>
+                        {{/if}}
+                    </div>
 
-                            <div class="program-content">
-                                <div class="program-header-row">
-                                    {{#if primary_tag}}
-                                        <span class="program-region-tag">{{primary_tag.name}}</span>
-                                    {{/if}}
-                                </div>
-                                <h3 class="program-title">{{title}}</h3>
-                                <p class="program-desc">{{excerpt}}</p>
-                                <a href="{{url}}" class="program-learn-btn">Explore Program</a>
-                            </div>
+                    <div class="program-content">
+                        <div class="program-header-row">
+                            {{#if primary_tag}}
+                            <span class="program-region-tag">{{primary_tag.name}}</span>
+                            {{/if}}
+                        </div>
+                        <h3 class="program-title">{{title}}</h3>
+                        <p class="program-desc">{{excerpt}}</p>
+                        <a href="{{url}}" class="program-learn-btn">Explore Program</a>
+                    </div>
 
-                        </article>
-                    {{/foreach}}
-                </div>
+                </article>
+                {{/foreach}}
+            </div>
             {{else}}
-                {{!-- No programs published yet --}}
-                <p class="programs-empty-note">Programs coming soon. Add posts with the <code>#program</code> tag in Ghost Admin.</p>
+            {{!-- No programs published yet --}}
+            <p class="programs-empty-note">Programs coming soon. Add posts with the <code>#program</code> tag in Ghost
+                Admin.</p>
             {{/if}}
-        {{/get}}
-    </div>
-</section>
+            {{/get}}
+        </div>
+    </section>
 
 
-{{!-- IMPACT MOTTO / QUOTE STRIPE --}}
-<section class="quote-stripe" data-animate="fade-up">
-    <div class="quote-stripe-inner">
-        <div class="quote-mark-big">"</div>
-        <blockquote class="rotating-quote" id="rotating-quote">
-            To create a society where every person has the right to a good standard of living and human dignity.
-        </blockquote>
-        <cite class="quote-author">— READ Core Vision</cite>
-    </div>
-</section>
+    {{!-- IMPACT MOTTO / QUOTE STRIPE --}}
+    <section class="quote-stripe" data-animate="fade-up">
+        <div class="quote-stripe-inner">
+            <div class="quote-mark-big">"</div>
+            <blockquote class="rotating-quote" id="rotating-quote">
+                To create a society where every person has the right to a good standard of living and human dignity.
+            </blockquote>
+            <cite class="quote-author">— READ Core Vision</cite>
+        </div>
+    </section>
 
-<script>
-(function() {
-    // Parse single post tagged #homepage-slider and extract images
-    const rawContentEl = document.getElementById('homepage-slider-raw-content');
-    const sliderContainer = document.getElementById('homepage-hero-slideshow');
-    
-    if (rawContentEl && sliderContainer) {
-        const imgs = rawContentEl.querySelectorAll('img');
-        const imgUrls = Array.from(imgs).map(img => img.src || img.getAttribute('src')).filter(Boolean);
-        
-        if (imgUrls.length > 0) {
-            // Clear fallback
-            sliderContainer.innerHTML = '';
-            
-            // Generate slides
-            imgUrls.forEach((url, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'hero-slide' + (index === 0 ? ' active' : '');
-                slide.style.backgroundImage = `url('${url}')`;
-                sliderContainer.appendChild(slide);
-            });
-            
-            // Run slideshow
-            if (imgUrls.length > 1) {
-                let currentSlide = 0;
-                const slides = sliderContainer.querySelectorAll('.hero-slide');
-                setInterval(function() {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }, 4000);
+    <script>
+        (function () {
+            // Parse single post tagged #homepage-slider and extract images
+            const rawContentEl = document.getElementById('homepage-slider-raw-content');
+            const sliderContainer = document.getElementById('homepage-hero-slideshow');
+
+            if (rawContentEl && sliderContainer) {
+                const imgs = rawContentEl.querySelectorAll('img');
+                const imgUrls = Array.from(imgs).map(img => img.src || img.getAttribute('src')).filter(Boolean);
+
+                if (imgUrls.length > 0) {
+                    // Clear fallback
+                    sliderContainer.innerHTML = '';
+
+                    // Generate slides
+                    imgUrls.forEach((url, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'hero-slide' + (index === 0 ? ' active' : '');
+                        slide.style.backgroundImage = `url('${url}')`;
+                        sliderContainer.appendChild(slide);
+                    });
+
+                    // Run slideshow
+                    if (imgUrls.length > 1) {
+                        let currentSlide = 0;
+                        const slides = sliderContainer.querySelectorAll('.hero-slide');
+                        setInterval(function () {
+                            slides[currentSlide].classList.remove('active');
+                            currentSlide = (currentSlide + 1) % slides.length;
+                            slides[currentSlide].classList.add('active');
+                        }, 4000);
+                    }
+                }
             }
-        }
-    }
-})();
-</script>
-
-
+        })();
+    </script>

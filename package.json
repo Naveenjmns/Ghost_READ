@@ -33,10 +33,10 @@
       "about_stats": {
         "type": "text"
       },
-      "stories_programs_image": {
-        "type": "image"
-      },
       "donation_bank_details": {
+        "type": "text"
+      },
+      "contact_details": {
         "type": "text"
       }
     }

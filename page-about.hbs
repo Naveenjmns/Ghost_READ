@@ -109,6 +109,22 @@
                     if (yearsEl) {
                         yearsEl.textContent = years;
                         yearsEl.setAttribute('data-stat-value', years);
+                        
+                        // Dynamically update the years of impact in the timeline section
+                        const numericYears = parseInt(years, 10);
+                        if (!isNaN(numericYears)) {
+                            const updateTimelineYears = () => {
+                                const dynamicYearsEl = document.getElementById('dynamic-impact-years');
+                                if (dynamicYearsEl) {
+                                    dynamicYearsEl.textContent = numericYears;
+                                }
+                            };
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', updateTimelineYears);
+                            } else {
+                                updateTimelineYears();
+                            }
+                        }
                     }
                     if (livesEl) {
                         livesEl.textContent = lives;
@@ -238,7 +254,7 @@
                 <div class="about-container">
                     <div class="about-section-head" data-animate="fade-up">
                         <div class="about-section-label">Our Journey</div>
-                        <h2 class="about-section-title">Celebrating 25 Years of <em>Impact</em></h2>
+                        <h2 class="about-section-title">Celebrating <span id="dynamic-impact-years">25</span> Years of <em>Impact</em></h2>
                     </div>
                     <div class="about-timeline-track">
                         <div class="about-timeline-line"></div>
