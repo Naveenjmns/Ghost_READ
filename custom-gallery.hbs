@@ -1,0 +1,354 @@
+{{!< default}}
+
+{{#post}}
+
+<article class="post-full post-gallery {{post_class}}" id="post-{{id}}">
+
+    {{!-- Post Header --}}
+    <header class="post-header">
+        <div class="post-header-inner">
+            {{!-- Gallery Badge / Tag --}}
+            <div class="post-tag-row" data-animate="fade-up">
+                <span class="gallery-badge-glow"></span>
+                <a href="/gallery/" class="post-tag-link">Gallery Album</a>
+            </div>
+            
+            {{!-- Title --}}
+            <h1 class="post-title" data-animate="fade-up" data-delay="100">{{title}}</h1>
+            
+            {{!-- Excerpt / Subtitle --}}
+            {{#if custom_excerpt}}
+            <p class="post-subtitle" data-animate="fade-up" data-delay="150">{{custom_excerpt}}</p>
+            {{/if}}
+            
+            {{!-- Meta Row --}}
+            <div class="post-meta-row" data-animate="fade-up" data-delay="200">
+                {{#primary_author}}
+                <div class="post-author-info">
+                    <img
+                        src="{{#if profile_image}}{{img_url profile_image size="xs"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=48{{/if}}"
+                        alt="{{name}}"
+                        class="post-author-avatar"
+                    >
+                    <div class="post-author-details">
+                        <a href="{{url}}" class="post-author-name">{{name}}</a>
+                        <div class="post-meta-sub">
+                            <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMMM D, YYYY"}}</time>
+                        </div>
+                    </div>
+                </div>
+                {{/primary_author}}
+                
+                <div class="post-share-row">
+                    <button class="post-copy-link-btn" id="copy-link-btn" aria-label="Copy Link" title="Copy Link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-3.939a4 4 0 00-5.656 0l-1.1 1.1a4 4 0 105.656 5.656l4-4a4 4 0 000-5.656"/></svg>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Custom Media Gallery Content --}}
+    <div class="gallery-content-wrap">
+        {{!-- Dynamic media elements will be parsed and injected here --}}
+        <div class="gallery-media-grid" id="gallery-media-grid" data-animate="fade-up" data-delay="250">
+            <div class="gallery-loading">
+                <div class="gallery-spinner"></div>
+                <p>Loading gallery items...</p>
+            </div>
+        </div>
+
+        {{!-- Hidden raw content rendered by Ghost --}}
+        <div id="gallery-raw-content" style="display: none !important;">
+            {{content}}
+        </div>
+
+        {{!-- Author Bio & Navigation --}}
+        {{#primary_author}}
+        <div class="post-author-bio" data-animate="fade-up">
+            <img
+                src="{{#if profile_image}}{{img_url profile_image size="s"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=80{{/if}}"
+                alt="{{name}}"
+                class="author-bio-img"
+            >
+            <div class="author-bio-content">
+                <h3 class="author-bio-name">
+                    <a href="{{url}}">{{name}}</a>
+                </h3>
+                {{#if bio}}
+                <p class="author-bio-text">{{bio}}</p>
+                {{/if}}
+                <a href="{{url}}" class="author-bio-link">More by {{name}} →</a>
+            </div>
+        </div>
+        {{/primary_author}}
+
+        <nav class="post-navigation" data-animate="fade-up">
+            <div class="post-nav-rule"></div>
+            <div class="post-nav-grid">
+                {{#prev_post}}
+                <a href="{{url}}" class="post-nav-item post-nav-prev">
+                    <span class="post-nav-dir">← Previous Album</span>
+                    <span class="post-nav-title">{{title}}</span>
+                </a>
+                {{/prev_post}}
+                {{#next_post}}
+                <a href="{{url}}" class="post-nav-item post-nav-next">
+                    <span class="post-nav-dir">Next Album →</span>
+                    <span class="post-nav-title">{{title}}</span>
+                </a>
+                {{/next_post}}
+            </div>
+        </nav>
+    </div>
+</article>
+
+{{!-- Lightbox template structure --}}
+<div id="gallery-lightbox" class="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <button class="lightbox-close" aria-label="Close Lightbox">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button class="lightbox-prev" aria-label="Previous Media">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="lightbox-next" aria-label="Next Media">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="lightbox-container">
+        <div class="lightbox-media-wrapper">
+            <!-- JS will inject image/video here -->
+        </div>
+        <div class="lightbox-caption-panel">
+            <p class="lightbox-caption-text"></p>
+            <span class="lightbox-counter"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rawContent = document.getElementById('gallery-raw-content');
+    const mediaGrid = document.getElementById('gallery-media-grid');
+    const lightbox = document.getElementById('gallery-lightbox');
+    if (!rawContent || !mediaGrid || !lightbox) return;
+
+    // Extract all media items: imgs, videos, and embedded iframes
+    const elements = rawContent.querySelectorAll('img, video, iframe');
+    const mediaItems = [];
+
+    elements.forEach((el) => {
+        let src = '';
+        let type = '';
+        let caption = '';
+
+        // Determine parent card type and retrieve caption
+        const parentFigure = el.closest('figure');
+        if (parentFigure) {
+            const figcaption = parentFigure.querySelector('figcaption');
+            if (figcaption) {
+                caption = figcaption.textContent.trim();
+            }
+        }
+
+        if (el.tagName.toLowerCase() === 'img') {
+            // Filter out avatar images if any leaked
+            if (el.classList.contains('post-author-avatar') || el.classList.contains('author-bio-img')) {
+                return;
+            }
+            src = el.src || el.getAttribute('data-src');
+            if (!src) return;
+            type = 'image';
+            if (!caption) caption = el.alt || el.title || '';
+        } else if (el.tagName.toLowerCase() === 'video') {
+            src = el.src || el.querySelector('source')?.src || el.getAttribute('data-src');
+            if (!src) return;
+            type = 'video';
+            if (!caption) caption = el.getAttribute('title') || '';
+        } else if (el.tagName.toLowerCase() === 'iframe') {
+            src = el.src;
+            if (!src) return;
+            
+            // Only process YouTube and Vimeo embed iframes
+            if (src.includes('youtube.com') || src.includes('youtu.be') || src.includes('vimeo.com')) {
+                type = 'iframe';
+                if (!caption) caption = el.title || '';
+            } else {
+                return; // Skip other iframes
+            }
+        }
+
+        mediaItems.push({ type, src, caption });
+    });
+
+    if (mediaItems.length === 0) {
+        mediaGrid.innerHTML = `
+            <div class="gallery-empty-state">
+                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                <h3>No gallery media found</h3>
+                <p>Upload images or videos inside this post content in your Ghost Admin to populate this album.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Render the extracted media items in a premium grid
+    let gridHTML = '';
+    mediaItems.forEach((item, idx) => {
+        if (item.type === 'image') {
+            gridHTML += `
+                <div class="gallery-media-item gallery-image-item" data-index="${idx}" tabindex="0">
+                    <div class="gallery-media-inner">
+                        <img src="${item.src}" alt="${item.caption || 'Gallery Image'}" loading="lazy">
+                        <div class="gallery-media-overlay">
+                            <span class="gallery-zoom-icon">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    ${item.caption ? `<div class="gallery-item-caption">${item.caption}</div>` : ''}
+                </div>
+            `;
+        } else if (item.type === 'video') {
+            gridHTML += `
+                <div class="gallery-media-item gallery-video-item" data-index="${idx}" tabindex="0">
+                    <div class="gallery-media-inner">
+                        <video src="${item.src}" muted loop playsinline></video>
+                        <div class="gallery-media-overlay">
+                            <span class="gallery-play-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    ${item.caption ? `<div class="gallery-item-caption">${item.caption}</div>` : ''}
+                </div>
+            `;
+        } else if (item.type === 'iframe') {
+            // Display an iframe thumbnail overlay
+            gridHTML += `
+                <div class="gallery-media-item gallery-iframe-item" data-index="${idx}" tabindex="0">
+                    <div class="gallery-media-inner">
+                        <iframe src="${item.src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="pointer-events: none;"></iframe>
+                        <div class="gallery-media-overlay">
+                            <span class="gallery-play-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    ${item.caption ? `<div class="gallery-item-caption">${item.caption}</div>` : ''}
+                </div>
+            `;
+        }
+    });
+    mediaGrid.innerHTML = gridHTML;
+
+    // Add dynamic hover logic for auto-play video cards
+    mediaGrid.querySelectorAll('.gallery-video-item').forEach(item => {
+        const video = item.querySelector('video');
+        item.addEventListener('mouseenter', () => {
+            video.play().catch(e => {});
+        });
+        item.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+
+    // Lightbox logic
+    let currentIndex = 0;
+    const mediaWrapper = lightbox.querySelector('.lightbox-media-wrapper');
+    const captionText = lightbox.querySelector('.lightbox-caption-text');
+    const counter = lightbox.querySelector('.lightbox-counter');
+
+    function openLightbox(index) {
+        currentIndex = parseInt(index, 10);
+        lightbox.setAttribute('aria-hidden', 'false');
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent background scrolling
+        showMedia(currentIndex);
+    }
+
+    function closeLightbox() {
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        mediaWrapper.innerHTML = ''; // Clear media to stop any playing videos/embeds
+    }
+
+    function showMedia(index) {
+        const item = mediaItems[index];
+        mediaWrapper.innerHTML = '';
+        
+        if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.caption || '';
+            img.className = 'lightbox-media-el lightbox-image';
+            mediaWrapper.appendChild(img);
+        } else if (item.type === 'video') {
+            const video = document.createElement('video');
+            video.src = item.src;
+            video.controls = true;
+            video.autoplay = true;
+            video.className = 'lightbox-media-el lightbox-video';
+            mediaWrapper.appendChild(video);
+        } else if (item.type === 'iframe') {
+            const iframe = document.createElement('iframe');
+            // Auto-play the embed in lightbox
+            let embedUrl = item.src;
+            if (embedUrl.includes('?')) {
+                embedUrl += '&autoplay=1';
+            } else {
+                embedUrl += '?autoplay=1';
+            }
+            iframe.src = embedUrl;
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.className = 'lightbox-media-el lightbox-iframe';
+            mediaWrapper.appendChild(iframe);
+        }
+
+        captionText.textContent = item.caption || '';
+        counter.textContent = `${index + 1} / ${mediaItems.length}`;
+    }
+
+    function nextMedia() {
+        currentIndex = (currentIndex + 1) % mediaItems.length;
+        showMedia(currentIndex);
+    }
+
+    function prevMedia() {
+        currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+        showMedia(currentIndex);
+    }
+
+    // Event listeners for grid items
+    mediaGrid.querySelectorAll('.gallery-media-item').forEach(item => {
+        item.addEventListener('click', () => {
+            openLightbox(item.getAttribute('data-index'));
+        });
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                openLightbox(item.getAttribute('data-index'));
+            }
+        });
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-next').addEventListener('click', nextMedia);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', prevMedia);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextMedia();
+        if (e.key === 'ArrowLeft') prevMedia();
+    });
+});
+</script>
+
+{{/post}}

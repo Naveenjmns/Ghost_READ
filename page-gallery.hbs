@@ -1,0 +1,66 @@
+{{!< default}}
+
+{{#post}}
+<div class="gallery-index-page">
+    {{!-- Hero Header --}}
+    <section class="gallery-hero">
+        <div class="gallery-container">
+            <div class="gallery-hero-badge" data-animate="fade-up">
+                <span class="gallery-hero-dot"></span>
+                <span>Visual Highlights · READ Centre</span>
+            </div>
+            
+            <h1 class="gallery-hero-title" data-animate="fade-up" data-delay="100">
+                {{#if title}}{{title}}{{else}}Our <em>Media Gallery</em>{{/if}}
+            </h1>
+            
+            <p class="gallery-hero-desc" data-animate="fade-up" data-delay="150">
+                {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Explore highlights of our programs, community outreach, and tribal village empowerment in photos and videos.{{/if}}
+            </p>
+        </div>
+    </section>
+
+    {{!-- Album List --}}
+    <section class="gallery-list-section">
+        <div class="gallery-container">
+            {{#get "posts" filter="tag:hash-gallery,tag:gallery" limit="100" include="tags" as |gallery_posts|}}
+                {{#if gallery_posts}}
+                    <div class="gallery-posts-grid">
+                        {{#foreach gallery_posts}}
+                            <article class="gallery-post-card" data-animate="fade-up" data-delay-index="{{@index}}">
+                                {{#if feature_image}}
+                                <a href="{{url}}" class="gallery-card-img-wrap">
+                                    <div class="gallery-card-img" style="background-image: url({{img_url feature_image size="m"}})">
+                                        <div class="gallery-card-overlay">
+                                            <div class="gallery-card-icon">
+                                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                {{/if}}
+                                <div class="gallery-card-body">
+                                    <span class="gallery-card-date">{{date format="MMMM DD, YYYY"}}</span>
+                                    <h3 class="gallery-card-title"><a href="{{url}}">{{title}}</a></h3>
+                                    {{#if custom_excerpt}}
+                                        <p class="gallery-card-excerpt">{{custom_excerpt}}</p>
+                                    {{/if}}
+                                    <a href="{{url}}" class="gallery-card-link">View Album <span>→</span></a>
+                                </div>
+                            </article>
+                        {{/foreach}}
+                    </div>
+                {{else}}
+                    <div class="gallery-empty-state">
+                        <div class="gallery-empty-icon">
+                            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                        </div>
+                        <h3>No gallery albums published yet</h3>
+                        <p>Create posts tagged with <code>#gallery</code> or <code>gallery</code> in your Ghost Admin to populate this page.</p>
+                    </div>
+                {{/if}}
+            {{/get}}
+        </div>
+    </section>
+</div>
+{{/post}}
