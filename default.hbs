@@ -26,21 +26,7 @@
     {{!-- Theme CSS --}}
     <link rel="stylesheet" href="{{asset "css/read.css"}}">
 
-    <script>
-        (function() {
-            let savedMood = localStorage.getItem('ghost-theme-mood');
-            if (savedMood === 'light-blue' || savedMood === 'emerald' || savedMood === 'aurora-teal') {
-                savedMood = 'sunset-violet';
-                localStorage.setItem('ghost-theme-mood', 'sunset-violet');
-            } else if (savedMood === 'dark-blue') {
-                savedMood = 'cyber-sapphire';
-                localStorage.setItem('ghost-theme-mood', 'cyber-sapphire');
-            }
-            if (savedMood && savedMood !== 'sunset-violet') {
-                document.documentElement.setAttribute('data-theme-mood', savedMood);
-            }
-        })();
-    </script>
+
 
     {{ghost_head}}
 </head>
@@ -115,10 +101,6 @@
 
                 {{!-- Right Actions --}}
                 <div class="header-actions">
-                    <div class="theme-mood-switcher" id="theme-mood-switcher">
-                        <button class="theme-mood-btn mood-sunset-violet active" data-preset="sunset-violet" title="Sunset Violet Mood" aria-label="Sunset Violet Mood"></button>
-                        <button class="theme-mood-btn mood-cyber-sapphire" data-preset="cyber-sapphire" title="Cyber Sapphire Mood" aria-label="Cyber Sapphire Mood"></button>
-                    </div>
                     <a href="/donate-us/" class="header-donate-btn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                         <span>Donate</span>

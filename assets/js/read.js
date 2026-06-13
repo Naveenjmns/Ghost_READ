@@ -267,44 +267,7 @@
         }
     });
 
-    /* ── Theme Mood Switcher Logic ──────────────────────── */
-    const moodSwitcher = $('#theme-mood-switcher');
-    if (moodSwitcher) {
-        const moodBtns = $$('.theme-mood-btn', moodSwitcher);
-        
-        const setMood = (mood) => {
-            moodBtns.forEach(btn => {
-                if (btn.dataset.preset === mood) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            
-            if (mood === 'sunset-violet') {
-                document.documentElement.removeAttribute('data-theme-mood');
-            } else {
-                document.documentElement.setAttribute('data-theme-mood', mood);
-            }
-            
-            localStorage.setItem('ghost-theme-mood', mood);
-        };
-        
-        moodBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const preset = btn.dataset.preset;
-                setMood(preset);
-            });
-        });
-        
-        let savedMood = localStorage.getItem('ghost-theme-mood') || 'sunset-violet';
-        if (savedMood === 'light-blue' || savedMood === 'emerald' || savedMood === 'aurora-teal') {
-            savedMood = 'sunset-violet';
-        } else if (savedMood === 'dark-blue') {
-            savedMood = 'cyber-sapphire';
-        }
-        setMood(savedMood);
-    }
+
 
     /* ── Stats Count-Up Animation ─────────────────────── */
     // Automatically apply count-up behavior to numeric stats on the about page
