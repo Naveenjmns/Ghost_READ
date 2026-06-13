@@ -9575,3 +9575,124 @@ button {
 .blog-posts-container .posts-grid {
     margin-top: var(--space-xl);
 }
+
+/* ============================================================
+   Restructured About Page Hero (Home Page Style)
+   ============================================================ */
+
+.about-hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    border-bottom: 1px solid var(--clr-border);
+    padding: 0;
+    width: 100%;
+}
+
+.about-hero-section .hero-image-banner {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.about-hero-section .hero-text-content {
+    background: linear-gradient(135deg, #f43f5e, #fb923c);
+    width: 100%;
+    padding: var(--space-2xl) 0 var(--space-3xl);
+    position: relative;
+    z-index: 2;
+}
+
+.about-hero-section .about-hero-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.about-hero-section .about-hero-title {
+    color: #ffffff;
+}
+
+.about-hero-section .about-hero-title em {
+    color: #ffe066;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+.about-hero-section .about-hero-desc {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.about-hero-section .about-hero-desc strong {
+    color: #ffffff;
+}
+
+.about-hero-section .about-hero-desc em {
+    color: #ffe066;
+}
+
+.about-hero-section .about-hero-kicker-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.about-hero-section .about-hero-kicker-line {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.about-hero-section .about-hero-badge {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.about-hero-section .about-hero-dot {
+    background-color: #ffe066;
+    box-shadow: 0 0 8px #ffe066;
+}
+
+.about-hero-section .about-hero-pill {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.about-hero-section .about-hero-pill:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: #ffe066;
+    color: #ffe066;
+}
+
+.about-hero-section .about-stat-num {
+    color: #ffffff;
+    text-shadow: none;
+    background: none;
+    -webkit-text-fill-color: initial;
+}
+
+.about-hero-section .about-stat-label {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Mobile responsive fixes for the restructured layout */
+@media (max-width: 580px) {
+    .about-hero-section .hero-image-banner {
+        height: 300px;
+    }
+    .about-hero-section .hero-text-content {
+        padding: var(--space-xl) 0 var(--space-2xl);
+    }
+    .about-hero-section .about-hero-inner {
+        padding: 0 var(--space-md);
+    }
+}

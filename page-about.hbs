@@ -4,128 +4,127 @@
 <div class="about-page">
 
     {{!-- ── Hero ─────────────────────────────── --}}
-    <section class="about-hero">
-        <div class="about-hero-bg">
-            <div class="about-hero-orb about-hero-orb-1"></div>
-            <div class="about-hero-orb about-hero-orb-2"></div>
-            <div class="about-hero-grid"></div>
-            
-            {{!-- Background Slideshow --}}
-            <div class="hero-slideshow" id="about-hero-slideshow">
+    {{!-- ── Hero Section (Home page style) ── --}}
+    <section class="about-hero-section">
+        {{!-- Top Image Banner Slideshow --}}
+        <div class="hero-image-banner">
+            <div class="hero-slideshow" id="about-hero-slideshow" style="opacity: 1;">
                 <div class="hero-slide active" style="background-image: url('{{asset "img/about1.png"}}');"></div>
                 <div class="hero-slide" style="background-image: url('{{asset "img/about2.png"}}');"></div>
                 <div class="hero-slide" style="background-image: url('{{asset "img/about3.jpg.jpeg"}}');"></div>
             </div>
-            <div class="hero-slideshow-overlay"></div>
-
-            {{!-- Dynamic Slider content post tagged #about-slider --}}
-            {{#get "posts" filter="tag:hash-about-slider" limit="1" as |slider_post|}}
-                {{#if slider_post}}
-                    {{#foreach slider_post}}
-                        <div id="about-slider-raw-content" style="display: none;">{{content}}</div>
-                    {{/foreach}}
-                {{/if}}
-            {{/get}}
         </div>
-        <div class="about-hero-inner">
-            <div class="about-hero-badge" data-animate="fade-up">
-                <span class="about-hero-dot"></span>
-                <span>Est. 2001 · Erode, Tamil Nadu</span>
-            </div>
 
-            <div class="about-hero-kicker" data-animate="fade-up" data-delay="60">
-                <span class="about-hero-kicker-line"></span>
-                <span class="about-hero-kicker-text">Rights Education and Development Centre</span>
-                <span class="about-hero-kicker-line"></span>
-            </div>
-
-            <h1 class="about-hero-title" data-animate="fade-up" data-delay="120">
-                {{#if title}}{{title}}{{else}}The <em>READ</em> Story{{/if}}
-            </h1>
-
-            <p class="about-hero-desc" data-animate="fade-up" data-delay="220">
-                {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Over <strong>two decades</strong> of empowering <em>vulnerable communities</em> through education, rights, and dignity.{{/if}}
-            </p>
-
-            <div class="about-hero-pills" data-animate="fade-up" data-delay="300">
-                <span class="about-hero-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                    Education
-                </span>
-                <span class="about-hero-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                    Rights
-                </span>
-                <span class="about-hero-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    Dignity
-                </span>
-                <span class="about-hero-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    Health
-                </span>
-                <span class="about-hero-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                    Livelihood
-                </span>
-            </div>
-
-            <div class="about-hero-stats" id="about-hero-stats" data-animate="fade-up" data-delay="400">
-                <div class="about-stat">
-                    <span class="about-stat-num" id="about-stat-years" data-stat-value="20+">20+</span>
-                    <span class="about-stat-label">Years of Service</span>
-                </div>
-                <div class="about-stat">
-                    <span class="about-stat-num" id="about-stat-lives" data-stat-value="50000+">50000+</span>
-                    <span class="about-stat-label">Lives Impacted</span>
-                </div>
-                <div class="about-stat">
-                    <span class="about-stat-num" id="about-stat-programs" data-stat-value="12+">12+</span>
-                    <span class="about-stat-label">Programs</span>
-                </div>
-                <div class="about-stat">
-                    <span class="about-stat-num" id="about-stat-region">Tamil Nadu</span>
-                    <span class="about-stat-label">Region Served</span>
-                </div>
-            </div>
-
-            {{#if @custom.about_stats}}
-            <script>
-            (function() {
-                const rawStats = "{{@custom.about_stats}}".trim();
-                if (!rawStats) return;
-
-                // Format: Years, Lives, Programs, Region
-                const parts = rawStats.split(',').map(p => p.trim());
-                
-                const years = parts[0] || '20+';
-                const lives = parts[1] || '50000+';
-                const programs = parts[2] || '12+';
-                const region = parts[3] || 'Tamil Nadu';
-
-                const yearsEl = document.getElementById('about-stat-years');
-                const livesEl = document.getElementById('about-stat-lives');
-                const programsEl = document.getElementById('about-stat-programs');
-                const regionEl = document.getElementById('about-stat-region');
-
-                if (yearsEl) {
-                    yearsEl.textContent = years;
-                    yearsEl.setAttribute('data-stat-value', years);
-                }
-                if (livesEl) {
-                    livesEl.textContent = lives;
-                    livesEl.setAttribute('data-stat-value', lives);
-                }
-                if (programsEl) {
-                    programsEl.textContent = programs;
-                    programsEl.setAttribute('data-stat-value', programs);
-                }
-                if (regionEl) {
-                    regionEl.textContent = region;
-                }
-            })();
-            </script>
+        {{!-- Dynamic Slider content post tagged #about-slider --}}
+        {{#get "posts" filter="tag:hash-about-slider" limit="1" as |slider_post|}}
+            {{#if slider_post}}
+                {{#foreach slider_post}}
+                    <div id="about-slider-raw-content" style="display: none;">{{content}}</div>
+                {{/foreach}}
             {{/if}}
+        {{/get}}
+
+        {{!-- Bottom Text Content (solid background matching home hero styling) --}}
+        <div class="hero-text-content">
+            <div class="about-hero-inner">
+                <div class="about-hero-badge" data-animate="fade-up">
+                    <span class="about-hero-dot"></span>
+                    <span>Est. 2001 · Erode, Tamil Nadu</span>
+                </div>
+
+                <div class="about-hero-kicker" data-animate="fade-up" data-delay="60">
+                    <span class="about-hero-kicker-line"></span>
+                    <span class="about-hero-kicker-text">Rights Education and Development Centre</span>
+                    <span class="about-hero-kicker-line"></span>
+                </div>
+
+                <h1 class="about-hero-title" data-animate="fade-up" data-delay="120">
+                    {{#if title}}{{title}}{{else}}The <em>READ</em> Story{{/if}}
+                </h1>
+
+                <p class="about-hero-desc" data-animate="fade-up" data-delay="220">
+                    {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Over <strong>two decades</strong> of empowering <em>vulnerable communities</em> through education, rights, and dignity.{{/if}}
+                </p>
+
+                <div class="about-hero-pills" data-animate="fade-up" data-delay="300">
+                    <span class="about-hero-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        Education
+                    </span>
+                    <span class="about-hero-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                        Rights
+                    </span>
+                    <span class="about-hero-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        Dignity
+                    </span>
+                    <span class="about-hero-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        Health
+                    </span>
+                    <span class="about-hero-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        Livelihood
+                    </span>
+                </div>
+
+                <div class="about-hero-stats" id="about-hero-stats" data-animate="fade-up" data-delay="400">
+                    <div class="about-stat">
+                        <span class="about-stat-num" id="about-stat-years" data-stat-value="20+">20+</span>
+                        <span class="about-stat-label">Years of Service</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num" id="about-stat-lives" data-stat-value="50000+">50000+</span>
+                        <span class="about-stat-label">Lives Impacted</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num" id="about-stat-programs" data-stat-value="12+">12+</span>
+                        <span class="about-stat-label">Programs</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="about-stat-num" id="about-stat-region">Tamil Nadu</span>
+                        <span class="about-stat-label">Region Served</span>
+                    </div>
+                </div>
+
+                {{#if @custom.about_stats}}
+                <script>
+                (function() {
+                    const rawStats = "{{@custom.about_stats}}".trim();
+                    if (!rawStats) return;
+
+                    const parts = rawStats.split(',').map(p => p.trim());
+                    
+                    const years = parts[0] || '20+';
+                    const lives = parts[1] || '50000+';
+                    const programs = parts[2] || '12+';
+                    const region = parts[3] || 'Tamil Nadu';
+
+                    const yearsEl = document.getElementById('about-stat-years');
+                    const livesEl = document.getElementById('about-stat-lives');
+                    const programsEl = document.getElementById('about-stat-programs');
+                    const regionEl = document.getElementById('about-stat-region');
+
+                    if (yearsEl) {
+                        yearsEl.textContent = years;
+                        yearsEl.setAttribute('data-stat-value', years);
+                    }
+                    if (livesEl) {
+                        livesEl.textContent = lives;
+                        livesEl.setAttribute('data-stat-value', lives);
+                    }
+                    if (programsEl) {
+                        programsEl.textContent = programs;
+                        programsEl.setAttribute('data-stat-value', programs);
+                    }
+                    if (regionEl) {
+                        regionEl.textContent = region;
+                    }
+                })();
+                </script>
+                {{/if}}
+            </div>
         </div>
     </section>
 
