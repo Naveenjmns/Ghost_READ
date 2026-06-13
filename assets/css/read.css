@@ -5118,6 +5118,32 @@ button {
     }
 }
 
+@media (max-width: 580px) {
+    .about-hero-inner {
+        padding: 0 var(--space-md);
+    }
+
+    .about-hero-kicker-line {
+        display: none;
+    }
+
+    .about-hero-kicker-text {
+        white-space: normal;
+        text-align: center;
+        line-height: 1.4;
+        letter-spacing: 0.1em;
+    }
+
+    .about-hero-title {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .about-hero-desc {
+        padding-left: var(--space-md);
+        font-size: 1rem;
+    }
+}
+
 @media (max-width: 480px) {
     .about-programs-grid {
         grid-template-columns: 1fr;
