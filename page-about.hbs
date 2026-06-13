@@ -11,12 +11,21 @@
             <div class="about-hero-grid"></div>
             
             {{!-- Background Slideshow --}}
-            <div class="hero-slideshow">
+            <div class="hero-slideshow" id="about-hero-slideshow">
                 <div class="hero-slide active" style="background-image: url('{{asset "img/about1.png"}}');"></div>
                 <div class="hero-slide" style="background-image: url('{{asset "img/about2.png"}}');"></div>
                 <div class="hero-slide" style="background-image: url('{{asset "img/about3.jpg.jpeg"}}');"></div>
             </div>
             <div class="hero-slideshow-overlay"></div>
+
+            {{!-- Dynamic Slider content post tagged #about-slider --}}
+            {{#get "posts" filter="tag:hash-about-slider" limit="1" as |slider_post|}}
+                {{#if slider_post}}
+                    {{#foreach slider_post}}
+                        <div id="about-slider-raw-content" style="display: none;">{{content}}</div>
+                    {{/foreach}}
+                {{/if}}
+            {{/get}}
         </div>
         <div class="about-hero-inner">
             <div class="about-hero-badge" data-animate="fade-up">
@@ -362,10 +371,31 @@
 
 <script>
 (function() {
-    // Background Slideshow
-    var slides = document.querySelectorAll('.about-hero .hero-slide');
-    if (slides.length) {
-        var currentSlide = 0;
+    const rawContentEl = document.getElementById('about-slider-raw-content');
+    const sliderContainer = document.getElementById('about-hero-slideshow');
+    
+    if (rawContentEl && sliderContainer) {
+        const imgs = rawContentEl.querySelectorAll('img');
+        const imgUrls = Array.from(imgs).map(img => img.src || img.getAttribute('src')).filter(Boolean);
+        
+        if (imgUrls.length > 0) {
+            // Clear fallback slides
+            sliderContainer.innerHTML = '';
+            
+            // Generate dynamic slides
+            imgUrls.forEach((url, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'hero-slide' + (index === 0 ? ' active' : '');
+                slide.style.backgroundImage = `url('${url}')`;
+                sliderContainer.appendChild(slide);
+            });
+        }
+    }
+    
+    // Background Slideshow transition
+    const slides = sliderContainer ? sliderContainer.querySelectorAll('.hero-slide') : [];
+    if (slides.length > 1) {
+        let currentSlide = 0;
         setInterval(function() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
