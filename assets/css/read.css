@@ -8799,21 +8799,22 @@ button {
    Donation Page Custom Settings Tweaks
    ============================================================ */
 .qr-code-img {
-    width: 160px;
-    height: 160px;
+    width: 240px;
+    height: 240px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
     border-radius: var(--radius-md);
     border: 1px solid var(--clr-border);
-    padding: var(--space-sm);
+    padding: var(--space-md);
     background: #ffffff;
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-mid);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-mid), box-shadow var(--transition-mid);
 }
 
 .qr-code-img:hover {
-    transform: scale(1.03);
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15), 0 12px 15px -8px rgba(0, 0, 0, 0.15);
 }
 
 /* ============================================================
