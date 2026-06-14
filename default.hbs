@@ -168,7 +168,7 @@
                 <div class="footer-social">
                     {{#if @site.secondary_navigation}}
                         {{#foreach @site.secondary_navigation}}
-                            <a href="{{url}}" class="social-link dynamic-footer-social" target="_blank" rel="noopener" aria-label="{{label}}" data-label="{{label}}"></a>
+                            <a href="{{this.url}}" class="social-link dynamic-footer-social" target="_blank" rel="noopener" aria-label="{{label}}" data-label="{{label}}"></a>
                         {{/foreach}}
                     {{else}}
                         {{#if @site.twitter}}

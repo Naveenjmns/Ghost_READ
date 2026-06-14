@@ -173,7 +173,7 @@
                         <div class="contact-social-pills">
                             {{#if @site.secondary_navigation}}
                                 {{#foreach @site.secondary_navigation}}
-                                    <a href="{{url}}" class="social-pill dynamic-social-pill" target="_blank" rel="noopener" data-label="{{label}}">
+                                    <a href="{{this.url}}" class="social-pill dynamic-social-pill" target="_blank" rel="noopener" data-label="{{label}}">
                                         <span class="social-icon-placeholder"></span>
                                         <span>{{label}}</span>
                                     </a>
