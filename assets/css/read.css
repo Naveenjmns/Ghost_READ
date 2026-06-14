@@ -1588,8 +1588,8 @@ button {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--clr-gold);
-    background: rgba(200, 151, 58, 0.08);
-    border: 1px solid rgba(200, 151, 58, 0.18);
+    background: var(--clr-gold-alpha-10);
+    border: 1px solid var(--clr-gold-alpha-20);
     padding: 2px 9px;
     border-radius: var(--radius-full);
     align-self: flex-start;
@@ -1597,8 +1597,8 @@ button {
 }
 
 .post-card-tag-pill:hover {
-    background: rgba(200, 151, 58, 0.15);
-    border-color: rgba(200, 151, 58, 0.3);
+    background: var(--clr-gold-alpha-20);
+    border-color: rgba(var(--clr-gold-rgb), 0.3);
 }
 
 .post-card-title {
@@ -4632,15 +4632,18 @@ button {
 .about-timeline-item .about-timeline-year {
     grid-column: 1;
     text-align: right;
+    grid-row: 1;
 }
 
 .about-timeline-item .about-timeline-dot {
     grid-column: 2;
     justify-self: center;
+    grid-row: 1;
 }
 
 .about-timeline-item .about-timeline-content {
     grid-column: 3;
+    grid-row: 1;
 }
 
 /* Right-side items swap content and year */
@@ -7228,9 +7231,9 @@ button {
     font-weight: 600;
     letter-spacing: 0.04em;
     border-radius: 999px;
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    color: var(--clr-text-2);
+    background: var(--clr-gold-alpha-10);
+    border: 1px solid var(--clr-gold-alpha-20);
+    color: var(--clr-gold);
     text-transform: capitalize;
 }
 

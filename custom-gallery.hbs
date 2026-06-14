@@ -23,21 +23,9 @@
             
             {{!-- Meta Row --}}
             <div class="post-meta-row" data-animate="fade-up" data-delay="200">
-                {{#primary_author}}
-                <div class="post-author-info">
-                    <img
-                        src="{{#if profile_image}}{{img_url profile_image size="xs"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=48{{/if}}"
-                        alt="{{name}}"
-                        class="post-author-avatar"
-                    >
-                    <div class="post-author-details">
-                        <a href="{{url}}" class="post-author-name">{{name}}</a>
-                        <div class="post-meta-sub">
-                            <time datetime="{{../date format="YYYY-MM-DD"}}">{{../date format="MMMM D, YYYY"}}</time>
-                        </div>
-                    </div>
+                <div class="post-meta-sub">
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
                 </div>
-                {{/primary_author}}
                 
                 <div class="post-share-row">
                     <button class="post-copy-link-btn" id="copy-link-btn" aria-label="Copy Link" title="Copy Link">
@@ -65,24 +53,7 @@
         </div>
 
         {{!-- Author Bio & Navigation --}}
-        {{#primary_author}}
-        <div class="post-author-bio" data-animate="fade-up">
-            <img
-                src="{{#if profile_image}}{{img_url profile_image size="s"}}{{else}}https://www.gravatar.com/avatar/{{email_hash}}?d=identicon&s=80{{/if}}"
-                alt="{{name}}"
-                class="author-bio-img"
-            >
-            <div class="author-bio-content">
-                <h3 class="author-bio-name">
-                    <a href="{{url}}">{{name}}</a>
-                </h3>
-                {{#if bio}}
-                <p class="author-bio-text">{{bio}}</p>
-                {{/if}}
-                <a href="{{url}}" class="author-bio-link">More by {{name}} →</a>
-            </div>
-        </div>
-        {{/primary_author}}
+
 
         <nav class="post-navigation" data-animate="fade-up">
             <div class="post-nav-rule"></div>
