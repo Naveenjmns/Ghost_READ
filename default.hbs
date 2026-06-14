@@ -39,15 +39,7 @@
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
             <div class="preloader-logo-wrap">
-                {{#get "posts" filter="tag:hash-custom-logo" limit="1" as |logo_post|}}
-                    {{#if logo_post}}
-                        {{#foreach logo_post}}
-                            <img src="{{img_url feature_image}}" alt="READ Logo" class="preloader-logo-img" width="90" height="90">
-                        {{/foreach}}
-                    {{else}}
-                        <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" class="preloader-logo-img" width="90" height="90">
-                    {{/if}}
-                {{/get}}
+                <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" class="preloader-logo-img" width="90" height="90">
                 <div class="preloader-badge-divider"></div>
                 {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
                     {{#if jubilee_post}}
@@ -73,15 +65,7 @@
                 {{!-- Logo --}}
                 <a href="{{@site.url}}" class="site-logo" aria-label="{{@site.title}} Home" id="site-logo-link">
                     <div class="site-logo-glow"></div>
-                    {{#get "posts" filter="tag:hash-custom-logo" limit="1" as |logo_post|}}
-                        {{#if logo_post}}
-                            {{#foreach logo_post}}
-                                <img src="{{img_url feature_image}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
-                            {{/foreach}}
-                        {{else}}
-                            <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
-                        {{/if}}
-                    {{/get}}
+                    <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
                     <div class="logo-badge-divider"></div>
                     {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
                         {{#if jubilee_post}}
@@ -140,15 +124,7 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <a href="{{@site.url}}" class="footer-logo">
-                    {{#get "posts" filter="tag:hash-custom-logo" limit="1" as |logo_post|}}
-                        {{#if logo_post}}
-                            {{#foreach logo_post}}
-                                <img src="{{img_url feature_image}}" alt="READ – Rights Education and Development Centre" class="footer-logo-img" width="52" height="52">
-                            {{/foreach}}
-                        {{else}}
-                            <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="footer-logo-img" width="52" height="52">
-                        {{/if}}
-                    {{/get}}
+                    <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="footer-logo-img" width="52" height="52">
                 </a>
                 <p class="footer-tagline">{{@site.description}}</p>
             </div>
