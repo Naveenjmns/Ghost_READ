@@ -9397,43 +9397,45 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(15, 23, 42, 0.35);
     display: flex;
-    flex-direction: column;
-    gap: 12px;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity var(--transition-mid);
-    backdrop-filter: blur(2px);
-}
-
-.gallery-zoom-text {
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #ffffff;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 6px 14px;
-    border-radius: 50px;
-    box-shadow: var(--shadow-sm);
-    transform: translateY(8px);
-    opacity: 0;
-    transition: transform var(--transition-mid), opacity var(--transition-mid);
-    pointer-events: none;
+    backdrop-filter: blur(1px);
 }
 
 .gallery-media-item:hover .gallery-media-overlay {
     opacity: 1;
 }
 
-.gallery-zoom-icon,
-.gallery-play-icon {
+.gallery-zoom-icon {
     background: rgba(255, 255, 255, 0.95);
     color: var(--clr-text);
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+    transform: scale(0.9);
+    transition: all var(--transition-mid);
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.gallery-zoom-icon svg {
+    flex-shrink: 0;
+}
+
+.gallery-play-icon {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--clr-gold);
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -9443,10 +9445,6 @@ button {
     box-shadow: var(--shadow-md);
     transform: scale(0.9);
     transition: all var(--transition-mid);
-}
-
-.gallery-play-icon {
-    color: var(--clr-gold);
     padding-left: 2px;
 }
 
