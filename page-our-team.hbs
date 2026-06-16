@@ -198,8 +198,6 @@
     padding: 20px 4px 40px;
     mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -337,4 +335,85 @@
     margin: 0;
 }
 </style>
+
+<script>
+(function() {
+    const initScroll = () => {
+        const containers = document.querySelectorAll('.team-scroll-container');
+        containers.forEach(container => {
+            const track = container.querySelector('.team-marquee-track');
+            if (!track) return;
+
+            // Only initialize scroll animations if there is horizontal overflow
+            if (container.scrollWidth <= container.clientWidth) {
+                return;
+            }
+
+            // Dynamically duplicate elements for infinite seamless looping
+            const originalCards = Array.from(track.children);
+            originalCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
+
+            let isUserInteracting = false;
+            let autoScrollTimer = null;
+            let scrollSpeed = 0.5; // Smooth slow scroll speed
+            let lastScrollLeft = container.scrollLeft;
+
+            const step = () => {
+                if (!isUserInteracting) {
+                    container.scrollLeft += scrollSpeed;
+
+                    // Reset seamlessly at the middle point (end of original cards)
+                    const maxScroll = track.scrollWidth / 2;
+                    if (container.scrollLeft >= maxScroll) {
+                        container.scrollLeft = 0;
+                    }
+                }
+                requestAnimationFrame(step);
+            };
+
+            // Start auto-scroll ticker
+            requestAnimationFrame(step);
+
+            // Pause auto-scroll on manual touch/mouse interaction
+            const handleInteraction = () => {
+                isUserInteracting = true;
+                clearTimeout(autoScrollTimer);
+                autoScrollTimer = setTimeout(() => {
+                    const maxScroll = track.scrollWidth / 2;
+                    // Wrap user scroll position back to main loop bounds
+                    if (container.scrollLeft >= maxScroll) {
+                        container.scrollLeft -= maxScroll;
+                    } else if (container.scrollLeft < 0) {
+                        container.scrollLeft += maxScroll;
+                    }
+                    isUserInteracting = false;
+                }, 4000); // Resume auto scroll after 4 seconds of inactivity
+            };
+
+            container.addEventListener('scroll', () => {
+                const diff = Math.abs(container.scrollLeft - lastScrollLeft);
+                // If scroll action is user-driven (not micro-ticked by script)
+                if (diff > scrollSpeed + 0.15) {
+                    handleInteraction();
+                }
+                lastScrollLeft = container.scrollLeft;
+            }, { passive: true });
+
+            container.addEventListener('touchstart', handleInteraction, { passive: true });
+            container.addEventListener('mousedown', handleInteraction, { passive: true });
+            container.addEventListener('wheel', handleInteraction, { passive: true });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScroll);
+    } else {
+        initScroll();
+    }
+})();
+</script>
 {{/post}}
