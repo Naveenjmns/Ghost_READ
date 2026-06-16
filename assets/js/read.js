@@ -241,16 +241,14 @@
     if (postContent && progressBar) {
         // Already handled by the global progress bar above — no extra needed
     }
-
     /* ── Active nav link highlighting ───────────────────── */
     const currentPath = window.location.pathname;
-    $$('.nav-list li a, .mobile-nav-list li a').forEach(link => {
+    $$('.nav li a').forEach(link => {
         const linkPath = new URL(link.href, window.location.origin).pathname;
         if (linkPath === currentPath || (currentPath !== '/' && linkPath !== '/' && currentPath.startsWith(linkPath))) {
             link.classList.add('nav-current');
         }
     });
-
     /* ── Lazy image loading polyfill ────────────────────── */
     $$('img[loading="lazy"]').forEach(img => {
         if ('loading' in HTMLImageElement.prototype) return;

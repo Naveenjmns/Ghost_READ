@@ -200,7 +200,82 @@
         </div>
     </section>
 
+    {{!-- Volunteer Section ── --}}
+    <section class="contact-volunteer-section" id="volunteer-section">
+        <div class="volunteer-container" data-animate="fade-up">
+            <div class="volunteer-header">
+                <div class="volunteer-badge">
+                    <span class="volunteer-sparkle">✦</span>
+                    <span>Become a Volunteer</span>
+                    <span class="volunteer-sparkle">✦</span>
+                </div>
+                <h2 class="volunteer-title">Join Our <em>Movement</em></h2>
+                <p class="volunteer-desc">Support rights, education, and development across Tamil Nadu. Share your details below and we will get in touch with you.</p>
+            </div>
 
+            <div class="volunteer-card">
+                <form id="volunteer-form" class="volunteer-form">
+                    {{!-- FormSubmit AJAX Endpoint --}}
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_subject" value="New Volunteer Registration - READ">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="volunteer-form-grid">
+                        <div class="form-group">
+                            <label for="volunteer-name" class="form-label">Full Name *</label>
+                            <input type="text" id="volunteer-name" name="name" class="form-input" placeholder="e.g. Anjali Devi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteer-email" class="form-label">Email Address *</label>
+                            <input type="email" id="volunteer-email" name="email" class="form-input" placeholder="e.g. anjali@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteer-phone" class="form-label">Phone Number *</label>
+                            <input type="tel" id="volunteer-phone" name="phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteer-interest" class="form-label">Area of Interest *</label>
+                            <select id="volunteer-interest" name="interest" class="form-select" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="Education Support">Education & Literacy</option>
+                                <option value="Rights Advocacy">Rights & Advocacy</option>
+                                <option value="Tribal Development">Tribal Villages Empowerment</option>
+                                <option value="Livelihood & Skills">Livelihood & Skills Training</option>
+                                <option value="Health Campaigns">Health & Welfare Campaigns</option>
+                                <option value="Other">Other (General Support)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width" style="margin-top: var(--space-md);">
+                        <label for="volunteer-message" class="form-label">Why do you want to volunteer with READ? (Optional)</label>
+                        <textarea id="volunteer-message" name="message" class="form-textarea" placeholder="Tell us a little bit about yourself, your skills, or your motivation..."></textarea>
+                    </div>
+
+                    <div class="volunteer-form-actions">
+                        <button type="submit" class="volunteer-submit-btn" id="volunteer-submit-btn">
+                            <span class="btn-text">Submit Application</span>
+                            <span class="btn-loading" style="display:none;">
+                                <svg class="spinner" viewBox="0 0 50 50">
+                                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                                </svg>
+                                Sending...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
+                {{!-- Success card --}}
+                <div class="volunteer-success-card" id="volunteer-success" style="display:none;">
+                    <div class="success-icon-wrap">
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3>Application Submitted!</h3>
+                    <p>Thank you for expressing interest in volunteering with READ. We have received your application and will contact you via email or phone soon.</p>
+                    <button type="button" class="volunteer-btn-reset" onclick="resetVolunteerForm()">Submit Another Response</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{!-- Map / Location Banner --}}
     <section class="contact-map-section" data-animate="fade-up">
@@ -303,7 +378,79 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
     {{/if}}
+
+    // Volunteer Form Submission Handler
+    const volunteerForm = document.getElementById('volunteer-form');
+    const volunteerSuccess = document.getElementById('volunteer-success');
+    const submitBtn = document.getElementById('volunteer-submit-btn');
+
+    if (volunteerForm && submitBtn) {
+        volunteerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            if (btnText && btnLoading) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-flex';
+                submitBtn.disabled = true;
+            }
+            
+            const formData = new FormData(volunteerForm);
+            const payload = {};
+            formData.forEach((value, key) => {
+                payload[key] = value;
+            });
+            
+            fetch("https://formsubmit.co/ajax/read.erode2000@gmail.com", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    volunteerForm.style.display = 'none';
+                    if (volunteerSuccess) volunteerSuccess.style.display = 'block';
+                } else {
+                    alert("Something went wrong. Please try again or email us directly at read.erode2000@gmail.com.");
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error("Error submitting volunteer form:", error);
+                alert("Connection error. Please check your network and try again.");
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            });
+        });
+    }
 });
+
+function resetVolunteerForm() {
+    const form = document.getElementById('volunteer-form');
+    const success = document.getElementById('volunteer-success');
+    const submitBtn = document.getElementById('volunteer-submit-btn');
+    if (form && success && submitBtn) {
+        form.reset();
+        form.style.display = 'block';
+        success.style.display = 'none';
+        
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        if (btnText && btnLoading) {
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    }
+}
 </script>
 </div>
 

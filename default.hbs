@@ -41,10 +41,10 @@
             <div class="preloader-logo-wrap">
                 <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ Logo" class="preloader-logo-img" width="90" height="90">
                 <div class="preloader-badge-divider"></div>
-                {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
+                {{#get "posts" filter="tag:hash-jubilee" limit="1" as |jubilee_post|}}
                     {{#if jubilee_post}}
                         {{#foreach jubilee_post}}
-                            <img src="{{img_url feature_image}}" alt="Silver Jubilee" class="preloader-logo-jubilee" width="70" height="70">
+                            <img src="{{img_url feature_image}}" alt="{{title}}" class="preloader-logo-jubilee" width="70" height="70">
                         {{/foreach}}
                     {{else}}
                         <img src="{{asset "img/silver_jubilee.png"}}" alt="Silver Jubilee" class="preloader-logo-jubilee" width="70" height="70">
@@ -67,10 +67,10 @@
                     <div class="site-logo-glow"></div>
                     <img src="{{#if @site.logo}}{{@site.logo}}{{else}}{{asset "img/read-logo.png"}}{{/if}}" alt="READ – Rights Education and Development Centre" class="site-logo-img" width="52" height="52">
                     <div class="logo-badge-divider"></div>
-                    {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
+                    {{#get "posts" filter="tag:hash-jubilee" limit="1" as |jubilee_post|}}
                         {{#if jubilee_post}}
                             {{#foreach jubilee_post}}
-                                <img src="{{img_url feature_image}}" alt="Silver Jubilee" class="site-logo-jubilee" width="36" height="36">
+                                <img src="{{img_url feature_image}}" alt="{{title}}" class="site-logo-jubilee" width="36" height="36">
                             {{/foreach}}
                         {{else}}
                             <img src="{{asset "img/silver_jubilee.png"}}" alt="Silver Jubilee" class="site-logo-jubilee" width="36" height="36">
@@ -85,10 +85,6 @@
 
                 {{!-- Right Actions --}}
                 <div class="header-actions">
-                    <a href="#/portal/signup" class="header-subscribe-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span>Subscribe</span>
-                    </a>
                     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
                         <span></span><span></span><span></span>
                     </button>
@@ -208,6 +204,17 @@
         });
     });
     </script>
+
+    {{!-- Floating Subscribe Action Button --}}
+    <a href="#/portal/signup" class="floating-subscribe-btn" aria-label="Subscribe to newsletter">
+        <div class="floating-subscribe-btn-inner">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="floating-subscribe-icon">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span class="floating-subscribe-text">Subscribe</span>
+        </div>
+    </a>
 
     {{ghost_foot}}
 </body>

@@ -1,0 +1,249 @@
+{{!< default}}
+
+{{#post}}
+<div class="award-page">
+    <div class="template-marker" data-template="page-award-and-appreciation.hbs" style="display:none;"></div>
+
+    {{!-- ── Hero Section ─────────────────────────────── --}}
+    <section class="award-hero">
+        <div class="award-hero-bg">
+            <div class="award-hero-orb award-hero-orb-1"></div>
+            <div class="award-hero-orb award-hero-orb-2"></div>
+        </div>
+        
+        <div class="award-container">
+            <div class="award-hero-inner">
+                <div class="award-hero-badge" data-animate="fade-up">
+                    <span class="award-hero-sparkle">✦</span>
+                    <span>Recognitions &amp; Tributes</span>
+                    <span class="award-hero-sparkle">✦</span>
+                </div>
+
+                <div class="award-hero-kicker" data-animate="fade-up" data-delay="60">
+                    <span class="award-hero-kicker-line"></span>
+                    <span class="award-hero-kicker-text">Honoring our journey and community support</span>
+                    <span class="award-hero-kicker-line"></span>
+                </div>
+
+                <h1 class="award-hero-title" data-animate="fade-up" data-delay="120">
+                    {{#if title}}{{title}}{{else}}Awards &amp; <em>Appreciation</em>{{/if}}
+                </h1>
+
+                <p class="award-hero-desc" data-animate="fade-up" data-delay="200">
+                    {{#if custom_excerpt}}{{custom_excerpt}}{{else}}Celebrating the milestones, recognitions, and words of support that inspire us to keep working for marginalized communities across Tamil Nadu.{{/if}}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{!-- ── Dynamic Filter Bar ────────────────────────── --}}
+    <section class="award-filter-bar" data-animate="fade-up" data-delay="260">
+        <div class="award-container">
+            <div class="award-filters" id="award-filters">
+                <button class="award-filter-btn award-filter-btn--active" data-filter="all">
+                    Show All
+                </button>
+                <button class="award-filter-btn" data-filter="award">
+                    Awards
+                </button>
+                <button class="award-filter-btn" data-filter="appreciation">
+                    Appreciation Letters
+                </button>
+            </div>
+        </div>
+    </section>
+
+    {{!-- ── Awards & Appreciation Grid ─────────────────── --}}
+    <section class="award-grid-section">
+        <div class="award-container">
+            {{#get "posts" filter="tag:award,tag:appreciation" limit="100" include="tags" order="published_at desc"}}
+                {{#if posts}}
+                    <div class="award-grid" id="award-grid">
+                        {{#foreach posts}}
+                            <article class="award-card"
+                                     data-type="{{#foreach tags}}{{slug}} {{/foreach}}"
+                                     data-animate="fade-up"
+                                     data-delay-index="{{@index}}">
+                                
+                                {{!-- Card Image (Feature Image) --}}
+                                {{#if feature_image}}
+                                <div class="award-card-image-wrap" onclick="openAwardLightbox('{{img_url feature_image size="xl"}}', '{{title}}', '{{custom_excerpt}}')">
+                                    <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="award-card-img" loading="lazy">
+                                    <div class="award-card-zoom-overlay">
+                                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        <span>Zoom Image</span>
+                                    </div>
+                                </div>
+                                {{/if}}
+
+                                <div class="award-card-body">
+                                    {{!-- Type Badge --}}
+                                    <div class="award-card-badge-row">
+                                        {{#has tag="award"}}
+                                            <span class="award-badge award-badge--award">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                                                Award
+                                            </span>
+                                        {{/has}}
+                                        {{#has tag="appreciation"}}
+                                            <span class="award-badge award-badge--appreciation">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                                Appreciation
+                                            </span>
+                                        {{/has}}
+                                    </div>
+
+                                    {{!-- Title --}}
+                                    <h3 class="award-card-title">
+                                        <a href="{{url}}" class="award-card-title-link">{{title}}</a>
+                                    </h3>
+
+                                    {{!-- Presenter & Year / Subtitle --}}
+                                    {{#if custom_excerpt}}
+                                        <div class="award-card-subtitle">
+                                            <span>Presenter:</span> {{custom_excerpt}}
+                                        </div>
+                                    {{/if}}
+
+                                    {{!-- Body Content --}}
+                                    <div class="award-card-excerpt">
+                                        {{excerpt}}
+                                    </div>
+
+                                    {{!-- Read More Link --}}
+                                    <div class="award-card-footer">
+                                        <a href="{{url}}" class="award-read-more">
+                                            Read More
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        {{/foreach}}
+                    </div>
+                {{else}}
+                    {{!-- Empty state --}}
+                    <div class="award-empty-state" data-animate="fade-up">
+                        <div class="award-empty-icon">
+                            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                        </div>
+                        <h3>No Awards or Appreciation Letters Published Yet</h3>
+                        <p>To populate this page, create posts in your Ghost Admin and tag them with <strong>award</strong> or <strong>appreciation</strong>.</p>
+                        <a href="/" class="award-btn-home">Back to Home <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                {{/if}}
+            {{/get}}
+
+            {{!-- No-results state --}}
+            <div class="award-no-results" id="award-no-results" style="display:none;" aria-live="polite">
+                <p>No items found in this category.</p>
+            </div>
+        </div>
+    </section>
+
+    {{!-- ── Lightbox Modal Overlay ─────────────────────── --}}
+    <div class="award-lightbox" id="award-lightbox" aria-hidden="true" role="dialog">
+        <button class="award-lightbox-close" onclick="closeAwardLightbox()" aria-label="Close Lightbox">✕</button>
+        <div class="award-lightbox-overlay" onclick="closeAwardLightbox()"></div>
+        <div class="award-lightbox-content">
+            <img src="" alt="" class="award-lightbox-img" id="lightbox-img">
+            <div class="award-lightbox-caption">
+                <h4 class="lightbox-caption-title" id="lightbox-title"></h4>
+                <p class="lightbox-caption-subtitle" id="lightbox-subtitle"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // ── Category Filter Logic ─────────────────────────
+    const filterBtns = document.querySelectorAll('.award-filter-btn');
+    const cards = document.querySelectorAll('.award-card');
+    const noResults = document.getElementById('award-no-results');
+
+    if (filterBtns.length && cards.length) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active classes
+                filterBtns.forEach(b => b.classList.remove('award-filter-btn--active'));
+                btn.classList.add('award-filter-btn--active');
+
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const tags = card.dataset.type || '';
+                    const isAward = tags.includes('award');
+                    const isAppreciation = tags.includes('appreciation');
+
+                    let matches = false;
+                    if (filter === 'all') {
+                        matches = true;
+                    } else if (filter === 'award' && isAward) {
+                        matches = true;
+                    } else if (filter === 'appreciation' && isAppreciation) {
+                        matches = true;
+                    }
+
+                    if (matches) {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                        visibleCount++;
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(16px) scale(0.98)';
+                        // Deferred hide for transition
+                        setTimeout(() => {
+                            if (card.style.opacity === '0') {
+                                card.style.display = 'none';
+                            }
+                        }, 250);
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+            });
+        });
+    }
+
+    // Escape Key closure for lightbox
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAwardLightbox();
+        }
+    });
+})();
+
+// Globals for Lightbox trigger (since onclick event is used inline for simplicity & compatibility)
+function openAwardLightbox(imgUrl, title, subtitle) {
+    const lightbox = document.getElementById('award-lightbox');
+    const img = document.getElementById('lightbox-img');
+    const titleEl = document.getElementById('lightbox-title');
+    const subtitleEl = document.getElementById('lightbox-subtitle');
+
+    if (lightbox && img) {
+        img.src = imgUrl;
+        img.alt = title || 'Award certificate';
+        if (titleEl) titleEl.textContent = title || '';
+        if (subtitleEl) subtitleEl.textContent = subtitle || '';
+        
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // prevent back scroll
+    }
+}
+
+function closeAwardLightbox() {
+    const lightbox = document.getElementById('award-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+}
+</script>
+{{/post}}

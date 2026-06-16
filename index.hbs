@@ -20,21 +20,29 @@
             {{!-- Hero Vision & Mission --}}
             <div class="hero-masthead" data-animate="fade-up">
                 <div class="jubilee-badge-wrap">
-                    <div class="jubilee-badge">
-                        {{#get "posts" filter="tag:hash-silver-jubilee" limit="1" as |jubilee_post|}}
-                        {{#if jubilee_post}}
+                    {{#get "posts" filter="tag:hash-jubilee" limit="1" as |jubilee_post|}}
+                    {{#if jubilee_post}}
                         {{#foreach jubilee_post}}
-                        <img src="{{img_url feature_image}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                        <div class="jubilee-badge">
+                            {{#if feature_image}}
+                            <img src="{{img_url feature_image}}" alt="{{title}}" class="jubilee-badge-logo">
+                            {{/if}}
+                            <span class="jubilee-text">{{title}}</span>
+                            {{#if custom_excerpt}}
+                            <span class="jubilee-divider">·</span>
+                            <span class="jubilee-years">{{custom_excerpt}}</span>
+                            {{/if}}
+                        </div>
                         {{/foreach}}
-                        {{else}}
-                        <img src="{{asset " img/silver_jubilee.png"}}" alt="Silver Jubilee Logo"
-                            class="jubilee-badge-logo">
-                        {{/if}}
-                        {{/get}}
-                        <span class="jubilee-text">Silver Jubilee</span>
-                        <span class="jubilee-divider">·</span>
-                        <span class="jubilee-years">25 Years of Service (2001 – 2026)</span>
-                    </div>
+                    {{else}}
+                        <div class="jubilee-badge">
+                            <img src="{{asset "img/silver_jubilee.png"}}" alt="Silver Jubilee Logo" class="jubilee-badge-logo">
+                            <span class="jubilee-text">Silver Jubilee</span>
+                            <span class="jubilee-divider">·</span>
+                            <span class="jubilee-years">25 Years of Service (2001 – 2026)</span>
+                        </div>
+                    {{/if}}
+                    {{/get}}
                 </div>
 
                 <div class="vision-block">
