@@ -360,16 +360,17 @@
             let isUserInteracting = false;
             let autoScrollTimer = null;
             let scrollSpeed = 0.5; // Smooth slow scroll speed
-            let lastScrollLeft = container.scrollLeft;
+            let isProgrammaticScroll = false;
 
             const step = () => {
                 if (!isUserInteracting) {
-                    container.scrollLeft += scrollSpeed;
-
-                    // Reset seamlessly at the middle point (end of original cards)
                     const maxScroll = track.scrollWidth / 2;
+                    isProgrammaticScroll = true;
+
                     if (container.scrollLeft >= maxScroll) {
                         container.scrollLeft = 0;
+                    } else {
+                        container.scrollLeft += scrollSpeed;
                     }
                 }
                 requestAnimationFrame(step);
@@ -384,6 +385,7 @@
                 clearTimeout(autoScrollTimer);
                 autoScrollTimer = setTimeout(() => {
                     const maxScroll = track.scrollWidth / 2;
+                    isProgrammaticScroll = true;
                     // Wrap user scroll position back to main loop bounds
                     if (container.scrollLeft >= maxScroll) {
                         container.scrollLeft -= maxScroll;
@@ -391,16 +393,17 @@
                         container.scrollLeft += maxScroll;
                     }
                     isUserInteracting = false;
-                }, 4000); // Resume auto scroll after 4 seconds of inactivity
+                }, 3000); // Resume auto scroll after 3 seconds of inactivity
             };
 
             container.addEventListener('scroll', () => {
-                const diff = Math.abs(container.scrollLeft - lastScrollLeft);
-                // If scroll action is user-driven (not micro-ticked by script)
-                if (diff > scrollSpeed + 0.15) {
-                    handleInteraction();
+                if (isProgrammaticScroll) {
+                    isProgrammaticScroll = false;
+                    return;
                 }
-                lastScrollLeft = container.scrollLeft;
+
+                // If scroll action is user-driven (not flagged as programmatic)
+                handleInteraction();
             }, { passive: true });
 
             container.addEventListener('touchstart', handleInteraction, { passive: true });
