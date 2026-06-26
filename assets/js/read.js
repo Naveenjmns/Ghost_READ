@@ -128,21 +128,10 @@
             author: "Nelson Mandela"
         },
         {
-            text: "Where the mind is without fear and the head is held high, where knowledge is free...",
-            author: "Rabindranath Tagore"
-        },
-        {
-            text: "Human dignity is the same for all human beings. When we respect others, we respect ourselves.",
-            author: "READ Advocacy"
-        },
-        {
             text: "Empowering a woman is empowering a community, a society, and a nation.",
             author: "READ Focus"
         },
-        {
-            text: "The true measure of any society lies in how it treats its most vulnerable members.",
-            author: "Mahatma Gandhi"
-        }
+
     ];
 
     const quoteEl = $('#rotating-quote');
